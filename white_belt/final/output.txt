@@ -1,0 +1,23 @@
+// "// text" - prints "// text"
+// "Clear" clears db
+// "unsafe" turns off exception capturing
+// .
+// .
+// .
+// .
+// .
+Unknown command: unsafe
+// .
+// .Given tests
+event1
+Deleted 1 events
+0001-02-03 event2
+Deleted successfully
+Event not found
+// event1
+// Deleted 1 events
+// 0001-02-03 event2
+// Deleted successfully
+// Event not found
+// .
+Month value is invalid: 13

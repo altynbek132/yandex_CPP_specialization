@@ -1,0 +1,177 @@
+// "// text" - prints "// text"
+// "Clear" clears db
+// "unsafe" turns off exception capturing
+// .
+// .
+// .
+// .
+// .
+unsafe
+// .
+// .Given tests
+Add 0-1-2 event1
+Add 1-2-3 event2
+Find 0-1-2
+
+Del 0-1-2
+Print
+Del 1-2-3 event2
+Del 1-2-3 event2
+// event1
+// Deleted 1 events
+// 0001-02-03 event2
+// Deleted successfully
+// Event not found
+// .
+// .
+// .
+// .
+// .
+// .
+Clear
+// Add date event
+// .
+// should be founded
+Add 1000-10-2 1
+Find 1000-10-2
+// 1
+// .
+// should be printed
+Print
+// 1000-10-2 1
+// .
+// should not add duplicates
+Add 1000-10-2 1
+Print
+// 1000-10-2 1
+// .
+// .
+// .
+// .
+// .
+// .
+// Del date event
+// .
+// should "Deleted successfully"
+Del 1000-10-2 1
+// Deleted successfully
+// .
+// should "Event not found"
+Del 1000-10-2 1
+// Event not found
+// .
+// .
+// .
+// .
+// .
+// .
+// .
+Clear
+// Del date
+// should delete all, count can be zero, print "Deleted N events"
+Add 1000-10-2 1
+Add 1000-10-2 2
+Add 1000-10-2 3
+Print
+// 1000-10-2 1 2 3
+Del 1000-10-2
+// Deleted 3 events
+Print
+// Printing nothing
+// .
+// zero if no date
+Del 1000-10-5
+// Deleted 0 events
+// should not create new key in map
+// .
+// .
+// .
+// .
+// .
+// .
+// .
+// .
+Clear
+// Find date
+// print events on date sorted increasing lexicographically
+Add 1000-10-2 c
+Add 1000-10-2 e
+Add 1000-10-2 d
+Add 1000-10-2 a
+Add 1000-10-2 b
+Print
+// 1000-10-02 a b c d e
+// .
+// .
+// .
+// .
+// .
+// .
+// .
+// .
+// Print
+Clear
+Add 900-11-3 20
+Add 900-11-2 14
+Add 900-11-2 13
+Add 1000-10-2 20
+Add 1000-10-2 10
+Add 1000-10-2 30
+Print
+// 0900-11-02 13 14
+// 0900-11-03 20
+// 1000-10-02 10 20 30
+// print all events in form: "Date event"
+// sort dates by date
+// sort events on each date
+// date should be filled by zeros "0001-01-01"
+// .
+// .
+// .
+// .
+// .
+// .
+Clear
+// Exceptions
+// ! after any above exception program should stop
+// Unknown command: COMMAND
+// .
+NALEI_MASLA 54 LITERS
+// Unknown command: NALEI_MASLA
+// .
+// Wrong date format: DATE
+Add maslo_date maslo_event1
+Add 1---1-1 maslo
+Add 1-11-1- maslo
+// Wrong date format: maslo_date
+// Wrong date format: 1---1-1
+// Wrong date format: 1-11-1-
+// .
+// one hyphen
+// .
+// can be zero and negative
+// .
+// Month value is invalid: MONTH, [1,12]
+// .
+// Day value is invalid: DAY, [1,31]
+// .
+// if invalid both show only month
+// .
+// examples:
+// 1-1-1 — корректная дата;
+// -1-1-1 — корректная дата (год -1, месяц 1, день 1);
+// 1--1-1 — дата в верном формате, но с некорректным месяцем -1;
+// 1---1-1 — дата в неверном формате: месяц не может начинаться с двух дефисов.
+// 1-+1-+1 — корректная дата, так как +1 это целое число
+// .
+// .
+// Add 0-13-32 event1
+// Month value is invalid: 13
+// .
+// .
+// .
+// .
+// .
+// .
+// .
+// .

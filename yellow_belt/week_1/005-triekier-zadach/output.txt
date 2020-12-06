@@ -1,0 +1,5 @@
+[{("IN_PROGRESS",5)}, {}]
+[{("TESTING",5)}, {}]
+[{("DONE",1)}, {("TESTING",4)}]
+[{("IN_PROGRESS",2)}, {("NEW",3),("TESTING",4)}]
+{("NEW",3),("IN_PROGRESS",2),("TESTING",4)}

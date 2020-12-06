@@ -25,8 +25,6 @@
 
 using namespace std;
 
-
-// output reloads
 #ifdef MASLO
 // ========= Definitions
 template<typename Collection>
@@ -101,7 +99,7 @@ std::ostream &operator<<(std::ostream &os, const std::tuple<T...> &tup) {
 
 #endif
 
-// utility functions
+
 void txt() {
     const char *maslo = std::getenv("maslo");
     if (!maslo) {
@@ -166,8 +164,43 @@ typedef vector<string> vs;
 
 // ==================================
 
+template<typename T>
+T Sqr(T num);
+template<typename T>
+vector<T> Sqr(vector<T> v);
+template<typename K, typename V>
+map<K, V> Sqr(map<K, V> m);
+template<typename F, typename S>
+pair<F, S> Sqr(pair<F, S> p);
 
+template<typename T>
+T Sqr(T num) {
+    return num * num;
+}
 
+template<typename T>
+vector<T> Sqr(vector<T> v) {
+    for (auto &val : v) {
+        val = Sqr(val);
+    }
+    return v;
+}
+
+template<typename K, typename V>
+map<K, V> Sqr(map<K, V> m) {
+    for (auto &[key, val] : m) {
+        val = Sqr(val);
+    }
+    return m;
+}
+
+template<typename F, typename S>
+pair<F, S> Sqr(pair<F, S> p) {
+    auto&[a, b]   = p;
+    a = Sqr(a);
+    b = Sqr(b);
+    return p;
+}
 // ==================================
 
 int main() {
@@ -177,7 +210,22 @@ int main() {
     io_files(in, "input.txt", out, "output.txt");
     // ================================================================
     
+    // Пример вызова функции
+    vector<int> v = {1, 2, 3};
+    cout << "vector:";
+    for (int x : Sqr(v)) {
+        cout << ' ' << x;
+    }
+    cout << endl;
     
+    map<int, pair<int, int>> map_of_pairs = {
+        {4, {2, 2}},
+        {7, {4, 3}}
+    };
+    cout << "map of pairs:" << endl;
+    for (const auto &x : Sqr(map_of_pairs)) {
+        cout << x.first << ' ' << x.second.first << ' ' << x.second.second << endl;
+    }
     
     return 0;
 }

@@ -166,7 +166,13 @@ typedef vector<string> vs;
 
 // ==================================
 
-
+template<class K, class V>
+V &GetRefStrict(map<K, V> &m, K k) {
+    if (m.count(k) == 0) {
+        throw runtime_error("no such key");
+    }
+    return m[k];
+}
 
 // ==================================
 
@@ -176,6 +182,10 @@ int main() {
     ofstream out;
     io_files(in, "input.txt", out, "output.txt");
     // ================================================================
+    map<int, string> m = {{0, "value"}};
+    string &item = GetRefStrict(m, 0);
+    item = "newvalue";
+    cout << m[0] << endl; // выведет newvalue
     
     
     

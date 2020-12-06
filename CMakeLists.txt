@@ -3,6 +3,11 @@ project(def)
 
 set(CMAKE_CXX_STANDARD 20)
 
+set(GCC_COVERAGE_COMPILE_FLAGS "-Wall")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
+
+add_definitions(-DMASLO)
+
 add_executable(def main.cpp)
 add_executable(week1 "white_belt/week 1/part2.cpp")
 add_executable(minimal_string "white_belt/week 1/minimal_string.cpp")
@@ -79,3 +84,17 @@ add_executable(012-kal-kuliator-obyknoviennykh-drobiei "white_belt/week 4/012-ka
 add_executable(013-rabota-s-siervierom-vriemieni "white_belt/week 4/013-rabota-s-siervierom-vriemieni/013-rabota-s-siervierom-vriemieni.cpp")
 
 add_executable(final white_belt/final/final.cpp)
+
+add_executable(001-summirovaniie-matrits yellow_belt/week_1/001-summirovaniie-matrits/001-summirovaniie-matrits.cpp)
+
+add_executable(002-sriedniaia-tiempieratura-2 yellow_belt/week_1/002-sriedniaia-tiempieratura-2/002-sriedniaia-tiempieratura-2.cpp)
+
+add_executable(003-massa-blokov yellow_belt/week_1/003-massa-blokov/003-massa-blokov.cpp)
+
+add_executable(004-uproshchaiem-opierator-sravnieniia yellow_belt/week_1/004-baza-rieghionov/004-baza-rieghionov.cpp)
+
+add_executable(005-triekier-zadach yellow_belt/week_1/005-triekier-zadach/005-triekier-zadach.cpp)
+
+add_executable(006-vsio-v-kvadrat yellow_belt/week_1/006-vsio-v-kvadrat/006-vsio-v-kvadrat.cpp)
+
+add_executable(007-ssylka-na-eliemient yellow_belt/week_1/007-ssylka-na-eliemient/007-ssylka-na-eliemient.cpp)

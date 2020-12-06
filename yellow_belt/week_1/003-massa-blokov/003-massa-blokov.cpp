@@ -18,36 +18,11 @@
 #include <iomanip>
 #include <fstream>
 
-#include <type_traits>
-
 #include <numeric>
 //#include <limits>
 
 using namespace std;
 
-
-// output reloads
-#ifdef MASLO
-// ========= Definitions
-template<typename Collection>
-string Join(const Collection &col, char sep);
-template<typename First, typename Second>
-ostream &operator<<(ostream &out, const pair<First, Second> &p);
-template<typename T>
-ostream &operator<<(ostream &out, const vector<T> &v);
-template<typename Key, typename Value>
-ostream &operator<<(ostream &out, const map<Key, Value> &m);
-
-template<size_t n, typename... T>
-typename std::enable_if<(n >= sizeof...(T))>::type
-print_tuple(std::ostream &, const std::tuple<T...> &);
-template<size_t n, typename... T>
-typename std::enable_if<(n < sizeof...(T))>::type
-print_tuple(std::ostream &os, const std::tuple<T...> &tup);
-template<typename... T>
-std::ostream &operator<<(std::ostream &os, const std::tuple<T...> &tup);
-
-// ========= Implementations
 template<typename Collection>
 string Join(const Collection &col, char sep) {
     stringstream ss;
@@ -77,39 +52,14 @@ ostream &operator<<(ostream &out, const map<Key, Value> &m) {
     return out << '{' << Join(m, ',') << '}';
 }
 
-
-template<size_t n, typename... T>
-typename std::enable_if<(n >= sizeof...(T))>::type
-print_tuple(std::ostream &, const std::tuple<T...> &) {}
-
-template<size_t n, typename... T>
-typename std::enable_if<(n < sizeof...(T))>::type
-print_tuple(std::ostream &os, const std::tuple<T...> &tup) {
-    if (n != 0) {
-        os << ", ";
-    }
-    os << std::get<n>(tup);
-    print_tuple<n + 1>(os, tup);
-}
-
-template<typename... T>
-std::ostream &operator<<(std::ostream &os, const std::tuple<T...> &tup) {
-    os << "[";
-    print_tuple<0>(os, tup);
-    return os << "]";
-}
-
-#endif
-
-// utility functions
 void txt() {
     const char *maslo = std::getenv("maslo");
     if (!maslo) {
         return;
     }
     
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+    ios::sync_with_stdio(0);
+    cin.tie(0);
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 }
@@ -144,11 +94,6 @@ stringstream stream_line(istream &input) {
     return input_stream;
 }
 
-void io_files(ifstream &in, const string &input, ofstream &out, const string &output) {
-    in = ifstream(input);
-    out = ofstream(output);
-}
-
 typedef long long ll;
 typedef pair<int, int> pi;
 typedef vector<int> vi;
@@ -158,6 +103,11 @@ typedef vector<string> vs;
 #define PB push_back
 #define MP make_pair
 #define REP(i, a, b) for (int i = a; i <= b; i++)
+
+void io_files(ifstream &in, const string &input, ofstream &out, const string &output) {
+    in = ifstream(input);
+    out = ofstream(output);
+}
 
 // 2^7 = 128
 // 2^15 = 3e4
@@ -177,7 +127,16 @@ int main() {
     io_files(in, "input.txt", out, "output.txt");
     // ================================================================
     
-    
+    uint32_t N;
+    uint16_t R;
+    cin >> N >> R;
+    uint64_t total_mass = 0;
+    for (size_t i = 0; i < N; ++i) {
+        uint16_t W, H, D;
+        cin >> W >> H >> D;
+        total_mass += static_cast<uint64_t>(W) * H * D * R;
+    }
+    std::cout << total_mass << std::endl;
     
     return 0;
 }

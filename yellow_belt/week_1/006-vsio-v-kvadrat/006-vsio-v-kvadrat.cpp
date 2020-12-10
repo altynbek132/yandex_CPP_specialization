@@ -151,7 +151,7 @@ typedef long long ll;
 typedef pair<int, int> pi;
 typedef vector<int> vi;
 typedef vector<string> vs;
-#define F first
+#define Func first
 #define S second
 #define PB push_back
 #define MP make_pair
@@ -170,8 +170,8 @@ template<typename T>
 vector<T> Sqr(vector<T> v);
 template<typename K, typename V>
 map<K, V> Sqr(map<K, V> m);
-template<typename F, typename S>
-pair<F, S> Sqr(pair<F, S> p);
+template<typename Func, typename S>
+pair<Func, S> Sqr(pair<Func, S> p);
 
 template<typename T>
 T Sqr(T num) {
@@ -194,8 +194,8 @@ map<K, V> Sqr(map<K, V> m) {
     return m;
 }
 
-template<typename F, typename S>
-pair<F, S> Sqr(pair<F, S> p) {
+template<typename Func, typename S>
+pair<Func, S> Sqr(pair<Func, S> p) {
     auto&[a, b]   = p;
     a = Sqr(a);
     b = Sqr(b);

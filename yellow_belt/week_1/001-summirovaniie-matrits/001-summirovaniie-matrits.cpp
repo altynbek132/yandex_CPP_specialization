@@ -66,7 +66,7 @@ typedef long long ll;
 typedef pair<int, int> pi;
 typedef vector<int> vi;
 typedef vector<string> vs;
-#define F first
+#define Func first
 #define S second
 #define PB push_back
 #define MP make_pair

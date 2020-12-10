@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="LeetcodeEditor">
+    <option name="projectConfig">
+      <map>
+        <entry key="$PROJECT_DIR$/../leetcode/leetcode/editor/en/0485_MaxConsecutiveOnes.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/../leetcode/leetcode/editor/en/0485_MaxConsecutiveOnes.cpp" />
+              <option name="questionId" value="485" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../leetcode_clion/leetcode/editor/en/[38]Count and Say.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/../leetcode_clion/leetcode/editor/en/[38]Count and Say.cpp" />
+              <option name="questionId" value="38" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../leetcode_clion/leetcode/editor/en/[67]Add Binary.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="$PROJECT_DIR$/../leetcode_clion/leetcode/editor/en/[67]Add Binary.cpp" />
+              <option name="questionId" value="67" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="c:/Temp/leetcode/editor/en/[13]Roman to Integer.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="c:/Temp/leetcode/editor/en/[13]Roman to Integer.cpp" />
+              <option name="questionId" value="13" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="c:/Temp/leetcode/editor/en/[14]Longest Common Prefix.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="c:/Temp/leetcode/editor/en/[14]Longest Common Prefix.cpp" />
+              <option name="questionId" value="14" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="c:/Temp/leetcode/editor/en/[15]3Sum.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="c:/Temp/leetcode/editor/en/[15]3Sum.cpp" />
+              <option name="questionId" value="15" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="c:/Temp/leetcode/editor/en/[1]Two Sum.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="c:/Temp/leetcode/editor/en/[1]Two Sum.cpp" />
+              <option name="questionId" value="1" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="c:/Temp/leetcode/editor/en/[20]Valid Parentheses.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="c:/Temp/leetcode/editor/en/[20]Valid Parentheses.cpp" />
+              <option name="questionId" value="20" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="c:/Temp/leetcode/editor/en/[21]Merge Two Sorted Lists.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="c:/Temp/leetcode/editor/en/[21]Merge Two Sorted Lists.cpp" />
+              <option name="questionId" value="21" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="c:/Temp/leetcode/editor/en/[26]Remove Duplicates from Sorted Array.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="c:/Temp/leetcode/editor/en/[26]Remove Duplicates from Sorted Array.cpp" />
+              <option name="questionId" value="26" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="c:/Temp/leetcode/editor/en/[3]Longest Substring Without Repeating Characters.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="c:/Temp/leetcode/editor/en/[3]Longest Substring Without Repeating Characters.cpp" />
+              <option name="questionId" value="3" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="c:/Temp/leetcode/editor/en/[4]Median of Two Sorted Arrays.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="c:/Temp/leetcode/editor/en/[4]Median of Two Sorted Arrays.cpp" />
+              <option name="questionId" value="4" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="c:/Temp/leetcode/editor/en/[7]Reverse Integer.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="c:/Temp/leetcode/editor/en/[7]Reverse Integer.cpp" />
+              <option name="questionId" value="7" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+        <entry key="c:/Temp/leetcode/editor/en/[9]Palindrome Number.cpp">
+          <value>
+            <LeetcodeEditor>
+              <option name="path" value="c:/Temp/leetcode/editor/en/[9]Palindrome Number.cpp" />
+              <option name="questionId" value="9" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

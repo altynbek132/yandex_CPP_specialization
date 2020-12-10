@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(def)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 
 set(GCC_COVERAGE_COMPILE_FLAGS "-Wall")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
@@ -98,3 +98,37 @@ add_executable(005-triekier-zadach yellow_belt/week_1/005-triekier-zadach/005-tr
 add_executable(006-vsio-v-kvadrat yellow_belt/week_1/006-vsio-v-kvadrat/006-vsio-v-kvadrat.cpp)
 
 add_executable(007-ssylka-na-eliemient yellow_belt/week_1/007-ssylka-na-eliemient/007-ssylka-na-eliemient.cpp)
+
+add_executable(unit_test_framework yellow_belt/week_2/!001-unit_test_framework/unit_test_framework.cpp)
+
+add_executable(unit_test_framework_week_3 yellow_belt/week_3/unit_test_framework/unit_test_framework_week_3.cpp)
+
+add_executable(001-diekompozitsiia-proghrammy yellow_belt/week_2/001-diekompozitsiia-proghrammy/001-diekompozitsiia-proghrammy.cpp)
+
+add_executable(002-tiesty-dlia-funktsii-getdistinctrealrootcount yellow_belt/week_2/002-tiesty-dlia-funktsii-getdistinctrealrootcount/002-tiesty-dlia-funktsii-getdistinctrealrootcount.cpp)
+
+add_executable(003-tiesty-dlia-klassa-person yellow_belt/week_2/003-tiesty-dlia-klassa-person/003-tiesty-dlia-klassa-person.cpp)
+
+add_executable(004-tiesty-dlia-klassa-rational yellow_belt/week_2/004-tiesty-dlia-klassa-rational/004-tiesty-dlia-klassa-rational.cpp)
+
+add_executable(005-tiesty-dlia-funktsii-ispalindrom yellow_belt/week_2/005-tiesty-dlia-funktsii-ispalindrom/005-tiesty-dlia-funktsii-ispalindrom.cpp)
+
+
+# ======================================================
+# ======================================================
+include_directories(./Masloriy_framework)
+file(GLOB Masloriy_framework CONFIGURE_DEPENDS
+        "./Masloriy_framework/*.h"
+        "./Masloriy_framework/*.cpp"
+        )
+
+# ======================================================
+set(folder_path yellow_belt/week_3/000-project-organization)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(week_3_001 ${project_files} ${Masloriy_framework})
+# ======================================================
+
+

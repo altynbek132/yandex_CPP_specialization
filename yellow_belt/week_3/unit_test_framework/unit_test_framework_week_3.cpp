@@ -24,18 +24,15 @@
 //#include <limits>
 
 #include <cassert>
-#include <random>
 
 using namespace std;
 
 
+// output reloads
+#ifdef MASLO
 // ========= Definitions
 template<typename Collection>
 string Join(const Collection &col, char sep);
-
-// output reloads
-#ifdef MASLO
-
 template<typename First, typename Second>
 ostream &operator<<(ostream &out, const pair<First, Second> &p);
 template<typename T>
@@ -53,6 +50,19 @@ template<typename... T>
 std::ostream &operator<<(std::ostream &os, const std::tuple<T...> &tup);
 
 // ========= Implementations
+template<typename Collection>
+string Join(const Collection &col, char sep) {
+    stringstream ss;
+    bool first = true;
+    for (const auto &i : col) {
+        if (!first) {
+            ss << sep;
+        }
+        first = false;
+        ss << i;
+    }
+    return ss.str();
+}
 
 template<typename First, typename Second>
 ostream &operator<<(ostream &out, const pair<First, Second> &p) {
@@ -92,21 +102,6 @@ std::ostream &operator<<(std::ostream &os, const std::tuple<T...> &tup) {
 }
 
 #endif
-
-template<typename Collection>
-string Join(const Collection &col, char sep) {
-    stringstream ss;
-    bool first = true;
-    for (const auto &i : col) {
-        if (!first) {
-            ss << sep;
-        }
-        first = false;
-        ss << i;
-    }
-    return ss.str();
-}
-
 
 // utility functions
 void txt() {
@@ -168,36 +163,23 @@ typedef vector<string> vs;
 // 2^31 = 2e9
 // 2^63 = 9e18
 
+// ==================================
 template<class A, class B>
-void _AssertEqual(const A &actual, const B &expected, const string &file, int line) {
+void AssertEqual(const A &actual, const B &expected, int line) {
     if (actual == expected) {
         return;
     }
-    
-    ifstream in(file);
-    int line_ = line;
-    while (--line_) {
-        in.ignore(numeric_limits<streamsize>::max(), '\n');
-    }
-    string error_line;
-    getline(in, error_line);
-    in.close();
-    
     stringstream error;
-    error << "Assertion error at line " << line << ": " << endl;
-    error << error_line << endl;
+    error << "Assertion error at line: " << line << endl;
     error << "Expected:" << endl << expected << endl;
     error << "Actual:" << endl << actual << endl;
     throw runtime_error(error.str());
 }
 
-#define AssertEqual(actual, expected)       _AssertEqual(actual, expected, __FILE__, __LINE__)
-
-void _Assert(const bool &statement, const string &file, int line) {
-    _AssertEqual(statement, true, file, line);
+template<class T>
+void Assert(const T &t, int line) {
+    AssertEqual(t, true, line);
 }
-
-#define Assert(statement)       _Assert(statement, __FILE__, __LINE__)
 
 
 class TestRunner {
@@ -205,15 +187,12 @@ class TestRunner {
   TestRunner(string description) : description(std::move(description)), fail_count(0) {}
   
   template<class Func>
-  void RunTest(Func &test, const string &test_name) {
+  void RunTest(Func &test, string test_name) {
       try {
           test();
       } catch (exception &ex) {
           std::cerr << "test case \"" << test_name << "\" failed" << std::endl;
           std::cerr << ex.what() << std::endl;
-          fail_count++;
-      } catch (...) {
-          std::cerr << "Unknown exception caught" << endl;
           fail_count++;
       }
   }
@@ -232,37 +211,42 @@ class TestRunner {
   size_t fail_count;
 };
 
-// ==================================
+void test_good() {
+    vector<int> a = {1, 2, 3};
+    AssertEqual(a, a, __LINE__);
+    Assert(true, __LINE__);
+}
 
-void basic_test() {
-    mt19937 gen;
-    uniform_real_distribution<> unifdouble(-10, 10);
-    uniform_int_distribution<int> unifint(-10, 10);
+void test_bad1() {
+    vector<int> a = {1, 2, 3};
+    vi b = {1, 2};
+    AssertEqual(a, b, __LINE__);
+    AssertEqual(a, b, __LINE__);//should not be executed
+}
+
+void test_bad2() {
+    Assert(false, __LINE__);
+    Assert(false, __LINE__);
 }
 
 void TestAll() {
     {
-        TestRunner tr("test1");
-        tr.RunTest(basic_test, "basic test");
+        TestRunner tr("basic test");
+        tr.RunTest(test_good, "good test");
+        tr.RunTest(test_bad1, "bad1");
+        tr.RunTest(test_bad2, "bad2");
     }
 }
-
 // ==================================
 
-struct Prerun {
-  Prerun() {
-      txt();
-      TestAll();
-  }
-};
-
-Prerun maslo;
-
 int main() {
+    txt();
     ifstream in;
     ofstream out;
     io_files(in, "input.txt", out, "output.txt");
     // ================================================================
+    TestAll();
+    
     
     return 0;
 }

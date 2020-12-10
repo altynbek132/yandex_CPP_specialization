@@ -38,7 +38,7 @@ typedef long long ll;
 typedef pair<int, int> pi;
 typedef vector<int> vi;
 typedef vector<string> vs;
-#define F first
+#define Func first
 #define S second
 #define PB push_back
 #define MP make_pair
@@ -238,17 +238,17 @@ int test2() {
   return 0;
 }
 
-int test3() {
-  {
-    Rational a(2, 3);
-    Rational b(4, 3);
-    Rational c = a * b;
-    bool equal = c == Rational(8, 9);
-    if (!equal) {
-      cout << "2/3 * 4/3 != 8/9" << endl;
-      return 1;
+int positive_denom() {
+    {
+        Rational a(2, 3);
+        Rational b(4, 3);
+        Rational c = a * b;
+        bool equal = c == Rational(8, 9);
+        if (!equal) {
+            cout << "2/3 * 4/3 != 8/9" << endl;
+            return 1;
+        }
     }
-  }
   
   {
     Rational a(5, 4);
@@ -373,22 +373,22 @@ int test5() {
 }
 
 int main() {
-  if (test1()) {
-    std::cout << "test1" << std::endl;
-  };
-  if (test2()) {
-    std::cout << "test2" << std::endl;
-  };
-  if (test3()) {
-    std::cout << "test3" << std::endl;
-  };
-  if (test4()) {
-    std::cout << "test4" << std::endl;
-  };
-  if (test5()) {
-    std::cout << "test5" << std::endl;
-  };
-  
-  cout << "OK" << endl;
-  return 0;
+    if (test1()) {
+        std::cout << "test1" << std::endl;
+    };
+    if (test2()) {
+        std::cout << "test2" << std::endl;
+    };
+    if (positive_denom()) {
+        std::cout << "positive_denom" << std::endl;
+    };
+    if (test4()) {
+        std::cout << "test4" << std::endl;
+    };
+    if (test5()) {
+        std::cout << "test5" << std::endl;
+    };
+    
+    cout << "OK" << endl;
+    return 0;
 }

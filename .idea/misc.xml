@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CMakeWorkspace" PROJECT_DIR="$PROJECT_DIR$" />
+  <component name="CidrRootsConfiguration">
+    <excludeRoots>
+      <file path="$PROJECT_DIR$/white_belt" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_1/001-summirovaniie-matrits" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_1/002-sriedniaia-tiempieratura-2" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_1/003-massa-blokov" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_1/004-baza-rieghionov" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_1/005-triekier-zadach" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_1/006-vsio-v-kvadrat" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_1/007-ssylka-na-eliemient" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_2/!001-unit_test_framework" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_2/001-diekompozitsiia-proghrammy" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_2/002-tiesty-dlia-funktsii-getdistinctrealrootcount" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_2/003-tiesty-dlia-klassa-person" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_2/004-tiesty-dlia-klassa-rational" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_2/005-tiesty-dlia-funktsii-ispalindrom" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_3/000-project-organization" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_3/001-riealizovat-funktsii-obiavliennyie-v-zagholovochnom-failie" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_3/002-riealizovat-klass-obiavliennyi-v-zagholovochnom-failie" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_3/003-napisat-obiavlieniie-klassa" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_3/004-diekompozitsiia-proghrammy-2" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_3/unit_test_framework" />
+    </excludeRoots>
+  </component>
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />
   </component>

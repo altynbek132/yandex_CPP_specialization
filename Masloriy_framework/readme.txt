@@ -22,6 +22,35 @@ Prerun maslo;
 #include <string>
 #include <vector>
 
+// #include <bits/stdc++.h>
+//
+//#include <cstdlib>
+//#include <iostream>
+//
+//#include <algorithm>
+//#include <deque>
+//#include <iterator>
+//#include <map>
+//#include <numeric>
+//#include <set>
+//#include <sstream>
+//#include <string>
+//#include <tuple>
+//#include <utility>
+//#include <vector>
+//
+//#include <iomanip>
+//#include <fstream>
+//
+//#include <type_traits>
+//
+//#include <numeric>
+//#include <limits>
+//
+//#include <cassert>
+//#include <random>
+
+
 using namespace std;
 
 typedef long long ll;

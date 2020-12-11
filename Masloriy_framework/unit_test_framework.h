@@ -12,6 +12,8 @@
 #include <tuple>
 #include <fstream>
 
+#include "utilities.h"
+
 #define AssertEqual(actual, expected)       _AssertEqual(actual, expected, __FILE__, __LINE__)
 #define Assert(statement)       _Assert(statement, __FILE__, __LINE__)
 
@@ -31,7 +33,7 @@ void _AssertEqual(const A &actual, const B &expected, const std::string &file, i
     in.close();
     
     std::stringstream error;
-    error << "Assertion error at line " << line << ": " << std::endl;
+    error << "Assertion error at:" << std::endl << file << ":" << line << ": " << std::endl;
     error << error_line << std::endl;
     error << "Expected:" << std::endl << expected << std::endl;
     error << "Actual:" << std::endl << actual << std::endl;

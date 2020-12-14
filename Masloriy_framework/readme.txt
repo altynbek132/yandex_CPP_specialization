@@ -1,22 +1,6 @@
 // ==========================================
 // sample for main:
 
-#ifdef MASLO
-
-#include "utilities.h"
-#include "tests.h"
-
-struct Prerun {
-  Prerun() {
-      txt();
-      TestAll();
-  }
-};
-
-Prerun maslo;
-#endif
-
-
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -27,24 +11,24 @@ Prerun maslo;
 //#include <cstdlib>
 //#include <iostream>
 //
-//#include <algorithm>
-//#include <deque>
-//#include <iterator>
-//#include <map>
-//#include <numeric>
 //#include <set>
+//#include <map>
+//#include <deque>
 //#include <sstream>
 //#include <string>
+//#include <iterator>
 //#include <tuple>
+//#include <algorithm>
 //#include <utility>
 //#include <vector>
+
+//#include <numeric>
 //
 //#include <iomanip>
 //#include <fstream>
 //
 //#include <type_traits>
 //
-//#include <numeric>
 //#include <limits>
 //
 //#include <cassert>
@@ -68,8 +52,21 @@ typedef vector<string> vs;
 // 2^31 = 2e9
 // 2^63 = 9e18
 
-// Prerun maslo for cin&cout to txt; and tests are at beginning of file
-// open
+#ifdef MASLO
+
+#include "utilities.h"
+#include "tests.h"
+
+struct Prerun {
+  Prerun() {
+      txt();
+      TestAll();
+  }
+};
+
+Prerun maslo;
+#endif
+
 
 int main() {
     std::cout << "001" << std::endl;

@@ -263,7 +263,10 @@ int main() {
     ofstream out;
     io_files(in, "input.txt", out, "output.txt");
     // ================================================================
-    
+    const istream_iterator<string> start(cin);
+    auto start_copy = start;
+    ++start_copy;
+    cout << (start == start_copy) << endl;
     
     return 0;
 }

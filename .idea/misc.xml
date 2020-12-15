@@ -4,6 +4,8 @@
   <component name="CidrRootsConfiguration">
     <excludeRoots>
       <file path="$PROJECT_DIR$/white_belt" />
+      <file path="$PROJECT_DIR$/yellow_belt/course_project_yellow_solution" />
+      <file path="$PROJECT_DIR$/yellow_belt/kursovoi-proiekt" />
       <file path="$PROJECT_DIR$/yellow_belt/week_1/001-summirovaniie-matrits" />
       <file path="$PROJECT_DIR$/yellow_belt/week_1/002-sriedniaia-tiempieratura-2" />
       <file path="$PROJECT_DIR$/yellow_belt/week_1/003-massa-blokov" />
@@ -30,6 +32,14 @@
       <file path="$PROJECT_DIR$/yellow_belt/week_4/005-pieriebor-pieriestanovok" />
       <file path="$PROJECT_DIR$/yellow_belt/week_4/006-diemoghrafichieskiie-pokazatieli" />
       <file path="$PROJECT_DIR$/yellow_belt/week_4/007-sortirovka-sliianiiem" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_4/008-poisk-blizhaishiegho-eliemienta" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_4/009-imiena-i-familii-4" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_4/010-gruppirovka-strok-po-priefiksu" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_4/011-postroieniie-arifmietichieskogho-vyrazhieniia" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_5/000" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_5/001-nasliedovaniie-svoimi-rukami" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_5/002-otpravka-uviedomlienii" />
+      <file path="$PROJECT_DIR$/yellow_belt/week_5/003-nabor-fighur" />
     </excludeRoots>
   </component>
   <component name="JavaScriptSettings">

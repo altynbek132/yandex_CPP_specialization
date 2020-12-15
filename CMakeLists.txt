@@ -237,3 +237,52 @@ file(GLOB project_files CONFIGURE_DEPENDS
         )
 add_executable(week-4-011 ${project_files} ${Masloriy_framework})
 # ======================================================
+set(folder_path yellow_belt/week_5/000)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(week-5-000 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path yellow_belt/week_5/001-nasliedovaniie-svoimi-rukami)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(week-5-001 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path sample)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(sample ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path yellow_belt/week_5/002-otpravka-uviedomlienii)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(week-5-002 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path yellow_belt/week_5/003-nabor-fighur)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(week-5-003 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path yellow_belt/kursovoi-proiekt)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(kursovoi-proiekt ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path yellow_belt/course_project_yellow_solution)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(course_project_yellow_solution ${project_files} ${Masloriy_framework})
+# ======================================================

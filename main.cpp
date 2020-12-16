@@ -251,8 +251,8 @@ void TestAll() {
 
 struct Prerun {
   Prerun() {
-      txt();
-      TestAll();
+//      txt();
+//      TestAll();
   }
 };
 

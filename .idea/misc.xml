@@ -3,6 +3,16 @@
   <component name="CMakeWorkspace" PROJECT_DIR="$PROJECT_DIR$" />
   <component name="CidrRootsConfiguration">
     <excludeRoots>
+      <file path="$PROJECT_DIR$/red_belt/week_1/001-maksimal-nyi-eliemient-po-priedikatu" />
+      <file path="$PROJECT_DIR$/red_belt/week_1/002-makros-log" />
+      <file path="$PROJECT_DIR$/red_belt/week_1/003-gienierator-komparatorov" />
+      <file path="$PROJECT_DIR$/red_belt/week_1/004-makros-update-field" />
+      <file path="$PROJECT_DIR$/red_belt/week_1/005-plokhoi-makros" />
+      <file path="$PROJECT_DIR$/red_belt/week_1/006-makros-uniq-id" />
+      <file path="$PROJECT_DIR$/red_belt/week_1/007-tablitsa" />
+      <file path="$PROJECT_DIR$/red_belt/week_1/008-diek-na-osnovie-dvukh-viektorov" />
+      <file path="$PROJECT_DIR$/red_belt/week_1/009-shablon-paginator" />
+      <file path="$PROJECT_DIR$/sample" />
       <file path="$PROJECT_DIR$/white_belt" />
       <file path="$PROJECT_DIR$/yellow_belt/course_project_yellow_solution" />
       <file path="$PROJECT_DIR$/yellow_belt/kursovoi-proiekt" />

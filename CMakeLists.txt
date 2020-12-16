@@ -286,3 +286,66 @@ file(GLOB project_files CONFIGURE_DEPENDS
         )
 add_executable(course_project_yellow_solution ${project_files} ${Masloriy_framework})
 # ======================================================
+set(folder_path red_belt/week_1/001-maksimal-nyi-eliemient-po-priedikatu)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(red-week-1-001 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path red_belt/week_1/002-makros-log)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(red-week-1-002 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path red_belt/week_1/003-gienierator-komparatorov)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(red-week-1-003 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path red_belt/week_1/004-makros-update-field)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(red-week-1-004 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path red_belt/week_1/005-plokhoi-makros)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(red-week-1-005 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path red_belt/week_1/006-makros-uniq-id)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(red-week-1-006 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path red_belt/week_1/007-tablitsa)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(red-week-1-007 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path red_belt/week_1/008-diek-na-osnovie-dvukh-viektorov)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(red-week-1-008 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path red_belt/week_1/009-shablon-paginator)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(red-week-1-009 ${project_files} ${Masloriy_framework})
+# ======================================================

@@ -9,8 +9,14 @@ using namespace std;
 
 #ifdef MASLO
 
-#include "utilities.h"
 #include "tests.h"
+
+void txt() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+}
 
 struct Prerun {
   Prerun() {

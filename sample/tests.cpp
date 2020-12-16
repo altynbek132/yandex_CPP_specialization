@@ -1,7 +1,6 @@
 #ifdef MASLO
 
 #include "tests.h"
-#include "solution.h"
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -22,18 +21,19 @@ string gen_random(const int len) {
     return tmp_s;
 }
 
-
 void basic_test() {
     std::mt19937 gen;
     std::uniform_real_distribution<> dd(-10, 10);
     std::uniform_int_distribution<int> ii(-10, 10);
+    ASSERT(true);
+    ASSERT_EQUAL(2 + 2, 4);
 }
 
 // this function is entry for testing
 void TestAll() {
     {
-        TestRunner tr("test1");
-        tr.RunTest(basic_test, "basic test");
+        TestRunner tr;
+        RUN_TEST(tr, basic_test);
     }
 }
 

@@ -259,6 +259,13 @@ struct Prerun {
 Prerun maslo;
 
 int main() {
+#ifdef DEBUG
+    std::cout << "debug" << std::endl;
+#endif
+#ifndef DEBUG
+    std::cout << "no debug" << std::endl;
+#endif
+    
     
     return 0;
 }

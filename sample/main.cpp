@@ -12,9 +12,10 @@ using namespace std;
 #include "tests.h"
 
 void txt() {
+    freopen("input.txt", "r", stdin);
+    return;
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 }
 

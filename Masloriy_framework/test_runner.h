@@ -96,17 +96,17 @@ class TestRunner {
 };
 
 #define ASSERT_EQUAL(x, y) {            \
-  __assert_equal_private_os os;                     \
-  os << #x << " != " << #y << ", "      \
+  stringstream __assert_equal_private_os;                     \
+  __assert_equal_private_os << #x << " != " << #y << ", "      \
     <<endl<< __FILE__ << ":" << __LINE__<<endl;     \
-  AssertEqual(x, y, os.str());          \
+  AssertEqual(x, y, __assert_equal_private_os.str());          \
 }
 
 #define ASSERT(x) {                     \
-  __assert_equal_private_os os;                     \
-  os << #x << " is false, "             \
+  stringstream __assert_equal_private_os;                     \
+  __assert_equal_private_os << #x << " is false, "             \
     <<endl<< __FILE__ << ":" << __LINE__<<endl;     \
-  Assert(x, os.str());                  \
+  Assert(x, __assert_equal_private_os.str());                  \
 }
 
 #define RUN_TEST(tr, func) \

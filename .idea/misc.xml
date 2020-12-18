@@ -53,6 +53,10 @@
       <file path="$PROJECT_DIR$/3__red_belt/week_2/003-ekspriessy" />
       <file path="$PROJECT_DIR$/3__red_belt/week_2/004-eliektronnaia-knigha" />
       <file path="$PROJECT_DIR$/3__red_belt/week_2/005-sistiema-bronirovaniia-otieliei" />
+      <file path="$PROJECT_DIR$/3__red_belt/week_3/001-pul-obiektov" />
+      <file path="$PROJECT_DIR$/3__red_belt/week_3/002-swap-sortpointers-reversedcopy" />
+      <file path="$PROJECT_DIR$/3__red_belt/week_3/003-pishiem-svoi-viektor" />
+      <file path="$PROJECT_DIR$/3__red_belt/week_3/004-odnosviaznyi-spisok" />
       <file path="$PROJECT_DIR$/sample" />
     </excludeRoots>
   </component>

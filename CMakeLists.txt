@@ -388,3 +388,31 @@ file(GLOB project_files CONFIGURE_DEPENDS
         )
 add_executable(red-week-2-005 ${project_files} ${Masloriy_framework})
 # ======================================================
+set(folder_path 3__red_belt/week_3/001-pul-obiektov)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(red-week-3-001 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path 3__red_belt/week_3/002-swap-sortpointers-reversedcopy)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(red-week-3-002 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path 3__red_belt/week_3/003-pishiem-svoi-viektor)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(red-week-3-003 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path 3__red_belt/week_3/004-odnosviaznyi-spisok)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(red-week-3-004 ${project_files} ${Masloriy_framework})
+# ======================================================

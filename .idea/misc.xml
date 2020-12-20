@@ -3,6 +3,11 @@
   <component name="CMakeWorkspace" PROJECT_DIR="$PROJECT_DIR$" />
   <component name="CidrRootsConfiguration">
     <excludeRoots>
+      <file path="$PROJECT_DIR$/1__white_belt/final" />
+      <file path="$PROJECT_DIR$/1__white_belt/week 1" />
+      <file path="$PROJECT_DIR$/1__white_belt/week 2" />
+      <file path="$PROJECT_DIR$/1__white_belt/week 3" />
+      <file path="$PROJECT_DIR$/1__white_belt/week 4" />
       <file path="$PROJECT_DIR$/2__yellow_belt/course_project_yellow_solution" />
       <file path="$PROJECT_DIR$/2__yellow_belt/kursovoi-proiekt" />
       <file path="$PROJECT_DIR$/2__yellow_belt/week_1/001-summirovaniie-matrits" />
@@ -57,6 +62,12 @@
       <file path="$PROJECT_DIR$/3__red_belt/week_3/002-swap-sortpointers-reversedcopy" />
       <file path="$PROJECT_DIR$/3__red_belt/week_3/003-pishiem-svoi-viektor" />
       <file path="$PROJECT_DIR$/3__red_belt/week_3/004-odnosviaznyi-spisok" />
+      <file path="$PROJECT_DIR$/3__red_belt/week_4/001-sportsmieny" />
+      <file path="$PROJECT_DIR$/3__red_belt/week_4/002-stackvector" />
+      <file path="$PROJECT_DIR$/3__red_belt/week_4/003-translator" />
+      <file path="$PROJECT_DIR$/3__red_belt/week_4/004-airportcounter" />
+      <file path="$PROJECT_DIR$/3__red_belt/week_4/005-tiekstovyi-riedaktor" />
+      <file path="$PROJECT_DIR$/3__red_belt/week_4/006-statistika-web-sierviera" />
       <file path="$PROJECT_DIR$/sample" />
     </excludeRoots>
   </component>

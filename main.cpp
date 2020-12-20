@@ -1,30 +1,30 @@
-// #include <bits/stdc++.h>
+#include <bits/stdc++.h>
 
-#include <cstdlib>
-#include <iostream>
-
-#include <algorithm>
-#include <deque>
-#include <iterator>
-#include <map>
-#include <numeric>
-#include <set>
-#include <sstream>
-#include <string>
-#include <tuple>
-#include <utility>
-#include <vector>
-
-#include <iomanip>
-#include <fstream>
-
-#include <type_traits>
-
-#include <numeric>
-//#include <limits>
-
-#include <cassert>
-#include <random>
+//#include <cstdlib>
+//#include <iostream>
+//
+//#include <algorithm>
+//#include <deque>
+//#include <iterator>
+//#include <map>
+//#include <numeric>
+//#include <set>
+//#include <sstream>
+//#include <string>
+//#include <tuple>
+//#include <utility>
+//#include <vector>
+//
+//#include <iomanip>
+//#include <fstream>
+//
+//#include <type_traits>
+//
+//#include <numeric>
+////#include <limits>
+//
+//#include <cassert>
+//#include <random>
 
 using namespace std;
 
@@ -259,13 +259,9 @@ struct Prerun {
 Prerun maslo;
 
 int main() {
-#ifdef DEBUG
-    std::cout << "debug" << std::endl;
-#endif
-#ifndef DEBUG
-    std::cout << "no debug" << std::endl;
-#endif
-    
+    set<string> s = {"a", "b"};
+    map<string, int> m{s.begin(), s.end()};
+    std::cout << m << std::endl;
     
     return 0;
 }

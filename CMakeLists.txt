@@ -4,6 +4,7 @@ project(yandex_cpp)
 set(CMAKE_CXX_STANDARD 17)
 
 set(GCC_COVERAGE_COMPILE_FLAGS "-Wall")
+#set(GCC_COVERAGE_COMPILE_FLAGS "-Wfatal-errors")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
 #set(CMAKE_CXX_FLAGS "-O2")
 
@@ -459,3 +460,87 @@ add_executable(def main.cpp)
 #        )
 #add_executable(red-week-4-006 ${project_files} ${Masloriy_framework})
 ## ======================================================
+#set(folder_path 3__red_belt/week_5/001-schitalka-iosifa)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-5-001 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_5/002-gruppirovka-strok)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-5-002 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_5/003-opierator-prisvaivaniia-dlia-simplevector)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-5-003 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_5/004-razbiieniie-na-priedlozhieniia)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-5-004 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_5/005-move-siemantika-v-simplevector)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-5-005 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_5/006-sortirovka-sliianiiem-3)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-5-006 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_5/007-kontieinier-s-prioritietami)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-5-007 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_5/008-summirovaniie-matritsy)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-5-008 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_5/009-issliedovaniie-bloghov)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-5-009 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_5/010-shablon-synchronized)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-5-010 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_5/011-concurrentmap)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-5-011 ${project_files} ${Masloriy_framework})
+## ======================================================
+set(folder_path 3__red_belt/week_6/final_poiskovaia-sistiema)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(red-week-6-final ${project_files} ${Masloriy_framework})
+# ======================================================

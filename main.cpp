@@ -112,6 +112,7 @@ string Join(const Collection &col, char sep) {
 void txt() {
 #ifdef MASLO
     ios::sync_with_stdio(false);
+    return;
     cin.tie(nullptr);
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
@@ -251,24 +252,15 @@ void TestAll() {
 
 struct Prerun {
   Prerun() {
-//      txt();
-//      TestAll();
-  }
+        txt();
+        TestAll();
+    }
 };
 
 Prerun maslo;
 
 int main() {
-    set<string> s = {"a", "b"};
-    map<string, int> m{s.begin(), s.end()};
-    std::cout << m << std::endl;
-    
+    std::cout << 123 << std::endl;
+
     return 0;
 }
-
-
-
-
-
-
-

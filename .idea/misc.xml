@@ -68,6 +68,17 @@
       <file path="$PROJECT_DIR$/3__red_belt/week_4/004-airportcounter" />
       <file path="$PROJECT_DIR$/3__red_belt/week_4/005-tiekstovyi-riedaktor" />
       <file path="$PROJECT_DIR$/3__red_belt/week_4/006-statistika-web-sierviera" />
+      <file path="$PROJECT_DIR$/3__red_belt/week_5/001-schitalka-iosifa" />
+      <file path="$PROJECT_DIR$/3__red_belt/week_5/002-gruppirovka-strok" />
+      <file path="$PROJECT_DIR$/3__red_belt/week_5/003-opierator-prisvaivaniia-dlia-simplevector" />
+      <file path="$PROJECT_DIR$/3__red_belt/week_5/004-razbiieniie-na-priedlozhieniia" />
+      <file path="$PROJECT_DIR$/3__red_belt/week_5/005-move-siemantika-v-simplevector" />
+      <file path="$PROJECT_DIR$/3__red_belt/week_5/006-sortirovka-sliianiiem-3" />
+      <file path="$PROJECT_DIR$/3__red_belt/week_5/007-kontieinier-s-prioritietami" />
+      <file path="$PROJECT_DIR$/3__red_belt/week_5/008-summirovaniie-matritsy" />
+      <file path="$PROJECT_DIR$/3__red_belt/week_5/009-issliedovaniie-bloghov" />
+      <file path="$PROJECT_DIR$/3__red_belt/week_5/010-shablon-synchronized" />
+      <file path="$PROJECT_DIR$/3__red_belt/week_5/011-concurrentmap" />
       <file path="$PROJECT_DIR$/sample" />
     </excludeRoots>
   </component>

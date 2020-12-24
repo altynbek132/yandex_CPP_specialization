@@ -1,0 +1,1 @@
+-Wno-unused-variable,-Wno-infinite-recursion,-Werror=implicit-function-declaration,-Wshadow,-Wno-shadow-field-in-constructor-modified,-Wno-shadow-ivar,-Wuninitialized,-Wunused-label

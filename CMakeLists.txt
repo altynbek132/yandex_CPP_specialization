@@ -537,10 +537,10 @@ add_executable(def main.cpp)
 #        )
 #add_executable(red-week-5-011 ${project_files} ${Masloriy_framework})
 ## ======================================================
-set(folder_path 3__red_belt/week_6/final_poiskovaia-sistiema)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-6-final ${project_files} ${Masloriy_framework})
+#set(folder_path 3__red_belt/week_6/final_poiskovaia-sistiema)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-6-final ${project_files} ${Masloriy_framework})
 # ======================================================

@@ -1,22 +1,9 @@
 #pragma once
 
-#include <iostream>
-
-#ifdef MASLO
-
-void txt() {
-    std::cout << "io: input.txt and output.txt" << std::endl;
-
-    std::freopen("input.txt", "r", stdin);
-
-    // return;
-    std::ios::sync_with_stdio(false);
-    std::cin.tie(nullptr);
-    std::freopen("output.txt", "w", stdout);
-}
+void txt(bool reopenInput, bool reopenOutput, bool turnOffSync);
 
 struct prerun {
-    prerun() { txt(); }
+    prerun(bool reopenInput, bool reopenOutput, bool turnOffSync = false) {
+        txt(reopenInput, reopenOutput, turnOffSync);
+    }
 };
-
-#endif  // MASLO

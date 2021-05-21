@@ -1,8 +1,6 @@
 #include <readFromInputTxt.h>
 #pragma once
 
-prerun maslo;
-
 #include <iostream>
 #include <map>
 #include <set>

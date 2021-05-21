@@ -1,4 +1,7 @@
+#include <readFromInputTxt.h>
 #pragma once
+
+prerun maslo;
 
 #include <iostream>
 #include <map>
@@ -104,12 +107,11 @@ class TestRunner {
         AssertEqual(x, y, __assert_equal_private_os.str());               \
     }
 
-#define ASSERT(x)                                                         \
-    {                                                                     \
-        stringstream __assert_equal_private_os;                           \
-        __assert_equal_private_os << #x << " is false, " << endl          \
-                                  << __FILE__ << ":" << __LINE__ << endl; \
-        Assert(x, __assert_equal_private_os.str());                       \
+#define ASSERT(x)                                                                                        \
+    {                                                                                                    \
+        stringstream __assert_equal_private_os;                                                          \
+        __assert_equal_private_os << #x << " is false, " << endl << __FILE__ << ":" << __LINE__ << endl; \
+        Assert(x, __assert_equal_private_os.str());                                                      \
     }
 
 #define RUN_TEST(tr, func) tr.RunTest(func, #func)

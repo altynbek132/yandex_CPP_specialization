@@ -23,8 +23,7 @@ file(GLOB Masloriy_framework CONFIGURE_DEPENDS
 
 # ======================================================
 
-
-add_executable(def main.cpp)
+add_executable(def main.cpp ${Masloriy_framework})
 #add_executable(week1 "1__white_belt/week 1/part2.cpp")
 #add_executable(minimal_string "1__white_belt/week 1/minimal_string.cpp")
 #add_executable(uravnenie "1__white_belt/week 1/uravnenie.cpp")

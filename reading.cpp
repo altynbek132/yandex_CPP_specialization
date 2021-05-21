@@ -91,7 +91,7 @@ std::ostream &operator<<(std::ostream &os, const std::tuple<T...> &tup) {
     return os << "]";
 }
 
-#endif
+#endif // MASLO
 
 template<typename Collection>
 string Join(const Collection &col, char sep) {
@@ -115,7 +115,7 @@ void txt() {
     cin.tie(nullptr);
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
-#endif
+#endif // MASLO
 }
 
 void ensure(istream &input, char expected) {

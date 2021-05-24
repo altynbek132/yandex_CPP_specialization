@@ -1,112 +1,79 @@
-#include <bits/stdc++.h>
+#include <cstddef>
+#include <stdexcept>
+#include <utility>
+#include <vector>
+
+#include "test_runner.h"
 
 using namespace std;
 
-// 2^7 = 128
-// 2^15 = 3e4
-// 2^31 = 2e9
-// 2^63 = 9e18
-
 #ifdef MASLO
 
-#include "tests.h"
+prerun maslo(true, false, false);
 
-void txt() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-}
+#endif  // MASLO
 
-struct Prerun {
-  Prerun() {
-      txt();
-//      TestAll();
-  }
+template <typename T>
+class Deque {
+   public:
+    Deque() = default;
+    bool Empty() const { return frontReverse.empty() && back.empty(); }
+    size_t Size() const { return frontReverse.size() + back.size(); }
+
+    T& operator[](size_t pos) { return AtMain(pos); }
+    const T& operator[](size_t pos) const { return AtMain(pos); }
+
+    // throws out_of_range if pos >= Size()
+    T& At(size_t pos) {
+        CheckIndex(pos);
+        return AtMain(pos);
+    }
+    // throws out_of_range if pos >= Size()
+    const T& At(size_t pos) const {
+        CheckIndex(pos);
+        return AtMain(pos);
+    }
+
+    const T& Front() const { return frontReverse.empty() ? back.front() : frontReverse.back(); }
+    T& Front() { return frontReverse.empty() ? back.front() : frontReverse.back(); }
+
+    const T& Back() const { return back.empty() ? frontReverse.front() : back.back(); }
+    T& Back() { return back.empty() ? frontReverse.front() : back.back(); }
+
+    void PushFront(const T& item) { frontReverse.push_back(item); }
+    void PushBack(const T& item) { back.push_back(item); }
+
+   private:
+    T& AtMain(size_t pos) {
+        size_t frontSize = frontReverse.size();
+        if (pos < frontSize) {
+            return frontReverse[frontSize - 1 - pos];
+        }
+        return back[pos - frontSize];
+    }
+
+    const T& AtMain(size_t pos) const {
+        size_t frontSize = frontReverse.size();
+        if (pos < frontSize) {
+            return frontReverse.at(frontSize - 1 - pos);
+        }
+        return back.at(pos - frontSize);
+    }
+
+    void CheckIndex(size_t pos) const {
+        if (pos >= Size()) {
+            throw out_of_range("out of range, epta");
+        }
+    }
+
+    vector<T> frontReverse, back;
+    /* <- frontReverse|      back ->
+     *   [front ......|..... back]
+     * */
 };
 
-Prerun maslo;
-#endif
-// ==========================================
-
-#include "test_runner.h"
-#include "Deque.h"
-#include <deque>
-
-void exceptionThrowing() {
-    Deque<int> d;
-    deque<int> dd;
-    
-    try {
-        ASSERT_EQUAL(d[0], dd[0]);
-        ASSERT(false); //should not get to that line
-    } catch (out_of_range &ex) {
-    } catch (...) {
-        ASSERT(false); //should throw only out_of_range
-    }
-    try {
-        d.Back();
-        ASSERT(false); //should not get to that line
-    } catch (out_of_range &ex) {
-    } catch (...) {
-        ASSERT(false); //should throw only out_of_range
-    }
-    try {
-        d.Front();
-        ASSERT(false); //should not get to that line
-    } catch (out_of_range &ex) {
-    } catch (...) {
-        ASSERT(false); //should throw only out_of_range
-    }
-}
-
-
-void DequeTest() {
-    Deque<int> d;
-    deque<int> dd;
-    
-    
-    for (size_t i = 0; i < 100; ++i) {
-        ASSERT_EQUAL(d.Empty(), dd.empty());
-        ASSERT_EQUAL(d.Size(), dd.size());
-        
-        if (i % 3 == 0) {
-            d.PushFront(i);
-            dd.push_front(i);
-        } else {
-            d.PushBack(i);
-            dd.push_back(i);
-        }
-        if (d.Size() > 54) {
-            ASSERT_EQUAL(d.Front(), dd.front());
-            ASSERT_EQUAL(d.Back(), dd.back());
-        }
-    }
-    
-    {
-        const int val = 1488228;
-        const vector<int> changeIndexes = {54, 27, 1488 / 228};
-        for (size_t change_index : changeIndexes) {
-            d[change_index] = val;
-            dd[change_index] = val;
-        }
-        
-        
-        const auto constD = d;
-        
-        for (size_t i = 0; i < d.Size(); ++i) {
-            ASSERT_EQUAL(constD[i], dd[i]);
-        }
-    }
-}
-
 int main() {
-    TestRunner tr;
-    RUN_TEST(tr, DequeTest);
-    RUN_TEST(tr, exceptionThrowing);
-    
+    const Deque<int> asdf;
+    asdf.At(0);
     return 0;
 }
-
-
-// ==========================================

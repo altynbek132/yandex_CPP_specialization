@@ -16,6 +16,7 @@ struct Date {
     int year, month, day;
 };
 
+
 struct Time {
     friend ostream& operator<<(ostream& os, const Time& time1);
     friend bool operator<(const Time& lhs, const Time& rhs);

@@ -1,82 +1,54 @@
 #include <bits/stdc++.h>
+#include "test_runner.h"
 
 using namespace std;
-
-// 2^7 = 128
-// 2^15 = 3e4
-// 2^31 = 2e9
-// 2^63 = 9e18
 
 #ifdef MASLO
 
-#include "tests.h"
+prerun maslo(true, false, false);
 
-void txt() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-}
+#endif  // MASLO
 
-struct Prerun {
-  Prerun() {
-      txt();
-      TestAll();
-  }
-};
-
-Prerun maslo;
-#endif
-// ==========================================
-
-
-#include "test_runner.h"
 #include <sstream>
 #include <string>
-
+#include "test_runner.h"
 using namespace std;
 
 class Logger {
- public:
-  explicit Logger(ostream &output_stream) : os(output_stream) {
-  }
-  
-  void SetLogLine(bool value) { log_line = value; }
-  
-  void SetLogFile(bool value) { log_file = value; }
-  
-  void Log(const string &message) {
-      if (log_file && log_line) {
-          os << file << ":" << line << " ";
-      } else if (log_file) {
-          os << file << " ";
-      } else if (log_line) {
-          os << "Line " << line << " ";
-      }
-      os << message << std::endl;
-  }
-  
-  void SetLine(int line) {
-      Logger::line = line;
-  }
-  
-  void SetFile(const string &file) {
-      Logger::file = file;
-  }
- 
- private:
-  ostream &os;
-  bool log_line = false;
-  bool log_file = false;
-  int line;
-  std::string file;
+   public:
+    explicit Logger(ostream& output_stream) : os(output_stream) {}
+
+    void SetLogLine(bool value) { log_line = value; }
+    void SetLogFile(bool value) { log_file = value; }
+
+    void Log(const string& message) {
+        if (!log_line && !log_file) {
+            os << message << std::endl;
+        } else if (log_file && log_line) {
+            os << file << ":" << line << " " << message << std::endl;
+        } else if (log_file) {
+            os << file << " " << message << std::endl;
+        } else if (log_line) {
+            os << "Line " << line << " " << message << std::endl;
+        }
+    }
+
+    void setFile(const string& file) { Logger::file = file; }
+    void setLine(size_t line) { Logger::line = line; }
+
+   private:
+    ostream& os;
+    bool log_line = false;
+    bool log_file = false;
+
+    string file;
+    size_t line;
 };
 
-#define LOG(logger, message) {      \
-    logger.SetFile(__FILE__);       \
-    logger.SetLine(__LINE__);       \
-    logger.Log(message);            \
-}
+#define LOG(logger, message)    \
+    (logger).setFile(__FILE__); \
+    (logger).setLine(__LINE__); \
+    (logger).Log(message);
 
 void TestLog() {
 /* Для написания юнит-тестов в этой задаче нам нужно фиксировать конкретные
@@ -90,20 +62,20 @@ void TestLog() {
  * строк внутри функции TestLog будут фиксированы независимо от того, какой
  * код мы добавляем перед ней*/
 #line 1 "logger.cpp"
-    
+
     ostringstream logs;
     Logger l(logs);
     LOG(l, "hello");
-    
+
     l.SetLogFile(true);
     LOG(l, "hello");
-    
+
     l.SetLogLine(true);
     LOG(l, "hello");
-    
+
     l.SetLogFile(false);
     LOG(l, "hello");
-    
+
     string expected = "hello\n";
     expected += "logger.cpp hello\n";
     expected += "logger.cpp:10 hello\n";
@@ -115,5 +87,3 @@ int main() {
     TestRunner tr;
     RUN_TEST(tr, TestLog);
 }
-
-// ==========================================

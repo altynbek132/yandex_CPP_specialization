@@ -1,71 +1,39 @@
 #include <bits/stdc++.h>
-
-using namespace std;
-
-// 2^7 = 128
-// 2^15 = 3e4
-// 2^31 = 2e9
-// 2^63 = 9e18
-
-#ifdef MASLO
-
-#include "tests.h"
-
-void txt() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-}
-
-struct Prerun {
-  Prerun() {
-      txt();
-      TestAll();
-  }
-};
-
-Prerun maslo;
-#endif
-// ==========================================
-
+#include "profile.h"
 #include "test_runner.h"
 
 using namespace std;
 
+#ifdef MASLO
+
+prerun maslo(true, false, false);
+
+#endif  // MASLO
+
 // Реализуйте здесь шаблонный класс Table
-template<class T>
+
+template <class T>
 class Table {
- public:
-  Table(size_t rows, size_t cols) : matrix(
-      vector(rows, vector<T>(cols))
-  ) {}
-  
-  vector<T> &operator[](size_t row) {
-      return matrix.at(row);
-  }
-  
-  const vector<T> &operator[](size_t row) const {
-      return matrix.at(row);
-  }
-  
-  void Resize(size_t rows, size_t cols) {
-      matrix.resize(rows);
-      for (auto &row : matrix) {
-          row.resize(cols);
-      }
-  }
-  
-  pair<size_t, size_t> Size() const {
-      if (!matrix.empty() && !matrix[0].empty()) {
-          return {matrix.size(), matrix[0].size()};
-      }
-      
-      return {0, 0};
-  }
- 
- private:
-  vector<vector<T>> matrix;
+   public:
+    Table(size_t rows, size_t cols) : matrix(vector(rows, vector<T>(cols))) {}
+    vector<T>& operator[](size_t row) { return matrix[row]; }
+    const vector<T>& operator[](size_t row) const { return matrix[row]; }
+    void Resize(size_t rows, size_t cols) {
+        matrix.resize(rows);
+        for (auto& row : matrix) {
+            row.resize(cols);
+        }
+    }
+
+    pair<size_t, size_t> Size() const {
+        if (matrix.empty() || matrix[0].empty()) {
+            return {0, 0};
+        }
+        return {matrix.size(), matrix[0].size()};
+    }
+
+   private:
+    vector<vector<T>> matrix;
 };
 
 void TestTable() {
@@ -84,6 +52,3 @@ int main() {
     RUN_TEST(tr, TestTable);
     return 0;
 }
-
-
-// ==========================================

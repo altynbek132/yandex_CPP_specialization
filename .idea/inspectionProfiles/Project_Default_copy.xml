@@ -334,8 +334,8 @@
     </inspection_tool>
     <inspection_tool class="OCDFA" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="OCGlobalUnused" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="OCInconsistentNaming" enabled="true" level="WEAK WARNING" enabled_by_default="false">
-      <scope name="Project Files" level="WEAK WARNING" enabled="true" />
+    <inspection_tool class="OCInconsistentNaming" enabled="false" level="WEAK WARNING" enabled_by_default="false">
+      <scope name="Project Files" level="WEAK WARNING" enabled="false" />
     </inspection_tool>
     <inspection_tool class="OCLegacyObjCLiteral" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="OCLoopDoesntUseConditionVariable" enabled="false" level="WARNING" enabled_by_default="false">

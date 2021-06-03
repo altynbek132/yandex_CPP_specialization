@@ -24,6 +24,19 @@ ostream& operator<<(ostream& os, const vector<T>& s) {
     }
     return os << "}";
 }
+template <class T>
+ostream& operator<<(ostream& os, const deque<T>& s) {
+    os << "{";
+    bool first = true;
+    for (const auto& x : s) {
+        if (!first) {
+            os << ", ";
+        }
+        first = false;
+        os << x;
+    }
+    return os << "}";
+}
 
 template <class T>
 ostream& operator<<(ostream& os, const set<T>& s) {
@@ -41,6 +54,19 @@ ostream& operator<<(ostream& os, const set<T>& s) {
 
 template <class K, class V>
 ostream& operator<<(ostream& os, const map<K, V>& m) {
+    os << "{";
+    bool first = true;
+    for (const auto& kv : m) {
+        if (!first) {
+            os << ", ";
+        }
+        first = false;
+        os << kv.first << ": " << kv.second;
+    }
+    return os << "}";
+}
+template <class K, class V>
+ostream& operator<<(ostream& os, const unordered_map<K, V>& m) {
     os << "{";
     bool first = true;
     for (const auto& kv : m) {

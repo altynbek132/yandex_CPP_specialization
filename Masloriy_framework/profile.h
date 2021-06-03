@@ -1,3 +1,4 @@
+#include "glue.h"
 #pragma once
 
 #include <chrono>
@@ -39,8 +40,11 @@ class LogDuration {
     std::chrono::steady_clock::time_point start;
 };
 //-------------------------------------------------------------------------------------------------
-#define UNIQ_ID_IMPL(lineno) _a_local_var_##lineno
-#define UNIQ_ID(lineno) UNIQ_ID_IMPL(lineno)
-//-------------------------------------------------------------------------------------------------
-#define LOG_DURATION(message) LogDuration UNIQ_ID(__LINE__){message};
+#define UNIQ_SS GLUE(_profile_uniq_ss, __LINE__)
+#define UNIQ_LOG_DURATION GLUE(_profile_uniq_log_duration, __LINE__)
+#define LOG_DURATION(message)                                                     \
+    stringstream UNIQ_SS;                                                         \
+    UNIQ_SS << (message) << " | " << endl << __FILE__ << ":" << __LINE__ << endl; \
+    LogDuration UNIQ_LOG_DURATION{UNIQ_SS.str()};
+
 //-------------------------------------------------------------------------------------------------

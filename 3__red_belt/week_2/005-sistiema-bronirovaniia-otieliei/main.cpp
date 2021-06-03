@@ -1,161 +1,169 @@
 #include <bits/stdc++.h>
+#include <ostream>
+#include "profile.h"
+#include "test_runner.h"
 
 using namespace std;
 
-// 2^7 = 128
-// 2^15 = 3e4
-// 2^31 = 2e9
-// 2^63 = 9e18
+#ifdef MASLO
+
+prerun maslo(true, false, false);
+
+#endif  // MASLO
+/*
+Q 10^5
+time — −10^18 до 10^18 и не убывает от события к событию
+hotel_name — строка
+client_id — 10^9
+room_count — 1000
+
+
+
+IMPLEMENTATION:
+class bookmanager
+map hotel to stack of bookings
+store and refresh room counts
+map client to booking count
+
+ * */
+
+using Time = int64_t;
+using Client_id = uint32_t;
+using Room_count = uint16_t;
+const int time_interval = 86400;
+
+struct Booking {
+    Time time;
+    Client_id client_id;
+    Room_count room_count;
+#ifdef MASLO
+
+    friend ostream& operator<<(ostream& os, const Booking& booking) {
+        os << "time: " << booking.time << " client_id: " << booking.client_id
+           << " room_count: " << booking.room_count;
+        return os;
+    }
+
+#endif  // MASLO
+};
+
+class Hotel {
+   public:
+    void book(Booking booking) {
+        room_count_ += booking.room_count;
+        client_to_book_count[booking.client_id]++;
+        bookings.push_back(booking);
+    }
+    size_t clients() { return client_to_book_count.size(); }
+    size_t rooms() { return room_count_; }
+    void popTill(Time time) {
+        while (true) {
+            if (bookings.empty())
+                break;
+            auto& booking = bookings.front();
+            if (booking.time > time)
+                break;
+            room_count_ -= booking.room_count;
+            auto it = client_to_book_count.find(booking.client_id);
+            if (--it->second == 0)
+                client_to_book_count.erase(it);
+            bookings.pop_front();
+        }
+    }
 
 #ifdef MASLO
 
-#include "tests.h"
-
-void txt() {
-    freopen("input.txt", "r", stdin);
-    return;
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    freopen("output.txt", "w", stdout);
-}
-
-struct Prerun {
-  Prerun() {
-      txt();
-      TestAll();
-  }
-};
-
-Prerun maslo;
-#endif
-// ==========================================
-#include <iostream>
-#include <cstdint>
-#include <map>
-#include <queue>
-
-//----------------------------------------------------------------------------------------------------
-struct Booking {
-  int64_t time;
-  int client_id;
-  int room_count;
-};
-
-//----------------------------------------------------------------------------------------------------
-class Hotel {
- public:
-  void Book(const Booking &booking);
-  
-  int GetClients(const int64_t &current_time);
-  
-  int GetRooms(const int64_t &current_time);
- 
- private:
-  static const int SECONDS_IN_DAYS = 86400;
-  
-  std::queue<Booking> booking_history;
-  int room_count = 0;
-  std::map<int, int> client_booking_counts;
-  
-  void pop_booking();
-  
-  void remove_old_books(const int64_t &current_time);
-};
-
-void Hotel::Book(const Booking &booking) {
-    booking_history.push(booking);
-    room_count += booking.room_count;
-    ++client_booking_counts[booking.client_id];
-}
-
-int Hotel::GetClients(const int64_t &current_time) {
-    remove_old_books(current_time);
-    return client_booking_counts.size();
-}
-
-int Hotel::GetRooms(const int64_t &current_time) {
-    remove_old_books(current_time);
-    return room_count;
-}
-
-void Hotel::pop_booking() {
-    const Booking &booking = booking_history.front();
-    room_count -= booking.room_count;
-    const auto client_stat_it = client_booking_counts.find(booking.client_id);
-    
-    if (--client_stat_it->second == 0) {
-        client_booking_counts.erase(client_stat_it);
+    friend ostream& operator<<(ostream& os, const Hotel& hotel) {
+        os << "room_count_: " << hotel.room_count_ << " client_to_book_count: " << hotel.client_to_book_count
+           << " bookings: " << hotel.bookings;
+        return os;
     }
-    booking_history.pop();
-}
 
-void Hotel::remove_old_books(const int64_t &current_time) {
-    while (!booking_history.empty() && booking_history.front().time <= current_time - SECONDS_IN_DAYS) {
-        pop_booking();
-    }
-}
+#endif  // MASLO
 
-//----------------------------------------------------------------------------------------------------
-class BookingManager {
- public:
-  void Book(const int64_t &time, const std::string &hotel_name, int client_id, short int room_count);
-  
-  int GetClients(const std::string &hotel_name);
-  
-  int GetRooms(const std::string &hotel_name);
- 
- private:
-  int64_t current_time = 0;
-  std::map<std::string, Hotel> hotels;
+   private:
+    size_t room_count_ = 0;
+    unordered_map<Client_id, size_t> client_to_book_count;
+    deque<Booking> bookings;
 };
 
-void BookingManager::Book(const int64_t &time, const string &hotel_name, int client_id, short room_count) {
-    current_time = time;
-    hotels[hotel_name].Book({time, client_id, room_count});
-}
+class BookManager {
+   public:
+    BookManager() {}
+    BookManager(BookManager&&) = default;
+    BookManager(const BookManager&) = default;
+    BookManager& operator=(BookManager&&) = default;
+    BookManager& operator=(const BookManager&) = default;
+    ~BookManager() {}
 
-int BookingManager::GetClients(const string &hotel_name) {
-    return hotels[hotel_name].GetClients(current_time);
-}
+    void book(const string& hotel_name, Time time, Client_id client_id, Room_count room_count) {
+        last_time = time;
+        hotel_to_books[hotel_name].popTill(last_time - time_interval);
+        hotel_to_books[hotel_name].book({time, client_id, room_count});
+    }
+    size_t clients(const string& hotel_name) {
+        hotel_to_books[hotel_name].popTill(last_time - time_interval);
+        return hotel_to_books[hotel_name].clients();
+    }
+    size_t rooms(const string& hotel_name) {
+        hotel_to_books[hotel_name].popTill(last_time - time_interval);
+        return hotel_to_books[hotel_name].rooms();
+    }
 
-int BookingManager::GetRooms(const string &hotel_name) {
-    return hotels[hotel_name].GetRooms(current_time);
-}
+#ifdef MASLO
 
-//----------------------------------------------------------------------------------------------------
-int main() {
+    friend ostream& operator<<(ostream& os, const BookManager& manager) {
+        os << "hotel_to_books: " << manager.hotel_to_books;
+        return os;
+    }
+
+#endif  // MASLO
+
+   private:
+    Time last_time;
+    unordered_map<string, Hotel> hotel_to_books;
+};
+
+int main(int argc, const char** argv) {
+#ifndef MASLO
     std::ios::sync_with_stdio(false);
     std::cin.tie(nullptr);
-    
-    BookingManager manager;
-    
-    int query_count;
-    std::cin >> query_count;
-    
-    for (int query_id = 0; query_id < query_count; ++query_id) {
-        std::string query_type;
-        std::cin >> query_type;
-        
-        if (query_type == "BOOK") {
-            int64_t time;
+#endif  // MASLO
+
+    BookManager bm;
+
+    size_t Q;
+    cin >> Q;
+    cin.ignore(1);
+    while (Q-- > 0) {
+        string query;
+        getline(cin, query);
+        stringstream ss(query);
+        string op;
+        ss >> op;
+
+        if (op == "BOOK") {
             string hotel_name;
-            uint64_t client_id;
-            uint16_t room_count;
-            cin >> time >> hotel_name >> client_id >> room_count;
-            
-            manager.Book(time, hotel_name, client_id, room_count);
-        } else if (query_type == "CLIENTS") {
-            std::string hotel_name;
-            std::cin >> hotel_name;
-            
-            std::cout << manager.GetClients(hotel_name) << "\n";
-        } else if (query_type == "ROOMS") {
-            std::string hotel_name;
-            std::cin >> hotel_name;
-            
-            std::cout << manager.GetRooms(hotel_name) << "\n";
+            Time time;
+            Client_id client_id;
+            Room_count room_count;
+            ss >> time >> hotel_name >> client_id >> room_count;
+            bm.book(hotel_name, time, client_id, room_count);
+        } else if (op == "CLIENTS") {
+            string hotel_name;
+            ss >> hotel_name;
+            cout << bm.clients(hotel_name) << std::endl;
+        } else if (op == "ROOMS") {
+            string hotel_name;
+            ss >> hotel_name;
+            cout << bm.rooms(hotel_name) << std::endl;
         }
+
+#ifdef MASLO1
+        std::cout << "========start" << std::endl;
+        cout << bm << endl;
+        std::cout << "========end" << std::endl;
+#endif  // MASLO
     }
     return 0;
 }
-//----------------------------------------------------------------------------------------------------

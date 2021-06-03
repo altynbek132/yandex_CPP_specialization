@@ -1,30 +1,29 @@
 #include "test_runner.h"
 
 #include <algorithm>
-#include <string>
 #include <queue>
-#include <stdexcept>
 #include <set>
-
+#include <stdexcept>
+#include <string>
 using namespace std;
 
-template<class T>
+template <class T>
 class ObjectPool {
- public:
-  T *Allocate();
-  T *TryAllocate();
-  
-  void Deallocate(T *object);
-  
-  ~ObjectPool();
- 
- private:
-  queue<T *> free;
-  set<T *> allocated;
+   public:
+    T* Allocate();
+    T* TryAllocate();
+
+    void Deallocate(T* object);
+
+    ~ObjectPool();
+
+   private:
+    queue<T*> free;
+    set<T*> allocated;
 };
 
-template<typename T>
-T *ObjectPool<T>::Allocate() {
+template <typename T>
+T* ObjectPool<T>::Allocate() {
     if (free.empty()) {
         free.push(new T);
     }
@@ -34,16 +33,16 @@ T *ObjectPool<T>::Allocate() {
     return ret;
 }
 
-template<typename T>
-T *ObjectPool<T>::TryAllocate() {
+template <typename T>
+T* ObjectPool<T>::TryAllocate() {
     if (free.empty()) {
         return nullptr;
     }
     return Allocate();
 }
 
-template<typename T>
-void ObjectPool<T>::Deallocate(T *object) {
+template <typename T>
+void ObjectPool<T>::Deallocate(T* object) {
     if (allocated.find(object) == allocated.end()) {
         throw invalid_argument("");
     }
@@ -51,7 +50,7 @@ void ObjectPool<T>::Deallocate(T *object) {
     free.push(object);
 }
 
-template<typename T>
+template <typename T>
 ObjectPool<T>::~ObjectPool() {
     for (auto x : allocated) {
         delete x;

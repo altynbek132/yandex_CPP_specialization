@@ -1,17 +1,5 @@
-#include <bits/stdc++.h>
-#include "profile.h"
 #include "test_runner.h"
 
-using namespace std;
-
-#ifdef MASLO
-
-prerun maslo(true, false, false);
-
-#endif  // MASLO
-#include "test_runner.h"
-
-#include <utility>
 #include <vector>
 using namespace std;
 
@@ -19,44 +7,16 @@ template <typename T>
 class LinkedList {
    public:
     struct Node {
-        Node(T value) : value(std::move(value)) {}
-        Node(T value, Node* next) : value(std::move(value)), next(next) {}
-
         T value;
         Node* next = nullptr;
     };
 
-    ~LinkedList() {
-        while (head)
-            PopFront();
-    }
+    ~LinkedList();
 
-    void PushFront(const T& value) { head = new Node(value, GetHead()); }
-    void InsertAfter(Node* node, const T& value) {
-        if (!node) {
-            PushFront(value);
-            return;
-        }
-        node->next = new Node(value, node->next);
-    }
-    void RemoveAfter(Node* node) {
-        if (!node) {
-            PopFront();
-            return;
-        }
-        auto garbage = node->next;
-        if (!garbage)
-            return;
-        node->next = garbage->next;
-        delete garbage;
-    }
-    void PopFront() {
-        auto garbage = head;
-        if (!garbage)
-            return;
-        head = garbage->next;
-        delete garbage;
-    }
+    void PushFront(const T& value);
+    void InsertAfter(Node* node, const T& value);
+    void RemoveAfter(Node* node);
+    void PopFront();
 
     Node* GetHead() { return head; }
     const Node* GetHead() const { return head; }
@@ -115,8 +75,8 @@ void TestRemoveAfter() {
     ASSERT_EQUAL(ToVector(list), expected);
 
     auto next_to_head = list.GetHead()->next;
-    list.RemoveAfter(next_to_head);  // удаляем 3
-    list.RemoveAfter(next_to_head);  // удаляем 2
+    list.RemoveAfter(next_to_head); // удаляем 3
+    list.RemoveAfter(next_to_head); // удаляем 2
 
     const vector<int> expected1 = {5, 4, 1};
     ASSERT_EQUAL(ToVector(list), expected1);

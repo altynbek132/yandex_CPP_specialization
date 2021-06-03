@@ -5,33 +5,28 @@ using namespace std;
 
 template <typename T>
 class SimpleVector {
- public:
-  SimpleVector() = default;
-  explicit SimpleVector(size_t size);
-  ~SimpleVector();
-  
-  T& operator[](size_t index);
-  
-  T* begin();
-  T* end();
-  
-  size_t Size() const;
-  size_t Capacity() const;
-  void PushBack(const T& value);
- 
- private:
-  T* data = nullptr;
-  size_t size = 0;
-  size_t capacity = 0;
+   public:
+    SimpleVector() = default;
+    explicit SimpleVector(size_t size);
+    ~SimpleVector();
+
+    T& operator[](size_t index);
+
+    T* begin();
+    T* end();
+
+    size_t Size() const;
+    size_t Capacity() const;
+    void PushBack(const T& value);
+
+   private:
+    T* data = nullptr;
+    size_t size = 0;
+    size_t capacity = 0;
 };
 
 template <typename T>
-SimpleVector<T>::SimpleVector(size_t size)
-    : data(new T[size])
-    , size(size)
-    , capacity(size)
-{
-}
+SimpleVector<T>::SimpleVector(size_t size) : data(new T[size]), size(size), capacity(size) {}
 
 template <typename T>
 SimpleVector<T>::~SimpleVector() {

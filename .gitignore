@@ -2,3 +2,6 @@
 /main.cpp
 /input.txt
 /output.txt
+/cmake-build-debug-coverage/
+/venv/
+/main.py

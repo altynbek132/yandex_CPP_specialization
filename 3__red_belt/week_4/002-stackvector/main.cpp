@@ -1,41 +1,19 @@
 #include <bits/stdc++.h>
+#include "profile.h"
+#include "test_runner.h"
 
 using namespace std;
 
-// 2^7 = 128
-// 2^15 = 3e4
-// 2^31 = 2e9
-// 2^63 = 9e18
-
 #ifdef MASLO
 
-#include "tests.h"
+prerun maslo(true, false, false);
 
-void txt() {
-    freopen("input.txt", "r", stdin);
-    return;
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    freopen("output.txt", "w", stdout);
-}
-
-struct Prerun {
-  Prerun() {
-      txt();
-      TestAll();
-  }
-};
-
-Prerun maslo;
-#endif
-// ==========================================
-
-
+#endif  // MASLO
 
 #include "stack_vector.h"
 
-#include "test_runner.h"
 #include "profile.h"
+#include "test_runner.h"
 
 #include <random>
 #include <stdexcept>
@@ -46,15 +24,15 @@ void TestConstruction() {
     StackVector<int, 10> v;
     ASSERT_EQUAL(v.Size(), 0u);
     ASSERT_EQUAL(v.Capacity(), 10u);
-    
+
     StackVector<int, 8> u(5);
     ASSERT_EQUAL(u.Size(), 5u);
     ASSERT_EQUAL(u.Capacity(), 8u);
-    
+
     try {
         StackVector<int, 10> u(50);
         Assert(false, "Expect invalid_argument for too large size");
-    } catch (invalid_argument &) {
+    } catch (invalid_argument&) {
     } catch (...) {
         Assert(false, "Unexpected exception for too large size");
     }
@@ -65,11 +43,11 @@ void TestPushBack() {
     for (size_t i = 0; i < v.Capacity(); ++i) {
         v.PushBack(i);
     }
-    
+
     try {
         v.PushBack(0);
         Assert(false, "Expect overflow_error for PushBack in full vector");
-    } catch (overflow_error &) {
+    } catch (overflow_error&) {
     } catch (...) {
         Assert(false, "Unexpected exception for PushBack in full vector");
     }
@@ -83,11 +61,11 @@ void TestPopBack() {
     for (int i = v.Size(); i > 0; --i) {
         ASSERT_EQUAL(v.PopBack(), i);
     }
-    
+
     try {
         v.PopBack();
         Assert(false, "Expect underflow_error for PopBack from empty vector");
-    } catch (underflow_error &) {
+    } catch (underflow_error&) {
     } catch (...) {
         Assert(false, "Unexpected exception for PopBack from empty vector");
     }
@@ -100,24 +78,24 @@ int main() {
         RUN_TEST(tr, TestPushBack);
         RUN_TEST(tr, TestPopBack);
     }
-    
+
     cerr << "Running benchmark..." << endl;
     const size_t max_size = 2500;
-    
+
     default_random_engine re;
     uniform_int_distribution<int> value_gen(1, max_size);
-    
+
     vector<vector<int>> test_data(50000);
-    for (auto &cur_vec : test_data) {
+    for (auto& cur_vec : test_data) {
         cur_vec.resize(value_gen(re));
-        for (int &x : cur_vec) {
+        for (int& x : cur_vec) {
             x = value_gen(re);
         }
     }
-    
+
     {
         LOG_DURATION("vector w/o reserve");
-        for (auto &cur_vec : test_data) {
+        for (auto& cur_vec : test_data) {
             vector<int> v;
             for (int x : cur_vec) {
                 v.push_back(x);
@@ -126,7 +104,7 @@ int main() {
     }
     {
         LOG_DURATION("vector with reserve");
-        for (auto &cur_vec : test_data) {
+        for (auto& cur_vec : test_data) {
             vector<int> v;
             v.reserve(cur_vec.size());
             for (int x : cur_vec) {
@@ -136,7 +114,7 @@ int main() {
     }
     {
         LOG_DURATION("StackVector");
-        for (auto &cur_vec : test_data) {
+        for (auto& cur_vec : test_data) {
             StackVector<int, max_size> v;
             for (int x : cur_vec) {
                 v.PushBack(x);

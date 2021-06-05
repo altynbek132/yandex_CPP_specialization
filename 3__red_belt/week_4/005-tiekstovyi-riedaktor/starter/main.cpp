@@ -1,58 +1,18 @@
-#include <bits/stdc++.h>
-#include "profile.h"
-#include "test_runner.h"
-
-using namespace std;
-
-#ifdef MASLO
-
-prerun maslo(true, false, false);
-
-#endif  // MASLO
 #include <string>
 #include "test_runner.h"
 using namespace std;
 
-template <typename It>
-It ranges_next(It it, size_t n, It bound) {
-    while (n-- && it != bound) {
-        it++;
-    }
-    return it;
-}
-
 class Editor {
    public:
-    Editor() = default;
-    void Left() {
-        if (cursor == text.begin()) {
-            return;
-        }
-        cursor--;
-    }
-    void Right() {
-        if (cursor == text.end()) {
-            return;
-        }
-        cursor++;
-    }
-    void Insert(char token) { text.insert(cursor, token); }
-    void Cut(size_t tokens = 1) {
-        buffer.clear();
-        auto last = ranges_next(cursor, tokens, text.end());
-        buffer.splice(buffer.begin(), text, cursor, last);
-        cursor = last;
-    }
-    void Copy(size_t tokens = 1) {
-        buffer.clear();
-        copy(cursor, ranges_next(cursor, tokens, text.end()), back_inserter(buffer));
-    }
-    void Paste() { text.insert(cursor, buffer.begin(), buffer.end()); }
-    string GetText() const { return string(text.begin(), text.end()); }
-
-   private:
-    list<char> text, buffer;
-    list<char>::iterator cursor = text.begin();
+    // Реализуйте конструктор по умолчанию и объявленные методы
+    Editor();
+    void Left();
+    void Right();
+    void Insert(char token);
+    void Cut(size_t tokens = 1);
+    void Copy(size_t tokens = 1);
+    void Paste();
+    string GetText() const;
 };
 
 void TypeText(Editor& editor, const string& text) {

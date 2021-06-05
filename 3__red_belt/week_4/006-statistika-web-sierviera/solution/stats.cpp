@@ -8,23 +8,23 @@ void Stats::AddUri(string_view uri) {
     uris.Add(uri);
 }
 
-const map<string_view, int> &Stats::GetMethodStats() const {
+const map<string_view, int>& Stats::GetMethodStats() const {
     return methods.GetValues();
 }
 
-const map<string_view, int> &Stats::GetUriStats() const {
+const map<string_view, int>& Stats::GetUriStats() const {
     return uris.GetValues();
 }
 
-void LeftStrip(string_view &sv) {
+void LeftStrip(string_view& sv) {
     while (!sv.empty() && isspace(sv[0])) {
         sv.remove_prefix(1);
     }
 }
 
-string_view ReadToken(string_view &sv) {
+string_view ReadToken(string_view& sv) {
     LeftStrip(sv);
-    
+
     auto pos = sv.find(' ');
     auto result = sv.substr(0, pos);
     sv.remove_prefix(pos != sv.npos ? pos : sv.size());

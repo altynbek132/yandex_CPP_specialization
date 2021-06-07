@@ -2,21 +2,27 @@
 #include "profile.h"
 #include "test_runner.h"
 
-// ====================================================================================
-// ====================================================================================
-// ====================================================================================
+using namespace std;
+
+#ifdef MASLO
+
+prerun maslo(true, false, false);
+
+#endif  // MASLO
 #include "profile.h"
 #include "test_runner.h"
 
 #include <algorithm>
 #include <future>
 #include <map>
-#include <ostream>
 #include <random>
 #include <string>
 #include <vector>
-
 using namespace std;
+template <typename T>
+T Abs(T x) {
+    return x < 0 ? -x : x;
+}
 
 template <typename K, typename V>
 class ConcurrentMap {
@@ -24,44 +30,30 @@ class ConcurrentMap {
     static_assert(is_integral_v<K>, "ConcurrentMap supports only integer keys");
 
     struct Access {
-        Access(const K& key, pair<mutex, map<K, V>>& bucket_content)
-            : guard(bucket_content.first), ref_to_value(bucket_content.second[key]) {}
-        lock_guard<mutex> guard;
+        // lock_guard should construct first
+        lock_guard<mutex> g;
         V& ref_to_value;
     };
 
-    explicit ConcurrentMap(size_t bucket_count);
+    explicit ConcurrentMap(size_t bucket_count) : data(bucket_count) {}
 
-    Access operator[](const K& key);
+    Access operator[](const K& key) {
+        auto& [m, map_] = data[Abs(key) % data.size()];
+        return {lock_guard(m), map_[key]};
+    }
 
-    map<K, V> BuildOrdinaryMap();
+    map<K, V> BuildOrdinaryMap() {
+        map<K, V> res;
+        for (auto& [m, map_part] : data) {
+            lock_guard lg(m);
+            res.insert(map_part.begin(), map_part.end());
+        }
+        return res;
+    }
 
    private:
-    std::vector<pair<std::mutex, std::map<K, V>>> vector_maps_;
+    vector<pair<mutex, map<K, V>>> data;
 };
-
-template <typename K, typename V>
-ConcurrentMap<K, V>::ConcurrentMap(size_t bucket_count) : vector_maps_(bucket_count) {}
-
-template <typename K, typename V>
-typename ConcurrentMap<K, V>::Access ConcurrentMap<K, V>::operator[](const K& key) {
-    const auto index = (key < 0 ? -key : key) % vector_maps_.size();
-    return {key, vector_maps_[index]};
-}
-
-template <typename K, typename V>
-map<K, V> ConcurrentMap<K, V>::BuildOrdinaryMap() {
-    map<K, V> res;
-    for (auto& [mutexx, mapp] : vector_maps_) {
-        lock_guard lock(mutexx);
-        res.insert(mapp.begin(), mapp.end());
-    }
-    return res;
-}
-
-// ====================================================================================
-
-// ====================================================================================
 
 void RunConcurrentUpdates(ConcurrentMap<int, int>& cm, size_t thread_count, int key_count) {
     auto kernel = [&cm, key_count](int seed) {
@@ -142,17 +134,9 @@ void TestSpeedup() {
     }
 }
 
-#ifdef MASLO
-
-prerun maslo(true, false, false);
-
-#endif  // MASLO
-
 int main() {
     TestRunner tr;
     RUN_TEST(tr, TestConcurrentUpdate);
     RUN_TEST(tr, TestReadAndWrite);
     RUN_TEST(tr, TestSpeedup);
 }
-
-// ====================================================================================

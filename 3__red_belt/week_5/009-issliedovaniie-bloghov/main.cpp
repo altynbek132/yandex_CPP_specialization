@@ -1,45 +1,14 @@
 #include <bits/stdc++.h>
-#include <profile.h>
-#include <test_runner.h>
+#include "profile.h"
+#include "test_runner.h"
 
 using namespace std;
-
-// 2^7 = 128
-// 2^15 = 3e4
-// 2^31 = 2e9
-// 2^63 = 9e18
-
-#define dout(arg) \
-    {}
 
 #ifdef MASLO
 
-#define dout(arg) \
-    { std::cout << (arg) << std::endl; }
+prerun maslo(true, false, false);
 
-#include "tests.h"
-
-void txt() {
-    freopen("input.txt", "r", stdin);
-    return;
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    freopen("output.txt", "w", stdout);
-}
-
-struct Prerun {
-    Prerun() {
-        txt();
-        TestAll();
-    }
-};
-
-Prerun maslo;
-#endif
-// ==========================================
-#include <vector>
-
-using namespace std;
+#endif  // MASLO
 
 template <typename Iterator>
 class IteratorRange {
@@ -85,54 +54,41 @@ template <typename C>
 auto Paginate(C& c, size_t page_size) {
     return Paginator(begin(c), end(c), page_size);
 }
-// ==========================================
-
 #include "profile.h"
 #include "test_runner.h"
 
 #include <map>
-#include <ostream>
 #include <string>
 using namespace std;
 
 struct Stats {
     map<string, int> word_frequences;
 
-    void operator+=(const Stats& other);
-    friend ostream& operator<<(ostream& os, const Stats& stats);
-};
-
-void Stats::operator+=(const Stats& other) {
-    for (const auto& [key, value] : other.word_frequences) {
-        word_frequences[key] += value;
-    }
-}
-
-ostream& operator<<(ostream& os, const Stats& stats) {
-    os << "word_frequences: " << stats.word_frequences;
-    return os;
-}
-
-Stats ExploreLine(const set<string>& key_words, const string& line) {
-    Stats stats;
-    istringstream is(line);
-    string word;
-    while (is >> word) {
-        if (key_words.count(word)) {
-            stats.word_frequences[std::move(word)]++;
+    void operator+=(const Stats& other) {
+        for (auto& [key, count] : other.word_frequences) {
+            word_frequences[key] += count;
         }
     }
-    return stats;
+};
+
+Stats ExploreLine(const set<string>& key_words, const string& line) {
+    stringstream ss(line);
+    string word;
+    Stats res;
+    while (ss >> word) {
+        if (key_words.count(word)) {
+            res.word_frequences[move(word)]++;
+        }
+    }
+    return res;
 }
 
-template <typename Collection>
-Stats ExploreLines(const set<string>& key_words, const Collection& lines) {
-    Stats stats;
-    for (const auto& line : lines) {
-        stats += ExploreLine(key_words, line);
-        dout(stats);
+Stats ExplorePage(const set<string>& key_words, vector<string> lines) {
+    Stats res;
+    for (auto& line : lines) {
+        res += ExploreLine(key_words, line);
     }
-    return stats;
+    return res;
 }
 
 Stats ExploreKeyWordsSingleThread(const set<string>& key_words, istream& input) {
@@ -144,32 +100,35 @@ Stats ExploreKeyWordsSingleThread(const set<string>& key_words, istream& input) 
 }
 
 Stats ExploreKeyWords(const set<string>& key_words, istream& input) {
-    std::vector<string> lines;
-    std::string line;
+    const int page_size = 5000;
+    vector<string> lines;
+    lines.reserve(page_size);
+    vector<future<Stats>> futures;
+
+    string line;
     while (getline(input, line)) {
-        lines.push_back(std::move(line));
-        line.clear();
+        lines.push_back(move(line));
+        if (lines.size() >= page_size) {
+            futures.push_back(async(ExplorePage, ref(key_words), move(lines)));
+            lines.reserve(page_size);
+        }
     }
-    dout(lines);
-
-    const auto lines_pages = Paginate(lines, 2000);
-    std::vector<future<Stats>> futures;
-    futures.reserve(lines_pages.size());
-    for (const auto& lines_page : lines_pages) {
-        futures.push_back(async([&] { return ExploreLines(key_words, lines_page); }));
+    if (!lines.empty()) {
+        futures.push_back(async(ExplorePage, ref(key_words), move(lines)));
     }
 
-    Stats result;
+    Stats res;
     for (auto& f : futures) {
-        result += f.get();
+        res += f.get();
     }
-    return result;
+    return res;
 }
 
 void TestBasic() {
     const set<string> key_words = {"yangle", "rocks", "sucks", "all"};
 
     stringstream ss;
+    // true:
     ss << "this new yangle service really rocks\n";
     ss << "It sucks when yangle isn't available\n";
     ss << "10 reasons why yangle is the best IT company\n";
@@ -185,5 +144,3 @@ int main() {
     TestRunner tr;
     RUN_TEST(tr, TestBasic);
 }
-
-// ==========================================

@@ -4,10 +4,11 @@
 
 using namespace std;
 
-// ====================================================================================
-// ====================================================================================
-// ====================================================================================
+#ifdef MASLO
 
+prerun maslo(true, false, false);
+
+#endif  // MASLO
 #include "test_runner.h"
 
 #include <future>
@@ -24,18 +25,18 @@ using namespace std;
 template <typename T>
 class Synchronized {
    public:
-    explicit Synchronized(T initial = T()) : value_(std::move(initial)) {}
+    explicit Synchronized(T initial = T()) : value(move(initial)) {}
 
     struct Access {
         T& ref_to_value;
-        lock_guard<mutex> guard;
+        lock_guard<mutex> g;
     };
 
-    Access GetAccess() { return Access{value_, lock_guard<mutex>{mutex_}}; }
+    Access GetAccess() { return {value, lock_guard(m)}; }
 
    private:
-    T value_;
-    mutex mutex_;
+    T value;
+    mutex m;
 };
 
 void TestConcurrentUpdate() {
@@ -109,5 +110,3 @@ int main() {
     RUN_TEST(tr, TestConcurrentUpdate);
     RUN_TEST(tr, TestProducerConsumer);
 }
-
-// ====================================================================================

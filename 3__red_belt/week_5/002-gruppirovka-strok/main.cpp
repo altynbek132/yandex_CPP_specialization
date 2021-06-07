@@ -1,37 +1,14 @@
 #include <bits/stdc++.h>
-#include <profile.h>
-#include <test_runner.h>
+#include "profile.h"
+#include "test_runner.h"
 
 using namespace std;
 
-// 2^7 = 128
-// 2^15 = 3e4
-// 2^31 = 2e9
-// 2^63 = 9e18
-
 #ifdef MASLO
 
-#include "tests.h"
+prerun maslo(true, false, false);
 
-void txt() {
-    freopen("input.txt", "r", stdin);
-    return;
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    freopen("output.txt", "w", stdout);
-}
-
-struct Prerun {
-  Prerun() {
-      txt();
-      TestAll();
-  }
-};
-
-Prerun maslo;
-#endif
-// ==========================================
-
+#endif  // MASLO
 #include "test_runner.h"
 
 #include <algorithm>
@@ -45,33 +22,28 @@ using namespace std;
 // Благодаря этому в качестве возвращаемого значения
 // функции можно указать не малопонятный вектор векторов,
 // а вектор групп — vector<Group<String>>.
-template<typename String>
+template <typename String>
 using Group = vector<String>;
 
 // Ещё один шаблонный синоним типа
 // позволяет вместо громоздкого typename String::value_type
 // использовать Char<String>
-template<typename String>
+template <typename String>
 using Char = typename String::value_type;
 
-template<typename String>
+template <typename String>
 vector<Group<String>> GroupHeavyStrings(vector<String> strings) {
-    // Напишите реализацию функции,
-    // использовав не более 1 копирования каждого символа
     map<set<Char<String>>, Group<String>> m;
-    for (auto &str : strings) {
+    for (auto& str : strings) {
         set<Char<String>> s(str.begin(), str.end());
         m[std::move(s)].push_back(move(str));
     }
-    
     vector<Group<String>> res;
-    for (auto &[key, group] : m) {
+    for (auto& [_, group] : m) {
         res.push_back(std::move(group));
     }
-    
     return res;
 }
-
 
 void TestGroupingABC() {
     vector<string> strings = {"caab", "abc", "cccc", "bacc", "c"};
@@ -99,6 +71,3 @@ int main() {
     RUN_TEST(tr, TestGroupingReal);
     return 0;
 }
-
-
-// ==========================================

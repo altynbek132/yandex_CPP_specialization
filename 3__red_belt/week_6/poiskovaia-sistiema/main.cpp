@@ -1,15 +1,3 @@
-#include <bits/stdc++.h>
-#include "profile.h"
-#include "test_runner.h"
-
-using namespace std;
-
-#ifdef MASLO
-
-prerun maslo(true, false, false);
-
-#endif  // MASLO
-
 #include "parse.h"
 #include "search_server.h"
 #include "test_runner.h"
@@ -31,49 +19,17 @@ void TestFunctionality(const vector<string>& docs,
     istringstream docs_input(Join('\n', docs));
     istringstream queries_input(Join('\n', queries));
 
-    SearchServer srv;
-
-#ifdef MASLO
-    // std::cout << "docs: " << docs << std::endl;
-#endif  // MASLO
-
-    srv.UpdateDocumentBase(docs_input);
-
-#ifdef MASLO
-    // std::cout << "srv: " << srv << std::endl;
-#endif  // MASLO
-
     ostringstream queries_output;
-    srv.AddQueriesStream(queries_input, queries_output);
+    {
+        SearchServer srv(docs_input);
+        srv.AddQueriesStream(queries_input, queries_output);
+    }
 
     const string result = queries_output.str();
     const auto lines = SplitBy(Strip(result), '\n');
     ASSERT_EQUAL(lines.size(), expected.size());
     for (size_t i = 0; i < lines.size(); ++i) {
         ASSERT_EQUAL(lines[i], expected[i]);
-    }
-}
-
-chrono::duration<int64_t, ratio<1, 1000>> random_time() {
-    std::mt19937_64 eng{std::random_device{}()};  // or seed however you want
-    std::uniform_int_distribution<> dist{10, 100};
-    return std::chrono::milliseconds{dist(eng)};
-}
-
-void TestSearchServer(vector<pair<istream, ostream*>> streams) {
-    // IteratorRange — шаблон из задачи Paginator
-    // random_time() — функция, которая возвращает случайный
-    // промежуток времени
-
-    LOG_DURATION("Total");
-    SearchServer srv(streams.front().first);
-    for (auto& [input, output] : IteratorRange(begin(streams) + 1, end(streams))) {
-        this_thread::sleep_for(random_time());
-        if (!output) {
-            srv.UpdateDocumentBase(input);
-        } else {
-            srv.AddQueriesStream(input, *output);
-        }
     }
 }
 

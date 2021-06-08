@@ -1,6 +1,7 @@
 #pragma once
 
 #include <deque>
+#include <future>
 #include <istream>
 #include <list>
 #include <map>
@@ -8,6 +9,7 @@
 #include <set>
 #include <string>
 #include <vector>
+#include "synchronized.h"
 using namespace std;
 /*
 document_input содержит не более 50000 документов
@@ -26,7 +28,10 @@ class InvertedIndex {
    public:
     struct Entry {
         size_t docid, hitcount;
+
+#ifdef MASLO
         friend ostream& operator<<(ostream& os, const Entry& entry);
+#endif  // MASLO
     };
 
     InvertedIndex() = default;
@@ -51,8 +56,6 @@ class InvertedIndex {
 class SearchServer {
    public:
     SearchServer() = default;
-    SearchServer(SearchServer&&) = default;
-    SearchServer& operator=(SearchServer&&) = default;
 
     explicit SearchServer(istream& document_input);
     void UpdateDocumentBase(istream& document_input);
@@ -63,5 +66,10 @@ class SearchServer {
 #endif  // MASLO
 
    private:
-    InvertedIndex index;
+    friend void ProcessUpdateDocumentBase(istream& document_input, SearchServer& srv);
+    friend void ProcessAddQueriesStream(istream& query_input,
+                                        ostream& search_results_output,
+                                        SearchServer& srv);
+    Synchronized<InvertedIndex> index_sync;
+    vector<future<void>> async_tasks;
 };

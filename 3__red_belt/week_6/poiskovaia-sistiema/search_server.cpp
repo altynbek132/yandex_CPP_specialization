@@ -9,28 +9,37 @@
 #include <sstream>
 #include "test_runner.h"
 
-SearchServer::SearchServer(istream& document_input) : index(document_input) {}
-
-// D * (Wid * L + log(Uw) * L)
+void ProcessUpdateDocumentBase(istream& document_input, SearchServer& srv) {
+    auto new_index = InvertedIndex(document_input);
+    auto index_access = srv.index_sync.GetAccess();
+    swap(index_access.ref_to_value, new_index);
+}
+SearchServer::SearchServer(istream& document_input) {
+    ProcessUpdateDocumentBase(document_input, *this);
+}
 void SearchServer::UpdateDocumentBase(istream& document_input) {
-    index = InvertedIndex(document_input);
+    async_tasks.push_back(async(ProcessUpdateDocumentBase, ref(document_input), ref(*this)));
 }
 
-void SearchServer::AddQueriesStream(istream& query_input, ostream& search_results_output) {
-    const auto size = index.GetDocuments().size();
-    vector<size_t> docid_count(size);
-    vector<int64_t> docids(size);
+void ProcessAddQueriesStream(istream& query_input, ostream& search_results_output, SearchServer& srv) {
+    vector<size_t> docid_count;
+    vector<int64_t> docids;
 
     for (string current_query; getline(query_input, current_query);) {
         const auto words = SplitIntoWordsView(current_query);
-        docid_count.assign(size, 0);
+        {
+            auto index_access = srv.index_sync.GetAccess();
+            auto& index = index_access.ref_to_value;
+            const auto size = index.GetDocuments().size();
+            docid_count.assign(size, 0);
+            docids.resize(size);
 
-        for (auto& word : words) {
-            for (auto& [docid, hitcount] : index.Lookup(word)) {
-                docid_count[docid] += hitcount;
+            for (auto& word : words) {
+                for (auto& [docid, hitcount] : index.Lookup(word)) {
+                    docid_count[docid] += hitcount;
+                }
             }
         }
-
         iota(docids.begin(), docids.end(), 0);
 
         partial_sort(docids.begin(), Head(docids, 5).end(), docids.end(),
@@ -52,20 +61,10 @@ void SearchServer::AddQueriesStream(istream& query_input, ostream& search_result
     }
 }
 
-#ifdef MASLO
-ostream& operator<<(ostream& os, const SearchServer& server) {
-    os << "index: " << server.index;
-    return os;
+void SearchServer::AddQueriesStream(istream& query_input, ostream& search_results_output) {
+    async_tasks.push_back(
+        async(ProcessAddQueriesStream, ref(query_input), ref(search_results_output), ref(*this)));
 }
-ostream& operator<<(ostream& os, const InvertedIndex& index) {
-    os << "word_to_stat: " << index.word_to_stat << " docs: " << index.docs;
-    return os;
-}
-ostream& operator<<(ostream& os, const InvertedIndex::Entry& entry) {
-    os << "docid: " << entry.docid << " hitcount: " << entry.hitcount;
-    return os;
-}
-#endif  // MASLO
 
 // log(Uw) * L
 const vector<InvertedIndex::Entry>& InvertedIndex::Lookup(string_view word) const {
@@ -93,3 +92,18 @@ InvertedIndex::InvertedIndex(istream& document_input) {
         }
     }
 }
+
+#ifdef MASLO
+ostream& operator<<(ostream& os, const SearchServer& server) {
+    // os << "index_sync: " << server.index_sync.GetAccess();
+    return os;
+}
+ostream& operator<<(ostream& os, const InvertedIndex& index) {
+    os << "word_to_stat: " << index.word_to_stat << " docs: " << index.docs;
+    return os;
+}
+ostream& operator<<(ostream& os, const InvertedIndex::Entry& entry) {
+    os << "docid: " << entry.docid << " hitcount: " << entry.hitcount;
+    return os;
+}
+#endif  // MASLO

@@ -550,3 +550,45 @@ file(GLOB project_files CONFIGURE_DEPENDS
         )
 add_executable(red-week-6-final-2 ${project_files} ${Masloriy_framework})
 # ======================================================
+set(folder_path 4__brown_belt/week_1/001-kontieinier-s-prioritietami)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(brown-week-1-001 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path 4__brown_belt/week_1/002-khiesh-tablitsa)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(brown-week-1-002 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path 4__brown_belt/week_1/003-set-iterator)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(brown-week-1-003 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path 4__brown_belt/week_1/004-intieghratsiia-struktury-point-v-unordered-set)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(brown-week-1-004 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path 4__brown_belt/week_1/005-intieghratsiia-struktury-person-v-unordered-set)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(brown-week-1-005 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path 4__brown_belt/week_1/006-vtorichnyi-indieks-v-bazie-dannykh)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(brown-week-1-006 ${project_files} ${Masloriy_framework})
+# ======================================================

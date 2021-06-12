@@ -1,10 +1,11 @@
 #include "stats_aggregator.h"
 
 using namespace std;
-using namespace StatsAggregators;
+
+namespace StatsAggregators {
 
 template <typename T>
-ostream& operator<<(ostream& os, const optional<T>& v) {
+ostream& operator << (ostream& os, const optional<T>& v) {
     if (v) {
         os << *v;
     } else {
@@ -81,4 +82,6 @@ void Mode::Process(int value) {
 
 void Mode::PrintValue(std::ostream& out) const {
     out << "Mode is " << mode;
+}
+
 }

@@ -5,6 +5,7 @@
 using namespace std;
 
 namespace StatsAggregators {
+
 string PrintedValue(const StatsAggregator& aggr) {
     ostringstream output;
     aggr.PrintValue(output);
@@ -99,4 +100,4 @@ void TestComposite() {
     ASSERT_EQUAL(PrintedValue(aggr), expected);
 }
 
-}  // namespace StatsAggregators
+}

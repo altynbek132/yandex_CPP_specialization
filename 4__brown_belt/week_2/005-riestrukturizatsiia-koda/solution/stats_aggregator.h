@@ -1,14 +1,15 @@
 #pragma once
 
+#include <ostream>
 #include <limits>
 #include <memory>
-#include <optional>
-#include <ostream>
-#include <unordered_map>
 #include <vector>
+#include <optional>
+#include <unordered_map>
 
 struct StatsAggregator {
-    virtual ~StatsAggregator() {}
+    virtual ~StatsAggregator() {
+    }
 
     virtual void Process(int value) = 0;
     virtual void PrintValue(std::ostream& out) const = 0;
@@ -31,9 +32,6 @@ class Min : public StatsAggregator {
     void PrintValue(std::ostream& out) const override;
 
    private:
-    // Ранее мы не рассматривали шаблон std::optional. О нём можно почитать в документации
-    // https://en.cppreference.com/w/cpp/utility/optional. Кроме того, ему будет уделено внимание
-    // в разделе про функции
     std::optional<int> current_min;
 };
 
@@ -84,4 +82,4 @@ void TestAverage();
 void TestMode();
 void TestComposite();
 
-}  // namespace StatsAggregators
+}

@@ -22,15 +22,43 @@ using namespace std;
 template <class T>
 class ObjectPool {
    public:
-    T* Allocate();
-    T* TryAllocate();
+    T* Allocate() {
+        if (deallocated.empty()) {
+            deallocated.push(new T);
+        }
+        auto ret = deallocated.front();
+        deallocated.pop();
+        allocated.insert(ret);
+        return ret;
+    }
+    T* TryAllocate() {
+        if (deallocated.empty())
+            return nullptr;
+        return Allocate();
+    }
 
-    void Deallocate(T* object);
+    void Deallocate(T* object) {
+        auto it = allocated.find(object);
+        if (it == allocated.end())
+            throw invalid_argument("chotam?");
+        allocated.erase(it);
+        deallocated.push(object);
+    }
 
-    ~ObjectPool();
+    ~ObjectPool() {
+        for (auto& obj : allocated) {
+            delete obj;
+        }
+        while (!deallocated.empty()) {
+            auto obj = deallocated.front();
+            deallocated.pop();
+            delete obj;
+        }
+    }
 
    private:
-    // Добавьте сюда поля
+    set<T*> allocated;
+    queue<T*> deallocated;
 };
 
 void TestObjectPool() {

@@ -26,38 +26,73 @@ class ConcurrentMap {
    public:
     using MapType = unordered_map<K, V, Hash>;
 
+    struct Entry {
+        mutable mutex m;
+        MapType map_part;
+    };
+
+    explicit ConcurrentMap(size_t bucket_count) : map_parts(bucket_count) {}
+
     struct WriteAccess {
+        // lock_guard should construct first
+        lock_guard<mutex> g;
         V& ref_to_value;
     };
 
     struct ReadAccess {
+        // todo: WHY we need mutex here?
+        lock_guard<mutex> g;
         const V& ref_to_value;
     };
 
-    explicit ConcurrentMap(size_t bucket_count);
+    WriteAccess operator[](const K& key) {
+        size_t index = GetBucketIndex(key);
+        auto& [m, map_part] = map_parts[index];
+        return {lock_guard(m), map_part[key]};
+    }
 
-    WriteAccess operator[](const K& key);
-    ReadAccess At(const K& key) const;
+    ReadAccess At(const K& key) const {
+        size_t index = GetBucketIndex(key);
+        auto& [m, map_part] = map_parts.at(index);
+        return {lock_guard(m), map_part.at(key)};
+    }
 
-    bool Has(const K& key) const;
+    bool Has(const K& key) const {
+        size_t index = GetBucketIndex(key);
+        auto& [m, map_part] = map_parts.at(index);
+        return map_part.count(key);
+    }
 
-    MapType BuildOrdinaryMap() const;
+    MapType BuildOrdinaryMap() const {
+        MapType res;
+        for (auto& [m, map_part] : map_parts) {
+            lock_guard lg(m);
+            res.insert(map_part.begin(), map_part.end());
+        }
+
+        return res;
+    }
 
    private:
+    vector<Entry> map_parts;
     Hash hasher;
+
+    size_t GetBucketIndex(const K& key) const { return hasher(key) % map_parts.size(); }
 };
+
+#ifdef MASLO
 
 void RunConcurrentUpdates(ConcurrentMap<int, int>& cm, size_t thread_count, int key_count) {
     auto kernel = [&cm, key_count](int seed) {
-      vector<int> updates(key_count);
-      iota(begin(updates), end(updates), -key_count / 2);
-      shuffle(begin(updates), end(updates), default_random_engine(seed));
+        vector<int> updates(key_count);
+        iota(begin(updates), end(updates), -key_count / 2);
+        shuffle(begin(updates), end(updates), default_random_engine(seed));
 
-      for (int i = 0; i < 2; ++i) {
-          for (auto key : updates) {
-              cm[key].ref_to_value++;
-          }
-      }
+        for (int i = 0; i < 2; ++i) {
+            for (auto key : updates) {
+                cm[key].ref_to_value++;
+            }
+        }
     };
 
     vector<future<void>> futures;
@@ -84,16 +119,16 @@ void TestReadAndWrite() {
     ConcurrentMap<size_t, string> cm(5);
 
     auto updater = [&cm] {
-      for (size_t i = 0; i < 50000; ++i) {
-          cm[i].ref_to_value += 'a';
-      }
+        for (size_t i = 0; i < 50000; ++i) {
+            cm[i].ref_to_value += 'a';
+        }
     };
     auto reader = [&cm] {
-      vector<string> result(50000);
-      for (size_t i = 0; i < result.size(); ++i) {
-          result[i] = cm[i].ref_to_value;
-      }
-      return result;
+        vector<string> result(50000);
+        for (size_t i = 0; i < result.size(); ++i) {
+            result[i] = cm[i].ref_to_value;
+        }
+        return result;
     };
 
     auto u1 = async(updater);
@@ -135,21 +170,21 @@ void TestConstAccess() {
                                                  {1598, "fifteen hundred and ninety eight"}};
 
     const ConcurrentMap<int, string> cm = [&expected] {
-      ConcurrentMap<int, string> result(3);
-      for (const auto& [k, v] : expected) {
-          result[k].ref_to_value = v;
-      }
-      return result;
+        ConcurrentMap<int, string> result(3);
+        for (const auto& [k, v] : expected) {
+            result[k].ref_to_value = v;
+        }
+        return result;
     }();
 
     vector<future<string>> futures;
     for (int i = 0; i < 10; ++i) {
         futures.push_back(async([&cm, i] {
-          try {
-              return cm.At(i).ref_to_value;
-          } catch (exception&) {
-              return string();
-          }
+            try {
+                return cm.At(i).ref_to_value;
+            } catch (exception&) {
+                return string();
+            }
         }));
     }
     futures.clear();
@@ -166,11 +201,11 @@ void TestStringKeys() {
     };
 
     const ConcurrentMap<string, string> cm = [&expected] {
-      ConcurrentMap<string, string> result(2);
-      for (const auto& [k, v] : expected) {
-          result[k].ref_to_value = v;
-      }
-      return result;
+        ConcurrentMap<string, string> result(2);
+        for (const auto& [k, v] : expected) {
+            result[k].ref_to_value = v;
+        }
+        return result;
     }();
 
     ASSERT_EQUAL(cm.BuildOrdinaryMap(), expected);
@@ -232,3 +267,5 @@ int main() {
     RUN_TEST(tr, TestUserType);
     RUN_TEST(tr, TestHas);
 }
+
+#endif  // MASLO

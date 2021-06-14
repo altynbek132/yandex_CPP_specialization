@@ -13,17 +13,25 @@ prerun maslo(true, false, false);
 
 #include <functional>
 #include <string>
+#include <utility>
 using namespace std;
 
 template <typename T>
 class LazyValue {
    public:
-    explicit LazyValue(std::function<T()> init);
+    explicit LazyValue(function<T()> init) : init(move(init)) {}
 
-    bool HasValue() const;
-    const T& Get() const;
+    bool HasValue() const { return value != nullopt; }
+    const T& Get() const {
+        if (!value) {
+            value = init();
+        }
+        return *value;
+    }
 
    private:
+    function<T()> init;
+    mutable optional<T> value;
 };
 
 void UseExample() {
@@ -41,8 +49,8 @@ void TestInitializerIsntCalled() {
 
     {
         LazyValue<int> lazy_int([&called] {
-          called = true;
-          return 0;
+            called = true;
+            return 0;
         });
     }
     ASSERT(!called);

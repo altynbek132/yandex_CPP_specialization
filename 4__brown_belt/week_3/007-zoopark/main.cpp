@@ -20,7 +20,7 @@ prerun maslo(true, false, false);
 
 using namespace std;
 
-using Zoo = vector<Animal>;
+using Zoo = vector<unique_ptr<Animal>>;
 
 // Эта функция получает на вход поток ввода и читает из него описание зверей.
 // Если очередное слово этого текста - Tiger, Wolf или Fox, функция должна поместить соответствующего зверя в
@@ -30,14 +30,14 @@ Zoo CreateZoo(istream& in) {
     string word;
     while (in >> word) {
         if (word == "Tiger") {
-            Tiger t;
-            zoo.push_back(t);
+            auto t = make_unique<Tiger>();
+            zoo.push_back(move(t));
         } else if (word == "Wolf") {
-            Wolf w;
-            zoo.push_back(w);
+            auto w = make_unique<Wolf>();
+            zoo.push_back(move(w));
         } else if (word == "Fox") {
-            Fox f;
-            zoo.push_back(f);
+            auto f = make_unique<Fox>();
+            zoo.push_back(move(f));
         } else {
             throw runtime_error("Unknown animal!");
         }
@@ -50,7 +50,7 @@ Zoo CreateZoo(istream& in) {
 // Разделяйте голоса разных зверей символом перевода строки '\n'.
 void Process(const Zoo& zoo, ostream& out) {
     for (const auto& animal : zoo) {
-        out << animal.Voice() << "\n";
+        out << animal->Voice() << "\n";
     }
 }
 

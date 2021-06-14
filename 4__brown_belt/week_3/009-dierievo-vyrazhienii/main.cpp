@@ -5,6 +5,61 @@
 
 using namespace std;
 
+class ValueExpression : public Expression {
+   public:
+    explicit ValueExpression(int value) : value(value) {}
+    int Evaluate() const override { return value; }
+    string ToString() const override { return to_string(value); }
+
+   private:
+    int value;
+};
+
+class SumExpression : public Expression {
+   public:
+    SumExpression(ExpressionPtr left, ExpressionPtr right) : left(move(left)), right(move(right)) {}
+
+    int Evaluate() const override { return left->Evaluate() + right->Evaluate(); }
+    string ToString() const override {
+        stringstream ss;
+        ss                                       //
+            << "(" << left->ToString() << ")"    //
+            << "+"                               //
+            << "(" << right->ToString() << ")";  //
+        return ss.str();
+    }
+
+   private:
+    ExpressionPtr left, right;
+};
+class ProductExpression : public Expression {
+   public:
+    ProductExpression(ExpressionPtr left, ExpressionPtr right) : left(move(left)), right(move(right)) {}
+
+    int Evaluate() const override { return left->Evaluate() * right->Evaluate(); }
+    string ToString() const override {
+        stringstream ss;
+        ss                                       //
+            << "(" << left->ToString() << ")"    //
+            << "*"                               //
+            << "(" << right->ToString() << ")";  //
+        return ss.str();
+    }
+
+   private:
+    ExpressionPtr left, right;
+};
+
+ExpressionPtr Value(int value) {
+    return make_unique<ValueExpression>(value);
+}
+ExpressionPtr Sum(ExpressionPtr left, ExpressionPtr right) {
+    return make_unique<SumExpression>(move(left), move(right));
+}
+ExpressionPtr Product(ExpressionPtr left, ExpressionPtr right) {
+    return make_unique<ProductExpression>(move(left), move(right));
+}
+
 string Print(const Expression* e) {
     if (!e) {
         return "Null expression provided";

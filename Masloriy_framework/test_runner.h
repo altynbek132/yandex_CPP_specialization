@@ -100,9 +100,9 @@ void AssertEqual(const T& t, const U& u, const std::string& hint = {}) {
     if (!(t == u)) {
         //    if (!((T) t == (T) u)) {
         std::ostringstream os;
-        os << "Assertion failed: " << t << " != " << u;
+        os << "Assertion failed: \n" << t << " != \n" << u;
         if (!hint.empty()) {
-            os << " hint: " << hint;
+            os << "\nhint: " << hint;
         }
         throw std::runtime_error(os.str());
     }

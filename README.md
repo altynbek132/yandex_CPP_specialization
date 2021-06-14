@@ -1,5 +1,7 @@
-# yandex_CPP_specialization
+# Искусство разработки на современном C++ Specialization (Coursera)
 
-my solutions of assignements of specialization
+solutions of specialization assignements
+
+---
 
 https://www.coursera.org/specializations/c-plus-plus-modern-development

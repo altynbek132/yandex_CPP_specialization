@@ -786,3 +786,38 @@ file(GLOB project_files CONFIGURE_DEPENDS
         )
 add_executable(brown-week-5-007 ${project_files} ${Masloriy_framework})
 # ======================================================
+set(folder_path 4__brown_belt/week_5/008-tiesty-k-zadachie-zaprieshchionnyie-domieny)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(brown-week-5-008 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path 4__brown_belt/week_5/009-lichnyi-biudzhiet-home-desktop-version)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(brown-week-5-009 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path 4__brown_belt/week_5/010-lichnyi-biudzhiet-professional-desktop-version)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(brown-week-5-010 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path 4__brown_belt/week_5/011-lichnyi-biudzhiet-professional-mobile-version)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(brown-week-5-011 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path 4__brown_belt/week_5/012-lichnyi-biudzhiet-professional-mobile-legacy-version)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(brown-week-5-012 ${project_files} ${Masloriy_framework})
+# ======================================================

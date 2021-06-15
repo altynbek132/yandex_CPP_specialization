@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 #include "profile.h"
 #include "test_runner.h"
 
@@ -19,28 +19,46 @@ using namespace std;
 template <typename T>
 class UniquePtr {
    private:
-    // ???
+    T* data_ = nullptr;
+
    public:
-    UniquePtr();
-    UniquePtr(T* ptr);
-    UniquePtr(const UniquePtr&);
-    UniquePtr(UniquePtr&& other);
-    UniquePtr& operator=(const UniquePtr&);
-    UniquePtr& operator=(nullptr_t);
-    UniquePtr& operator=(UniquePtr&& other);
-    ~UniquePtr();
+    UniquePtr() = default;
+    explicit UniquePtr(T* ptr) : data_(ptr) {}
 
-    T& operator*() const;
+    UniquePtr(const UniquePtr&) = delete;
+    UniquePtr& operator=(const UniquePtr&) = delete;
 
-    T* operator->() const;
+    UniquePtr& operator=(nullptr_t) {
+        Reset(nullptr);
+        return *this;
+    }
 
-    T* Release();
+    UniquePtr(UniquePtr&& other) noexcept { data_ = other.Release(); }
+    UniquePtr& operator=(UniquePtr&& other) noexcept {
+        Reset(other.Release());
+        return *this;
+    }
 
-    void Reset(T* ptr);
+    ~UniquePtr() { Reset(nullptr); }
 
-    void Swap(UniquePtr& other);
+    T& operator*() const { return *Get(); }
 
-    T* Get() const;
+    T* operator->() const { return Get(); }
+
+    T* Release() {
+        auto res = data_;
+        data_ = nullptr;
+        return res;
+    }
+
+    void Reset(T* ptr) {
+        delete data_;
+        data_ = ptr;
+    }
+
+    void Swap(UniquePtr& other) { swap(other.data_, data_); }
+
+    T* Get() const { return data_; }
 };
 
 struct Item {

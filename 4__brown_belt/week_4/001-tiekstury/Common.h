@@ -1,17 +1,26 @@
 #pragma once
 
 #include <memory>
+#include <ostream>
 #include <string>
 #include <vector>
 
 struct Point {
     int x;
     int y;
+
+#ifdef MASLO
+    friend std::ostream& operator<<(std::ostream& os, const Point& point);
+#endif  // MASLO
 };
 
 struct Size {
     int width;
     int height;
+
+#ifdef MASLO
+    friend std::ostream& operator<<(std::ostream& os, const Size& size);
+#endif  // MASLO
 };
 
 // Проверяет, содержится ли заданная точка в эллипсе заданного размера
@@ -45,6 +54,10 @@ class ITexture {
     virtual Size GetSize() const = 0;
     // Возвращает хранимое изображение
     virtual const Image& GetImage() const = 0;
+
+#ifdef MASLO
+    friend std::ostream& operator<<(std::ostream& os, const ITexture& texture);
+#endif  // MASLO
 };
 
 // Интерфейс фигуры

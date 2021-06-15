@@ -2,7 +2,7 @@
 #include "Common.h"
 
 using namespace std;
-
+// DO NOT WORK - DO NOT KNOW WHY
 class LruCache : public ICache {
    public:
     using CacheType = list<BookPtr>;
@@ -13,11 +13,15 @@ class LruCache : public ICache {
         : books_unpacker_(move(books_unpacker)), settings_(settings) {}
 
     BookPtr GetBook(const string& book_name) override {
-        lock_guard g(m_);
+        bool found = false;
+        auto name_to_cacheIt_it = [&] {
+            lock_guard g(m_);
+            auto it = name_to_cacheIt_.find(book_name);
+            found = it != name_to_cacheIt_.end();
+            return it;
+        }();
 
-        auto name_to_cacheIt_it = name_to_cacheIt_.find(book_name);
-
-        if (name_to_cacheIt_it == name_to_cacheIt_.end()) {
+        if (!found) {
             auto book_ptr_uniq = books_unpacker_->UnpackBook(book_name);
             auto& book = *book_ptr_uniq;
             size_t book_size = CalcSize(book);
@@ -31,8 +35,11 @@ class LruCache : public ICache {
                 Shrink(book_size);
             }
 
-            auto cache_it = cache_.insert(cache_.begin(), book_ptr);
-            name_to_cacheIt_.insert(name_to_cacheIt_it, {book.GetName(), cache_it});
+            {
+                lock_guard g(m_);
+                auto cache_it = cache_.insert(cache_.begin(), book_ptr);
+                name_to_cacheIt_.insert(name_to_cacheIt_it, {book.GetName(), cache_it});
+            }
             memory_used_by_books_ += book_size;
             return book_ptr;
         }
@@ -41,6 +48,7 @@ class LruCache : public ICache {
         auto& book = *book_ptr;
         {
             // move cache_ piece to front as recent
+            lock_guard g(m_);
             auto cache_it = name_to_cacheIt_it->second;
             cache_.splice(cache_.begin(), cache_, cache_it);
             name_to_cacheIt_.insert(name_to_cacheIt_it, {book.GetName(), cache_it});
@@ -58,6 +66,7 @@ class LruCache : public ICache {
     MapType name_to_cacheIt_;
 
     void Shrink(size_t needed_size) {
+        lock_guard g(m_);
         while (needed_size > settings_.max_memory - memory_used_by_books_) {
             auto& book = **cache_.rbegin();
             size_t book_size = CalcSize(book);

@@ -729,6 +729,13 @@ file(GLOB project_files CONFIGURE_DEPENDS
         )
 add_executable(brown-week-4-003 ${project_files} ${Masloriy_framework})
 # ======================================================
+set(folder_path 4__brown_belt/week_4/004-raii-booking)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(brown-week-4-004 ${project_files} ${Masloriy_framework})
+# ======================================================
 
 set(folder_path 4__brown_belt/week_5/001-diemoghrafichieskiie-pokazatieli)
 file(GLOB project_files CONFIGURE_DEPENDS

@@ -21,26 +21,28 @@ using namespace std;
 class RouteManager {
    public:
     void AddRoute(int start, int finish) {
-        reachable_lists_[start].push_back(finish);
-        reachable_lists_[finish].push_back(start);
+        reachable_lists_[start].insert(finish);
+        reachable_lists_[finish].insert(start);
     }
     int FindNearestFinish(int start, int finish) const {
         int result = abs(start - finish);
-        if (reachable_lists_.count(start) < 1) {
+        if (reachable_lists_.count(start) == 0) {
             return result;
         }
-        const vector<int>& reachable_stations = reachable_lists_.at(start);
-        if (!reachable_stations.empty()) {
-            result = min(result, abs(finish - *min_element(begin(reachable_stations), end(reachable_stations),
-                                                           [finish](int lhs, int rhs) {
-                                                             return abs(lhs - finish) < abs(rhs - finish);
-                                                           })));
+        const auto& reachable_stations = reachable_lists_.at(start);
+        auto it = reachable_stations.lower_bound(finish);
+        if (it != reachable_stations.end()) {
+            result = min(result, abs(finish - *it));
         }
+        if (auto before = it; before-- != reachable_stations.begin()) {
+            result = min(result, abs(finish - *before));
+        }
+
         return result;
     }
 
    private:
-    map<int, vector<int>> reachable_lists_;
+    map<int, set<int>> reachable_lists_;
 };
 
 int main() {

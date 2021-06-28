@@ -1,8 +1,11 @@
-4
+7
 ya.ru
 maps.me
 m.ya.ru
 com
+net
+asdf.net
+m.asdf.net
 7
 ya.ru
 ya.com

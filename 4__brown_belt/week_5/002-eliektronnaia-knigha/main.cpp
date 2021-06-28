@@ -16,75 +16,170 @@ prerun maslo(true, false, false);
 
 using namespace std;
 
+/*
+HAS CHEAP READ AND COSTLY CHEER(P)
+Q : queries
+n : peoples
+P : pages
+Tmax : max time
+
+implementation:
+
+ vector<people_count> counts(P)
+ vector person_to_pageCount
+
+constructor
+ P
+read
+ correct position of person in counts
+ 1
+cheer
+ count prev, total
+ P (always)
+
+overall
+Q = 10**6
+n = 10**5
+P = 10**3
+
+op_per_s = 10**9
+# 10-50
+coeff = 50
+Tmax = 4
+
+time = Q * (P)
+print(time)
+print(time<4)
+
+ // ===============================================================
+IMPLEMENTED:
+ HAS CHEAP CHEER AND COSTLY READ(P)
+Q : queries
+n : peoples
+P : pages
+Tmax : max time
+
+implementation:
+
+page to persons_before (prefix sum)
+vector as map person_to_page
+
+constructor
+read
+total : n people by P pages: nP,
+ P
+cheer
+ 1
+
+overall
+Q = 10**6
+n = 10**5
+P = 10**3
+
+op_per_s = 10**9
+# 10-50
+coeff = 50
+Tmax = 4
+
+time = coeff * Q * (n*P/Q) / op_per_s
+print(time)
+print(time<4)
+
+ * */
 class ReadingManager {
    public:
     ReadingManager()
-        : user_page_counts_(MAX_USER_COUNT_ + 1, 0),
-          sorted_users_(),
-          user_positions_(MAX_USER_COUNT_ + 1, -1) {}
+        : page_to_persons_before_prefix_sum(MAX_PAGE_COUNT + 1),
+          person_to_pages(MAX_USER_COUNT + 1, -1),
+          user_count(0) {}
 
     void Read(int user_id, int page_count) {
-        if (user_page_counts_[user_id] == 0) {
-            AddUser(user_id);
-        }
-        user_page_counts_[user_id] = page_count;
-        int& position = user_positions_[user_id];
-        while (position > 0 && page_count > user_page_counts_[sorted_users_[position - 1]]) {
-            SwapUsers(position, position - 1);
+        auto& pages_ref = person_to_pages[user_id];
+        bool hasRead = pages_ref != -1;
+        if (hasRead) {
+            auto old = pages_ref;
+            auto cur = page_count;
+            for (int i = old + 1; i < cur + 1; ++i) {
+                page_to_persons_before_prefix_sum[i]--;
+            }
+            pages_ref = cur;
+        } else {
+            user_count++;
+            auto cur = page_count;
+            for (int i = cur + 1; i < MAX_PAGE_COUNT; ++i) {
+                page_to_persons_before_prefix_sum[i]++;
+            }
+            pages_ref = cur;
         }
     }
 
     double Cheer(int user_id) const {
-        if (user_page_counts_[user_id] == 0) {
+        if (bool hasRead = person_to_pages[user_id] != -1; !hasRead) {
             return 0;
         }
-        const int user_count = GetUserCount();
         if (user_count == 1) {
             return 1;
         }
-        const int page_count = user_page_counts_[user_id];
-        int position = user_positions_[user_id];
-        while (position < user_count && user_page_counts_[sorted_users_[position]] == page_count) {
-            ++position;
-        }
-        if (position == user_count) {
-            return 0;
-        }
-        // По умолчанию деление целочисленное, поэтому
-        // нужно привести числитель к типу double.
-        // Простой способ сделать это — умножить его на 1.0.
-        return (user_count - position) * 1.0 / (user_count - 1);
+        auto page_count = person_to_pages[user_id];
+        auto persons_before = page_to_persons_before_prefix_sum[page_count];
+        return 1.0 * persons_before / (user_count - 1);
     }
+
+    void debug() {
+        vector<User_stat> user_stats;
+        for (size_t user_id = 0; user_id < MAX_USER_COUNT; ++user_id) {
+            auto page_count = person_to_pages[user_id];
+            if (page_count != -1) {
+                user_stats.emplace_back(user_id, page_count, Cheer(user_id));
+            }
+        }
+        sort(user_stats.begin(), user_stats.end(),
+             [](const User_stat& lhs, const User_stat& rhs) { return lhs.page_count < rhs.page_count; });
+
+        std::cout << "printing all users sorted by read pages count:" << std::endl;
+        User_stat::printHeader();
+        std::cout << std::endl;
+
+        for (auto& user_stat : user_stats) {
+            user_stat.printRow();
+            std::cout << std::endl;
+        }
+    }
+
+    struct User_stat {
+        friend ostream& operator<<(ostream& os, const User_stat& stat) {
+            os << "user_id: " << left << setw(5) << stat.user_id << " page_count: " << left << setw(5)
+               << stat.page_count << " cheer: " << left << setw(5) << stat.cheer;
+            return os;
+        }
+        void printRow() {
+            cout << left << setw(15) << user_id     //
+                 << left << setw(20) << page_count  //
+                 << left << setw(12) << cheer;      //
+        }
+        static void printHeader() {
+            cout << left << setw(15) << "user_id: "     //
+                 << left << setw(20) << "page_count: "  //
+                 << left << setw(12) << "cheer: ";      //
+        }
+        User_stat(int userId, int pageCount, double cheer)
+            : user_id(userId), page_count(pageCount), cheer(cheer) {}
+        int user_id, page_count;
+        double cheer;
+    };
 
    private:
-    // Статическое поле не принадлежит какому-то конкретному
-    // объекту класса. По сути это глобальная переменная,
-    // в данном случае константная.
-    // Будь она публичной, к ней можно было бы обратиться снаружи
-    // следующим образом: ReadingManager::MAX_USER_COUNT.
-    static const int MAX_USER_COUNT_ = 100'000;
+    // excluding
+    static const int MAX_PAGE_COUNT = 1000 + 1;
+    static const int MAX_USER_COUNT = 1e5 + 1;
 
-    vector<int> user_page_counts_;
-    vector<int> sorted_users_;  // отсортированы по убыванию количества страниц
-    vector<int> user_positions_;  // позиции в векторе sorted_users_
-
-    int GetUserCount() const { return sorted_users_.size(); }
-    void AddUser(int user_id) {
-        sorted_users_.push_back(user_id);
-        user_positions_[user_id] = sorted_users_.size() - 1;
-    }
-    void SwapUsers(int lhs_position, int rhs_position) {
-        const int lhs_id = sorted_users_[lhs_position];
-        const int rhs_id = sorted_users_[rhs_position];
-        swap(sorted_users_[lhs_position], sorted_users_[rhs_position]);
-        swap(user_positions_[lhs_id], user_positions_[rhs_id]);
-    }
+    vector<size_t> page_to_persons_before_prefix_sum;
+    // -1: never read
+    vector<int> person_to_pages;
+    size_t user_count;
 };
 
 int main() {
-    // Для ускорения чтения данных отключается синхронизация
-    // cin и cout с stdio,
-    // а также выполняется отвязка cin от cout
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 

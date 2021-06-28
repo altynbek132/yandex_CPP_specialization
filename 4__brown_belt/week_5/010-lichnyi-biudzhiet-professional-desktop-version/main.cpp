@@ -31,16 +31,20 @@ ostream& ExecuteQueries(vector<shared_ptr<Query::Query>> queries, ostream& os = 
                 bm.Earn(query->from, query->to, query->value);
                 break;
             }
+            case Query::Type::Spend: {
+                bm.Spend(query->from, query->to, query->value);
+                break;
+            }
             case Query::Type::ComputeIncome: {
                 os << bm.ComputeIncome(query->from, query->to) << endl;
                 break;
             }
             case Query::Type::PayTax: {
-                bm.PayTax(query->from, query->to);
+                bm.PayTax(query->from, query->to, query->value);
                 break;
             }
             default:
-                throw runtime_error("chotam?");
+                throw Query::UnknownQueryError("UnknownQueryError");
         }
 
 #ifdef MASLO1

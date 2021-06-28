@@ -22,10 +22,17 @@ shared_ptr<Query> Read(istream& is) {
         is >> value;
         return make_shared<Earn>(from, to, value);
     }
-    if (name == "PayTax") {
-        return make_shared<PayTax>(from, to);
+    if (name == "Spend") {
+        double value;
+        is >> value;
+        return make_shared<Spend>(from, to, value);
     }
-    throw UnknownQueryError("chotam?");
+    if (name == "PayTax") {
+        double percentage;
+        is >> percentage;
+        return make_shared<PayTax>(from, to, percentage);
+    }
+    throw UnknownQueryError("UnknownQueryError");
 }
 
 /* ========================================================

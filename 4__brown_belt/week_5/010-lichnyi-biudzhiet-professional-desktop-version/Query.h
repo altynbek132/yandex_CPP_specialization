@@ -11,8 +11,10 @@ enum class Type {
     Earn,
     ComputeIncome,
     PayTax,
+    Spend,
 };
 
+// todo: incorrect implementation
 class Query {
    public:
     Query(const Date::Date& from, const Date::Date& to);
@@ -20,8 +22,6 @@ class Query {
     virtual Type type() const = 0;
     Date::Date from, to;
     double value;
-
-    friend std::ostream& operator<<(std::ostream& os, const Query& query);
 };
 
 class Earn : public Query {
@@ -41,6 +41,12 @@ class PayTax : public Query {
 
    public:
     Type type() const override { return Type::PayTax; }
+};
+class Spend : public Query {
+    using Query::Query;
+
+   public:
+    Type type() const override { return Type::Spend; }
 };
 
 std::shared_ptr<Query> Read(std::istream& is);

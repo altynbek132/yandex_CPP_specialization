@@ -6,35 +6,39 @@ using namespace std;
 
 namespace BudgetManager {
 
-Manager::Manager() : income_prefixed_sum_(Date::DiffInDays(begin_, end_), 0) {}
+Manager::Manager() : prefix_sum_(Date::DiffInDays(begin_, end_)) {}
 Manager::Manager(const Date::Date& begin, const Date::Date& end)
-    : begin_(begin), end_(end), income_prefixed_sum_(Date::DiffInDays(begin_, end_), 0) {}
+    : begin_(begin), end_(end), prefix_sum_(Date::DiffInDays(begin_, end_)) {}
 
 double Manager::ComputeIncome(Date::Date from, Date::Date to) const {
     CheckYearBoundaries(from), CheckYearBoundaries(to);
 
     auto from_date_idx = GetIndex(from);
-    return income_prefixed_sum_[GetIndex(to)] - (from_date_idx ? income_prefixed_sum_[from_date_idx - 1] : 0);
+    auto income =
+        prefix_sum_[GetIndex(to)].income - (from_date_idx ? prefix_sum_[from_date_idx - 1].income : 0);
+    auto spending =
+        prefix_sum_[GetIndex(to)].spending - (from_date_idx ? prefix_sum_[from_date_idx - 1].spending : 0);
+    return income - spending;
 }
+
 void Manager::Earn(Date::Date from, Date::Date to, double value) {
     CheckYearBoundaries(from), CheckYearBoundaries(to);
 
     size_t from_idx = GetIndex(from);
     size_t to_idx = GetIndex(to);
     double daily_income = value / (to_idx - from_idx + 1);
-    auto end = GetIndex(end_);
-    for (auto [i, prev_total_plus] = tuple(from_idx, 0.0);  //
-         i < end;                                           //
-         ++i) {
-        if (i <= to_idx) {
-            double& current_pref_income = income_prefixed_sum_[i];
-            double new_pref_income = current_pref_income + daily_income + prev_total_plus;
-            prev_total_plus = new_pref_income - current_pref_income;
-            current_pref_income = new_pref_income;
-        } else {
-            income_prefixed_sum_[i] += prev_total_plus;
-        }
-    }
+    IncreasePrefixedSumEntries(from_idx, to_idx, daily_income,
+                               [](Entry& entry) { return ref(entry.income); });
+}
+
+void Manager::Spend(Date::Date from, Date::Date to, double value) {
+    CheckYearBoundaries(from), CheckYearBoundaries(to);
+
+    size_t from_idx = GetIndex(from);
+    size_t to_idx = GetIndex(to);
+    double daily_spending = value / (to_idx - from_idx + 1);
+    IncreasePrefixedSumEntries(from_idx, to_idx, daily_spending,
+                               [](Entry& entry) { return ref(entry.spending); });
 }
 
 void Manager::PayTax(Date::Date from, Date::Date to, double percentage) {
@@ -49,15 +53,14 @@ void Manager::PayTax(Date::Date from, Date::Date to, double percentage) {
          ++i)                                                //
     {
         if (i <= to_idx) {
-            double income =
-                income_prefixed_sum_[i] - (i ? income_prefixed_sum_[i - 1] + prev_total_minus : 0);
+            double income = prefix_sum_[i].income - (i ? prefix_sum_[i - 1].income + prev_total_minus : 0);
             double new_income = income * factor;
             double tax = income - new_income;
             double total_minus = prev_total_minus + tax;
-            income_prefixed_sum_[i] -= total_minus;
+            prefix_sum_[i].income -= total_minus;
             prev_total_minus = total_minus;
         } else {
-            income_prefixed_sum_[i] -= prev_total_minus;
+            prefix_sum_[i].income -= prev_total_minus;
         }
     }
 }
@@ -70,7 +73,7 @@ void Manager::CheckYearBoundaries(Date::Date date) const {
     if (CheckBounds(date.getYear(), begin_.getYear(), end_.getYear())) {
         return;
     }
-    throw YearOutOfBoundError("chotam?");
+    throw YearOutOfBoundError("YearOutOfBoundError");
 }
 size_t Manager::GetIndex(Date::Date date) const {
     return Date::DiffInDays(begin_, date);
@@ -80,7 +83,8 @@ size_t Manager::GetIndex(Date::Date date) const {
 BOILERPLATE
 ======================================================== */
 
-std::ostream& operator<<(std::ostream& os, const std::vector<double>& s) {
+template <class T>
+std::ostream& operator<<(std::ostream& os, const std::vector<T>& s) {
     os << "{";
     bool first = true;
     for (const auto& x : s) {
@@ -92,8 +96,14 @@ std::ostream& operator<<(std::ostream& os, const std::vector<double>& s) {
     }
     return os << "}";
 }
+
 ostream& operator<<(ostream& os, const Manager& manager) {
-    os << "income_prefixed_sum_: " << manager.income_prefixed_sum_;
+    os << manager.prefix_sum_;
+    return os;
+}
+
+ostream& operator<<(ostream& os, const Manager::Entry& entry) {
+    os << "{" << entry.income << ", " << entry.spending << "}";
     return os;
 }
 

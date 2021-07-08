@@ -291,529 +291,529 @@ add_executable(def main.cpp ${Masloriy_framework})
 #        )
 #add_executable(course_project_yellow_solution ${project_files} ${Masloriy_framework})
 ## ======================================================
-set(folder_path 3__red_belt/week_1/001-maksimal-nyi-eliemient-po-priedikatu)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-1-001 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_1/002-makros-log)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-1-002 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_1/003-gienierator-komparatorov)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-1-003 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_1/004-makros-update-field)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-1-004 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_1/005-plokhoi-makros)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-1-005 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_1/006-makros-uniq-id)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-1-006 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_1/007-tablitsa)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-1-007 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_1/008-diek-na-osnovie-dvukh-viektorov)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-1-008 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_1/009-shablon-paginator)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-1-009 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_2/001-sortirovka-studientov-po-rieitinghu)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-2-001 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_2/002-izuchieniie-novogho-iazyka)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-2-002 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_2/003-ekspriessy)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-2-003 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_2/004-eliektronnaia-knigha)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-2-004 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_2/005-sistiema-bronirovaniia-otieliei)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-2-005 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_3/001-pul-obiektov)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-3-001 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_3/002-swap-sortpointers-reversedcopy)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-3-002 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_3/003-pishiem-svoi-viektor)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-3-003 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_3/004-odnosviaznyi-spisok)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-3-004 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_4/001-sportsmieny)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-4-001 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_4/002-stackvector)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-4-002 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_4/003-translator)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-4-003 ${project_files} ${Masloriy_framework})
-#======================================================
-set(folder_path 3__red_belt/week_4/004-airportcounter)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-4-004 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_4/005-tiekstovyi-riedaktor)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-4-005 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_4/006-statistika-web-sierviera)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-4-006 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_5/001-schitalka-iosifa)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-5-001 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_5/002-gruppirovka-strok)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-5-002 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_5/003-opierator-prisvaivaniia-dlia-simplevector)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-5-003 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_5/004-razbiieniie-na-priedlozhieniia)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-5-004 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_5/005-move-siemantika-v-simplevector)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-5-005 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_5/006-sortirovka-sliianiiem-3)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-5-006 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_5/007-kontieinier-s-prioritietami)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-5-007 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_5/008-summirovaniie-matritsy)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-5-008 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_5/009-issliedovaniie-bloghov)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-5-009 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_5/010-shablon-synchronized)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-5-010 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_5/011-concurrentmap)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-5-011 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_6/poiskovaia-sistiema)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-6-final ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 3__red_belt/week_6/poiskovaia-sistiema/solution/01-search-engine-part-2-authors)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(red-week-6-final-2 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_1/001-kontieinier-s-prioritietami)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-1-001 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_1/002-khiesh-tablitsa)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-1-002 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_1/003-set-iterator)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-1-003 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_1/004-intieghratsiia-struktury-point-v-unordered-set)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-1-004 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_1/005-intieghratsiia-struktury-person-v-unordered-set)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-1-005 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_1/006-vtorichnyi-indieks-v-bazie-dannykh)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-1-006 ${project_files} ${Masloriy_framework})
-# ======================================================
-
-
-set(folder_path 4__brown_belt/week_2/001-zaghruzka-raskhodov-iz-formata-xml)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-2-001 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_2/002-zaghruzka-raskhodov-iz-formata-json)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-2-002 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_2/003-bibliotieka-raboty-s-ini-failami)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-2-003 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_2/004-riefaktoringh-chuzhogho-koda)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-2-004 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_2/005-riestrukturizatsiia-koda)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-2-005 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_2/006-dvoinaia-dispietchierizatsiia)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-2-006 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_2/007-siervier-kommientariiev)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-2-007 ${project_files} ${Masloriy_framework})
-
-# ======================================================
-set(folder_path 4__brown_belt/week_3/001-diemoghrafichieskiie-pokazatieli-2-0)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-3-001 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_3/002-shablon-lazyvalue)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-3-002 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_3/003-konstantnost-v-shablonie-synchronized)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-3-003 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_3/004-konstantnost-v-shablonie-concurrentmap)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-3-004 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_3/005-operator-v-klassie-polynomial)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-3-005 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_3/006-pul-obiektov)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-3-006 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_3/007-zoopark)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-3-007 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_3/008-konvieiier)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-3-008 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_3/009-dierievo-vyrazhienii)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-3-009 ${project_files} ${Masloriy_framework})
-
-# ======================================================
-set(folder_path 4__brown_belt/week_4/001-tiekstury)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-4-001 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_4/002-cache)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-4-002 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_4/003-shablon-uniqueptr)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-4-003 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_4/004-raii-booking)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-4-004 ${project_files} ${Masloriy_framework})
-# ======================================================
-
-set(folder_path 4__brown_belt/week_5/001-diemoghrafichieskiie-pokazatieli)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-5-001 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_5/002-eliektronnaia-knigha)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-5-002 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_5/003-ekspriessy)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-5-003 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_5/004-triekier-zadach)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-5-004 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_5/005-sistiema-bronirovaniia-otieliei)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-5-005 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_5/006-tiesty-k-zadachie-diemoghrafichieskiie-pokazatieli)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-5-006 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_5/007-zaprieshchionnyie-domieny)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-5-007 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_5/008-tiesty-k-zadachie-zaprieshchionnyie-domieny)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-5-008 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_5/009-lichnyi-biudzhiet-home-desktop-version)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-5-009 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_5/010-lichnyi-biudzhiet-professional-desktop-version)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-5-010 ${project_files} ${Masloriy_framework})
-# ======================================================
-set(folder_path 4__brown_belt/week_5/011-lichnyi-biudzhiet-professional-mobile-version)
-file(GLOB project_files CONFIGURE_DEPENDS
-        "${folder_path}/*.h"
-        "${folder_path}/*.cpp"
-        )
-add_executable(brown-week-5-011 ${project_files} ${Masloriy_framework})
-# ======================================================
+#set(folder_path 3__red_belt/week_1/001-maksimal-nyi-eliemient-po-priedikatu)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-1-001 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_1/002-makros-log)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-1-002 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_1/003-gienierator-komparatorov)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-1-003 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_1/004-makros-update-field)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-1-004 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_1/005-plokhoi-makros)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-1-005 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_1/006-makros-uniq-id)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-1-006 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_1/007-tablitsa)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-1-007 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_1/008-diek-na-osnovie-dvukh-viektorov)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-1-008 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_1/009-shablon-paginator)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-1-009 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_2/001-sortirovka-studientov-po-rieitinghu)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-2-001 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_2/002-izuchieniie-novogho-iazyka)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-2-002 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_2/003-ekspriessy)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-2-003 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_2/004-eliektronnaia-knigha)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-2-004 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_2/005-sistiema-bronirovaniia-otieliei)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-2-005 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_3/001-pul-obiektov)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-3-001 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_3/002-swap-sortpointers-reversedcopy)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-3-002 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_3/003-pishiem-svoi-viektor)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-3-003 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_3/004-odnosviaznyi-spisok)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-3-004 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_4/001-sportsmieny)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-4-001 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_4/002-stackvector)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-4-002 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_4/003-translator)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-4-003 ${project_files} ${Masloriy_framework})
+##======================================================
+#set(folder_path 3__red_belt/week_4/004-airportcounter)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-4-004 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_4/005-tiekstovyi-riedaktor)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-4-005 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_4/006-statistika-web-sierviera)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-4-006 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_5/001-schitalka-iosifa)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-5-001 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_5/002-gruppirovka-strok)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-5-002 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_5/003-opierator-prisvaivaniia-dlia-simplevector)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-5-003 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_5/004-razbiieniie-na-priedlozhieniia)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-5-004 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_5/005-move-siemantika-v-simplevector)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-5-005 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_5/006-sortirovka-sliianiiem-3)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-5-006 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_5/007-kontieinier-s-prioritietami)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-5-007 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_5/008-summirovaniie-matritsy)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-5-008 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_5/009-issliedovaniie-bloghov)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-5-009 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_5/010-shablon-synchronized)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-5-010 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_5/011-concurrentmap)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-5-011 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_6/poiskovaia-sistiema)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-6-final ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 3__red_belt/week_6/poiskovaia-sistiema/solution/01-search-engine-part-2-authors)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(red-week-6-final-2 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_1/001-kontieinier-s-prioritietami)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-1-001 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_1/002-khiesh-tablitsa)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-1-002 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_1/003-set-iterator)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-1-003 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_1/004-intieghratsiia-struktury-point-v-unordered-set)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-1-004 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_1/005-intieghratsiia-struktury-person-v-unordered-set)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-1-005 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_1/006-vtorichnyi-indieks-v-bazie-dannykh)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-1-006 ${project_files} ${Masloriy_framework})
+## ======================================================
+#
+#
+#set(folder_path 4__brown_belt/week_2/001-zaghruzka-raskhodov-iz-formata-xml)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-2-001 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_2/002-zaghruzka-raskhodov-iz-formata-json)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-2-002 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_2/003-bibliotieka-raboty-s-ini-failami)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-2-003 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_2/004-riefaktoringh-chuzhogho-koda)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-2-004 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_2/005-riestrukturizatsiia-koda)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-2-005 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_2/006-dvoinaia-dispietchierizatsiia)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-2-006 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_2/007-siervier-kommientariiev)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-2-007 ${project_files} ${Masloriy_framework})
+#
+## ======================================================
+#set(folder_path 4__brown_belt/week_3/001-diemoghrafichieskiie-pokazatieli-2-0)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-3-001 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_3/002-shablon-lazyvalue)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-3-002 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_3/003-konstantnost-v-shablonie-synchronized)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-3-003 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_3/004-konstantnost-v-shablonie-concurrentmap)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-3-004 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_3/005-operator-v-klassie-polynomial)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-3-005 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_3/006-pul-obiektov)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-3-006 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_3/007-zoopark)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-3-007 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_3/008-konvieiier)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-3-008 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_3/009-dierievo-vyrazhienii)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-3-009 ${project_files} ${Masloriy_framework})
+#
+## ======================================================
+#set(folder_path 4__brown_belt/week_4/001-tiekstury)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-4-001 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_4/002-cache)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-4-002 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_4/003-shablon-uniqueptr)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-4-003 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_4/004-raii-booking)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-4-004 ${project_files} ${Masloriy_framework})
+## ======================================================
+#
+#set(folder_path 4__brown_belt/week_5/001-diemoghrafichieskiie-pokazatieli)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-5-001 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_5/002-eliektronnaia-knigha)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-5-002 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_5/003-ekspriessy)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-5-003 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_5/004-triekier-zadach)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-5-004 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_5/005-sistiema-bronirovaniia-otieliei)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-5-005 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_5/006-tiesty-k-zadachie-diemoghrafichieskiie-pokazatieli)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-5-006 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_5/007-zaprieshchionnyie-domieny)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-5-007 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_5/008-tiesty-k-zadachie-zaprieshchionnyie-domieny)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-5-008 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_5/009-lichnyi-biudzhiet-home-desktop-version)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-5-009 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_5/010-lichnyi-biudzhiet-professional-desktop-version)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-5-010 ${project_files} ${Masloriy_framework})
+## ======================================================
+#set(folder_path 4__brown_belt/week_5/011-lichnyi-biudzhiet-professional-mobile-version)
+#file(GLOB project_files CONFIGURE_DEPENDS
+#        "${folder_path}/*.h"
+#        "${folder_path}/*.cpp"
+#        )
+#add_executable(brown-week-5-011 ${project_files} ${Masloriy_framework})
+## ======================================================
 set(folder_path 4__brown_belt/week_5/012-lichnyi-biudzhiet-professional-mobile-legacy-version)
 file(GLOB project_files CONFIGURE_DEPENDS
         "${folder_path}/*.h"

@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(GCC_COVERAGE_COMPILE_FLAGS "-Wall")
 #set(GCC_COVERAGE_COMPILE_FLAGS "-Wfatal-errors")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}")
-#set(CMAKE_CXX_FLAGS "-O2")
+#set(CMAKE_CXX_FLAGS "-O3 -flto")
 
 add_definitions(-DMASLO)
 
@@ -793,31 +793,45 @@ add_executable(def main.cpp ${Masloriy_framework})
 #        )
 #add_executable(brown-week-5-008 ${project_files} ${Masloriy_framework})
 ## ======================================================
-#set(folder_path 4__brown_belt/week_5/009-lichnyi-biudzhiet-home-desktop-version)
-#file(GLOB project_files CONFIGURE_DEPENDS
-#        "${folder_path}/*.h"
-#        "${folder_path}/*.cpp"
-#        )
-#add_executable(brown-week-5-009 ${project_files} ${Masloriy_framework})
-## ======================================================
-#set(folder_path 4__brown_belt/week_5/010-lichnyi-biudzhiet-professional-desktop-version)
-#file(GLOB project_files CONFIGURE_DEPENDS
-#        "${folder_path}/*.h"
-#        "${folder_path}/*.cpp"
-#        )
-#add_executable(brown-week-5-010 ${project_files} ${Masloriy_framework})
-## ======================================================
-#set(folder_path 4__brown_belt/week_5/011-lichnyi-biudzhiet-professional-mobile-version)
-#file(GLOB project_files CONFIGURE_DEPENDS
-#        "${folder_path}/*.h"
-#        "${folder_path}/*.cpp"
-#        )
-#add_executable(brown-week-5-011 ${project_files} ${Masloriy_framework})
-## ======================================================
+set(folder_path 4__brown_belt/week_5/009-lichnyi-biudzhiet-home-desktop-version)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(brown-week-5-009 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path 4__brown_belt/week_5/010-lichnyi-biudzhiet-professional-desktop-version)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(brown-week-5-010 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path 4__brown_belt/week_5/011-lichnyi-biudzhiet-professional-mobile-version)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(brown-week-5-011 ${project_files} ${Masloriy_framework})
+# ======================================================
 set(folder_path 4__brown_belt/week_5/012-lichnyi-biudzhiet-professional-mobile-legacy-version)
 file(GLOB project_files CONFIGURE_DEPENDS
         "${folder_path}/*.h"
         "${folder_path}/*.cpp"
         )
 add_executable(brown-week-5-012 ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path 4__brown_belt/final/transportnyi-spravochnik-chast-a)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(brown-final-transportnyi-spravochnik-chast-a ${project_files} ${Masloriy_framework})
+# ======================================================
+set(folder_path ass)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(ass ${project_files} ${Masloriy_framework})
 # ======================================================

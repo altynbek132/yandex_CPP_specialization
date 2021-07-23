@@ -52,12 +52,12 @@ struct AddBusRoute : ModifyRequest {
     void Process(BusManager& manager) const override;
 };
 
-using ResultType = string;
-struct ReadBusRouteInfo : ReadRequest<ResultType> {
+using ReadBusRouteInfoResultType = string;
+struct ReadBusRouteInfo : ReadRequest<ReadBusRouteInfoResultType> {
     string bus_name;
     ReadBusRouteInfo();
     void ParseFrom(string_view input) override;
-    ResultType Process(const BusManager& manager) const override;
+    ReadBusRouteInfoResultType Process(const BusManager& manager) const override;
 };
 
 using Map_Type = unordered_map<string_view, RequestBase::Type>;

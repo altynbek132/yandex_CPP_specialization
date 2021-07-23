@@ -1,10 +1,13 @@
 #pragma once
 #include <bits/stdc++.h>
-#include "BusStop.h"
-
-using namespace std;
 
 struct BusRoute {
-    string name;
-    vector<BusStop> stops;
+    enum class Type {
+        LOOPED,
+        STRAIGHT,
+    };
+
+    std::string bus_name;
+    std::vector<std::string> stop_names;
+    Type type;
 };

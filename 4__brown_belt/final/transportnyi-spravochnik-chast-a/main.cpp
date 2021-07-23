@@ -44,7 +44,7 @@ vector<Request::RequestHolder> ReadRequests(istream& input = cin) {
     return requests;
 }
 
-using ResponsesContainer = vector<Request::ResultType>;
+using ResponsesContainer = vector<Request::ReadBusRouteInfoResultType>;
 ResponsesContainer ProcessRequests(const vector<Request::RequestHolder>& requests) {
     ResponsesContainer responses;
     BusManager manager;

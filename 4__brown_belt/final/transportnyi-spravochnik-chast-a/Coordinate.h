@@ -7,7 +7,7 @@ using namespace std;
 struct Coordinate {
     double latitude;
     double longitude;
-    double DistanceTo(const Coordinate& other ) const;
+    double DistanceTo(const Coordinate& other) const;
 };
 
 double DistanceBetween(const Coordinate& first, const Coordinate& second);

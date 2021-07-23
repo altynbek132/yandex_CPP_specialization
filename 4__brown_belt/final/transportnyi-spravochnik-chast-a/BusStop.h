@@ -1,12 +1,11 @@
 #pragma once
 #include <bits/stdc++.h>
 #include "Coordinate.h"
-#include "utils.h"
 
 using namespace std;
 
 struct BusStop {
-    string name;
+    std::string name;
     Coordinate coordinate;
 };
 

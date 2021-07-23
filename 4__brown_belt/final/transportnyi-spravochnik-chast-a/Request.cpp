@@ -29,7 +29,7 @@ void AddBusRoute::Process(BusManager& manager) const {}
 AddBusRoute::AddBusRoute() : ModifyRequest(RequestBase::Type::ADD_BUS_ROUTE) {}
 
 void ReadBusRouteInfo::ParseFrom(string_view input) {}
-ResultType ReadBusRouteInfo::Process(const BusManager& manager) const {
+ReadBusRouteInfoResultType ReadBusRouteInfo::Process(const BusManager& manager) const {
     return "yo";
 }
 ReadBusRouteInfo::ReadBusRouteInfo() : ReadRequest(RequestBase::Type::READ_BUS_ROUTE) {}

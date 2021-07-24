@@ -1,8 +1,9 @@
 #include <bits/stdc++.h>
-#include "Responses.h"
 #include "Request.h"
+#include "Response.h"
 #include "profile.h"
 #include "test_runner.h"
+#include "utils.h"
 
 using namespace std;
 
@@ -17,10 +18,10 @@ using namespace std;
 Request::Holder ParseRequest(string_view str) {
     using namespace Request;
 
-    const auto [lhs, rhs] = SplitTwoStrict(str, ":");
+    auto [lhs, rhs] = SplitTwoStrict(str, ":");
     const OperationType operation_type = rhs ? OperationType::MODIFY : OperationType::READ;
 
-    auto request_type = ConvertRequestTypeFromString(str, operation_type);
+    auto request_type = ConvertRequestTypeFromString(ReadToken(lhs), operation_type);
     if (!request_type) {
         return nullptr;
     }

@@ -1,8 +1,14 @@
-#include "Responses.h"
+#include "Response.h"
+
 
 namespace Response {
 
-void BusRouteFound::print(ostream& os) const {
+std::ostream& operator<<(std::ostream& out, const Base& response) {
+    response.print(out);
+    return out;
+}
+
+void BusRouteFound::print(std::ostream& os) const {
     // example:
     // Bus 256: 6 stops on route, 5 unique stops, 4371.02 route length
     os << "Bus " << bus_name                          //
@@ -11,7 +17,7 @@ void BusRouteFound::print(ostream& os) const {
        << route_length << " route length";
 }
 
-void BusRouteNotFound::print(ostream& os) const {
+void BusRouteNotFound::print(std::ostream& os) const {
     // example:
     // Bus 751: not found
     os << "Bus " << bus_name << ": not found";

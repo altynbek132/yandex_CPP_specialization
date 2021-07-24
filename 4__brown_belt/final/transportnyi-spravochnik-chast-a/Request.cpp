@@ -2,6 +2,8 @@
 #include <exception>
 #include "utils.h"
 
+using namespace std;
+
 namespace Request {
 
 Base::Base(Base::Type type) : type(type) {}

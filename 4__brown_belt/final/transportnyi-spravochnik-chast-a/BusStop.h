@@ -2,8 +2,6 @@
 #include <bits/stdc++.h>
 #include "Coordinate.h"
 
-using namespace std;
-
 struct BusStop {
     std::string name;
     Coordinate coordinate;
@@ -12,8 +10,8 @@ struct BusStop {
 namespace std {
 template <>
 struct hash<BusStop> {
-    hash<string> string_hash;
-    hash<Coordinate> Coordinate_hash;
+    std::hash<std::string> string_hash;
+    std::hash<Coordinate> Coordinate_hash;
     size_t operator()(const BusStop& obj) const;
 };
 }  // namespace std

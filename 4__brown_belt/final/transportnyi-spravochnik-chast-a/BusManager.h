@@ -1,11 +1,8 @@
 #pragma once
-#include "Responses.h"
 #include <bits/stdc++.h>
 #include "BusRoute.h"
 #include "BusStop.h"
-#include "Request.h"
-
-using namespace std;
+#include "Response.h"
 
 /*
  fields:
@@ -26,12 +23,12 @@ class BusManager {
     BusManager() = default;
     void AddBusRoute(BusRoute bus_route);
     void AddBusStop(BusStop bus_stop);
-    Response::Holder ReadBusRouteInfo(string_view bus_name) const;
+    Response::Holder ReadBusRouteInfo(std::string_view bus_name) const;
 
    private:
-    unordered_map<string, BusRoute> bus_name_to_bus_route;
+    std::unordered_map<std::string, BusRoute> bus_name_to_bus_route;
 
     // todo: use string_view
-    unordered_map<string, Coordinate> bus_stop_name_to_coordinate;
-    unordered_map<string, size_t> bus_stop_name_to_count;
+    std::unordered_map<std::string, Coordinate> bus_stop_name_to_coordinate;
+    std::unordered_map<std::string, size_t> bus_stop_name_to_count;
 };

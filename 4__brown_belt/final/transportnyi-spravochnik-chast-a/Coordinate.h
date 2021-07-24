@@ -1,8 +1,6 @@
 #pragma once
-#include "utils.h"
-
 #include <bits/stdc++.h>
-using namespace std;
+#include "utils.h"
 
 struct Coordinate {
     double latitude;
@@ -16,6 +14,6 @@ namespace std {
 template <>
 struct hash<Coordinate> {
     size_t operator()(const Coordinate& obj) const;
-    hash<double> double_hash;
+    std::hash<double> double_hash;
 };
 }  // namespace std

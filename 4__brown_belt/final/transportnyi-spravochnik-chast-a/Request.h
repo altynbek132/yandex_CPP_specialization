@@ -5,15 +5,13 @@
 #include "BusRoute.h"
 #include "BusStop.h"
 #include "Coordinate.h"
-#include "Responses.h"
-
-using namespace std;
+#include "Response.h"
 
 namespace Request {
 
 struct Base;
 
-using Holder = unique_ptr<Base>;
+using Holder = std::unique_ptr<Base>;
 
 struct Base {
     enum class Type {
@@ -26,7 +24,7 @@ struct Base {
 
     explicit Base(Type type);
     static Holder Create(Type type);
-    virtual void ParseFrom(string_view input) = 0;
+    virtual void ParseFrom(std::string_view input) = 0;
     virtual ~Base() = default;
 };
 
@@ -44,24 +42,24 @@ struct Modify : Base {
 struct AddBusStop : Modify {
     BusStop stop;
     explicit AddBusStop();
-    void ParseFrom(string_view input) override;
+    void ParseFrom(std::string_view input) override;
     void Process(BusManager& manager) const override;
 };
 struct AddBusRoute : Modify {
     BusRoute bus_route;
     explicit AddBusRoute();
-    void ParseFrom(string_view input) override;
+    void ParseFrom(std::string_view input) override;
     void Process(BusManager& manager) const override;
 };
 
 struct ReadBusRouteInfo : Read<Response::Holder> {
-    string bus_name;
+    std::string bus_name;
     ReadBusRouteInfo();
-    void ParseFrom(string_view input) override;
+    void ParseFrom(std::string_view input) override;
     Response::Holder Process(const BusManager& manager) const override;
 };
 
-using Map_Type = unordered_map<string_view, Base::Type>;
+using Map_Type = std::unordered_map<std::string_view, Base::Type>;
 inline const Map_Type STR_TO_MODIFY_REQUEST_TYPE = {
     {"Stop", Base::Type::ADD_BUS_STOP},
     {"Bus", Base::Type::ADD_BUS_ROUTE},
@@ -75,11 +73,11 @@ enum class OperationType {
     READ,
 };
 
-inline const unordered_map<OperationType, const Map_Type*> OPERATION_TYPE_TO_MAP = {
+inline const std::unordered_map<OperationType, const Map_Type*> OPERATION_TYPE_TO_MAP = {
     {OperationType::MODIFY, &STR_TO_MODIFY_REQUEST_TYPE},
     {OperationType::READ, &STR_TO_READ_REQUEST_TYPE},
 };
 
-optional<Base::Type> ConvertRequestTypeFromString(string_view type_str, OperationType operation_type);
+std::optional<Base::Type> ConvertRequestTypeFromString(std::string_view type_str, OperationType operation_type);
 
 }  // namespace Request

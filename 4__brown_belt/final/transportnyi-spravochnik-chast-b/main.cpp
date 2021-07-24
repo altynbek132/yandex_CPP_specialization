@@ -47,9 +47,8 @@ vector<Request::Holder> ReadRequests(istream& input = cin) {
 }
 
 using ResponsesContainer = vector<Response::Holder>;
-ResponsesContainer ProcessRequests(const vector<Request::Holder>& requests) {
+ResponsesContainer ProcessRequests(const vector<Request::Holder>& requests, BusManager& manager) {
     ResponsesContainer responses;
-    BusManager manager;
 
     for (auto& request_holder : requests) {
         auto type = request_holder->type;
@@ -99,7 +98,8 @@ int main(int argc, const char** argv) {
     std::cout << "====\n\n\n" << std::endl;
 #endif  // MASLO
 
-    const auto responses = ProcessRequests(all_requests);
+    BusManager manager;
+    const auto responses = ProcessRequests(all_requests, manager);
     PrintResponses(responses);
 
     return 0;

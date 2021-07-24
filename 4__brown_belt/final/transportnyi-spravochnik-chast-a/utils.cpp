@@ -40,6 +40,16 @@ int ConvertToInt(string_view str) {
     }
     return result;
 }
+double ConvertToDouble(std::string_view str) {
+    size_t pos;
+    const double result = stod(str.data(), &pos);
+    if (pos != str.length()) {
+        std::stringstream error;
+        error << "string " << str << " contains " << (str.length() - pos) << " trailing chars";
+        throw invalid_argument(error.str());
+    }
+    return result;
+}
 
 size_t pow_size_t(size_t x, size_t p) {
     if (p == 0)

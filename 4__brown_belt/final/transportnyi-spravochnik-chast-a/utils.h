@@ -21,6 +21,7 @@ void TrimLeft(std::string_view& s);
 void TrimRight(std::string_view& s);
 void Trim(std::string_view& s);
 int ConvertToInt(std::string_view str);
+double ConvertToDouble(std::string_view str);
 size_t PolynomicCombine(size_t x, const std::vector<size_t>& v);
 template <typename Number>
 Number ReadNumberOnLine(std::istream& stream);

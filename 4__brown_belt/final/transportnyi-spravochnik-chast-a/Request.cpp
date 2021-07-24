@@ -20,17 +20,19 @@ RequestHolder RequestBase::Create(RequestBase::Type type) {
     }
 }
 void AddBusStop::ParseFrom(string_view input) {}
-void AddBusStop::Process(BusManager& manager) const {}
-AddBusStop::AddBusStop() : ModifyRequest(RequestBase::Type::ADD_BUS_STOP) {}
-void AddBusRoute::ParseFrom(string_view input) {
-
+void AddBusStop::Process(BusManager& manager) const {
+    manager.AddBusStop(stop);
 }
-void AddBusRoute::Process(BusManager& manager) const {}
+AddBusStop::AddBusStop() : ModifyRequest(RequestBase::Type::ADD_BUS_STOP) {}
+void AddBusRoute::ParseFrom(string_view input) {}
+void AddBusRoute::Process(BusManager& manager) const {
+    manager.AddBusRoute(bus_route);
+}
 AddBusRoute::AddBusRoute() : ModifyRequest(RequestBase::Type::ADD_BUS_ROUTE) {}
 
 void ReadBusRouteInfo::ParseFrom(string_view input) {}
 ReadBusRouteInfoResultType ReadBusRouteInfo::Process(const BusManager& manager) const {
-    return "yo";
+    return manager.ReadBusRouteInfo(bus_name);
 }
 ReadBusRouteInfo::ReadBusRouteInfo() : ReadRequest(RequestBase::Type::READ_BUS_ROUTE) {}
 

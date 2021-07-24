@@ -25,10 +25,11 @@ class BusManager {
     BusManager() = default;
     void AddBusRoute(BusRoute bus_route);
     void AddBusStop(BusStop bus_stop);
-    Request::ReadBusRouteInfoResultType ReadBusRouteInfo(string bus_name);
+    Request::ReadBusRouteInfoResultType ReadBusRouteInfo(string bus_name) const;
 
    private:
+    unordered_map<string, BusRoute> bus_name_to_bus_route;
+
     unordered_map<string, Coordinate> bus_stop_name_to_coordinate;
     unordered_map<string, size_t> bus_stop_name_to_count;
-    unordered_map<string, BusRoute> bus_name_to_bus_route;
 };

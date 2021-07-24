@@ -10,4 +10,6 @@ struct BusRoute {
     std::string bus_name;
     std::vector<std::string> stop_names;
     Type type;
+
+    mutable std::optional<double> route_length;
 };

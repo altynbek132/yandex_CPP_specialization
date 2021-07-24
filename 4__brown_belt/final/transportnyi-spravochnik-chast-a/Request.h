@@ -52,7 +52,12 @@ struct AddBusRoute : ModifyRequest {
     void Process(BusManager& manager) const override;
 };
 
-using ReadBusRouteInfoResultType = string;
+struct ReadBusRouteInfoResultType {
+    size_t stops_count;
+    size_t unique_stops_count;
+    double route_length;
+};
+
 struct ReadBusRouteInfo : ReadRequest<ReadBusRouteInfoResultType> {
     string bus_name;
     ReadBusRouteInfo();

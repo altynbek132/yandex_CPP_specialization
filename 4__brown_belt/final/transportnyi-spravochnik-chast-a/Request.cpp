@@ -91,6 +91,15 @@ void AddBusRoute::ParseFrom(string_view input) {
         Trim(stop_name);
         bus_route.stop_names.emplace_back(string(stop_name));
     }
+    if (bus_route.type == BusRoute::Type::LOOPED) {
+        if (bus_route.stop_names.front() != bus_route.stop_names.back()) {
+            std::stringstream error;
+            error << "stop_first should be equal stop_last in looped route (delim = '>'): " << initial_input;
+            throw std::invalid_argument(error.str());
+        }
+        bus_route.stop_names.pop_back();
+    }
+
     bus_route.stop_names.shrink_to_fit();
 }
 void AddBusRoute::Process(BusManager& manager) const {

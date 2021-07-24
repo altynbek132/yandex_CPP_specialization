@@ -15,6 +15,7 @@ std::ostream& operator<<(std::ostream& out, const Base& response);
 //
 struct BusRouteFound : Base {
     std::string_view bus_name;
+    // stops count on FULL route (from stop1 to stop1)
     size_t stops_count;
     size_t unique_stops_count;
     double route_length;

@@ -14,7 +14,7 @@
  AddBusStop O(1)
  ReadBusRouteInfo
     count of stops O(1)
-    count of unique stops for route (can be cached but we have to use bus_name_to_bus_routes map) O(n)
+    count of unique stops for route O(1)
     route length (cache) O(1?)
  * */
 

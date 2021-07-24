@@ -30,5 +30,4 @@ class BusManager {
 
     // todo: use string_view
     std::unordered_map<std::string, Coordinate> bus_stop_name_to_coordinate;
-    std::unordered_map<std::string, size_t> bus_stop_name_to_count;
 };

@@ -4,9 +4,6 @@ using namespace std;
 
 void BusManager::AddBusRoute(BusRoute bus_route) {
     bus_name_to_bus_route[bus_route.bus_name] = bus_route;
-    for (auto& stop_name : bus_route.stop_names) {
-        bus_stop_name_to_count[stop_name]++;
-    }
 }
 void BusManager::AddBusStop(BusStop bus_stop) {
     bus_stop_name_to_coordinate[bus_stop.name] = bus_stop.coordinate;
@@ -23,8 +20,7 @@ Response::Holder BusManager::ReadBusRouteInfo(string_view bus_name) const {
 
     if (!bus_route.unique_stops_count.has_value()) {
         bus_route.unique_stops_count =
-            count_if(bus_route.stop_names.begin(), bus_route.stop_names.end(),
-                     [&](const auto& stop_name) { return bus_stop_name_to_count.at(stop_name) == 1; });
+            unordered_set(bus_route.stop_names.begin(), bus_route.stop_names.end()).size();
     }
 
     if (!bus_route.route_length.has_value()) {

@@ -10,15 +10,17 @@ using namespace std;
  * https://www.movable-type.co.uk/scripts/latlong.html
  * */
 double DistanceBetween(const Coordinate& first, const Coordinate& second) {
-    const auto φ1 = first.latitude * PI / 180;  // φ, λ in radians
-    const auto φ2 = second.latitude * PI / 180;
-    const auto Δφ = (second.latitude - first.latitude) * PI / 180;
-    const auto Δλ = (second.longitude - first.longitude) * PI / 180;
+    const auto phi1 = first.latitude * PI / 180;  // φ, λ in radians
+    const auto phi2 = second.latitude * PI / 180;
+    const auto delta_phi = (second.latitude - first.latitude) * PI / 180;
+    const auto delta_lambda = (second.longitude - first.longitude) * PI / 180;
 
-    const auto a = sin(Δφ / 2) * sin(Δφ / 2) + cos(φ1) * cos(φ2) * sin(Δλ / 2) * sin(Δλ / 2);
+    const auto a = sin(delta_phi / 2) * sin(delta_phi / 2) +
+                   cos(phi1) * cos(phi2) * sin(delta_lambda / 2) * sin(delta_lambda / 2);
     const auto c = 2 * atan2(sqrt(a), sqrt(1 - a));
 
     const auto d = EARTH_RADIUS_KM * c;
+    return d;
 }
 double Coordinate::DistanceTo(const Coordinate& other) const {
     return DistanceBetween(*this, other);

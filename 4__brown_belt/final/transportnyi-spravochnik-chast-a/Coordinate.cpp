@@ -4,7 +4,7 @@
 using namespace std;
 
 /**
- * distance between two longitude-latitude coords
+ * distance between two longitude-latitude coords in METERS
  *
  * formula:
  * https://www.movable-type.co.uk/scripts/latlong.html
@@ -19,7 +19,7 @@ double DistanceBetween(const Coordinate& first, const Coordinate& second) {
                    cos(phi1) * cos(phi2) * sin(delta_lambda / 2) * sin(delta_lambda / 2);
     const auto c = 2 * atan2(sqrt(a), sqrt(1 - a));
 
-    const auto d = EARTH_RADIUS_KM * c;
+    const auto d = EARTH_RADIUS_KM * c * 1000;
     return d;
 }
 double Coordinate::DistanceTo(const Coordinate& other) const {

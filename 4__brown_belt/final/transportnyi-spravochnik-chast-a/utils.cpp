@@ -61,6 +61,20 @@ size_t PolynomicCombine(size_t x, const vector<size_t>& v) {
     }
     return res;
 }
+void TrimLeft(string_view& s) {
+    while (!s.empty() && isspace(s.front())) {
+        s.remove_prefix(1);
+    }
+}
+void TrimRight(string_view& s) {
+    while (!s.empty() && isspace(s.back())) {
+        s.remove_suffix(1);
+    }
+}
+void Trim(string_view& s) {
+    TrimLeft(s);
+    TrimRight(s);
+}
 template <typename Number>
 Number ReadNumberOnLine(istream& stream) {
     Number number;

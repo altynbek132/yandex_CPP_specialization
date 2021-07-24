@@ -19,11 +19,13 @@ Response::Holder BusManager::ReadBusRouteInfo(string_view bus_name) const {
 
     auto& bus_route = it->second;
 
-    auto stops_count = bus_route.stop_names.size();
+    if (!bus_route.unique_stops_count.has_value()) {
+        bus_route.unique_stops_count =
+            count_if(bus_route.stop_names.begin(), bus_route.stop_names.end(),
+                     [&](const auto& stop_name) { return bus_stop_name_to_count.at(stop_name) == 1; });
+    }
 
-    size_t unique_stops_count =
-        count_if(bus_route.stop_names.begin(), bus_route.stop_names.end(),
-                 [&](const auto& stop_name) { return bus_stop_name_to_count.at(stop_name) == 1; });
+    auto stops_count = bus_route.stop_names.size();
 
     if (!bus_route.route_length.has_value()) {
         // todo: depend on type
@@ -37,12 +39,11 @@ Response::Holder BusManager::ReadBusRouteInfo(string_view bus_name) const {
         }
         bus_route.route_length = route_length;
     }
-    auto route_length = bus_route.route_length.value();
 
     auto response = make_shared<Response::BusRouteFound>();
     response->bus_name = bus_name;
     response->stops_count = stops_count;
-    response->unique_stops_count = unique_stops_count;
-    response->route_length = route_length;
+    response->unique_stops_count = bus_route.unique_stops_count.value();
+    response->route_length = bus_route.route_length.value();
     return response;
 }

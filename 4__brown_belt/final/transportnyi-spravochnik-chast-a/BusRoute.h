@@ -12,6 +12,7 @@ struct BusRoute {
     Type type;
 
     mutable std::optional<double> route_length;
+    mutable std::optional<size_t> unique_stops_count;
 
     friend std::ostream& operator<<(std::ostream& os, const BusRoute& route);
 };

@@ -34,9 +34,9 @@ void AddBusStop::ParseFrom(string_view input) {
 
     Trim(input);
     ReadToken(input);
-    const string_view stop_name = ReadToken(input);
+    const string_view stop_name = ReadToken(input, ":");
     TrimLeft(input);
-    const double latitude = ConvertToDouble(ReadToken(input));
+    const double latitude = ConvertToDouble(ReadToken(input, ", "));
     const double longitude = ConvertToDouble(ReadToken(input));
     if (!input.empty()) {
         stringstream error;
@@ -89,7 +89,7 @@ void AddBusRoute::ParseFrom(string_view input) {
     while (!input.empty()) {
         auto stop_name = ReadToken(input, delim);
         Trim(stop_name);
-        bus_route.stop_names.emplace_back(stop_name.data());
+        bus_route.stop_names.emplace_back(string(stop_name));
     }
     bus_route.stop_names.shrink_to_fit();
 }

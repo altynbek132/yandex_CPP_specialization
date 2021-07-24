@@ -42,7 +42,7 @@ int ConvertToInt(string_view str) {
 }
 double ConvertToDouble(std::string_view str) {
     size_t pos;
-    const double result = stod(str.data(), &pos);
+    const double result = stod(string(str), &pos);
     if (pos != str.length()) {
         std::stringstream error;
         error << "string " << str << " contains " << (str.length() - pos) << " trailing chars";

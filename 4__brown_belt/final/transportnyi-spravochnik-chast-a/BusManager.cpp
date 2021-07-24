@@ -10,7 +10,7 @@ void BusManager::AddBusStop(BusStop bus_stop) {
     bus_stop_name_to_coordinate[bus_stop.name] = bus_stop.coordinate;
 }
 Response::Holder BusManager::ReadBusRouteInfo(string_view bus_name) const {
-    auto it = bus_name_to_bus_route.find(bus_name.data());
+    auto it = bus_name_to_bus_route.find(string(bus_name));
     if (it == bus_name_to_bus_route.end()) {
         auto response = make_shared<Response::BusRouteNotFound>();
         response->bus_name = bus_name;

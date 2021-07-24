@@ -85,11 +85,3 @@ void Trim(string_view& s) {
     TrimLeft(s);
     TrimRight(s);
 }
-template <typename Number>
-Number ReadNumberOnLine(istream& stream) {
-    Number number;
-    stream >> number;
-    std::string dummy;
-    getline(stream, dummy);
-    return number;
-}

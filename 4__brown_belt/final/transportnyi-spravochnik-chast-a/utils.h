@@ -25,3 +25,12 @@ double ConvertToDouble(std::string_view str);
 size_t PolynomicCombine(size_t x, const std::vector<size_t>& v);
 template <typename Number>
 Number ReadNumberOnLine(std::istream& stream);
+
+template <typename Number>
+Number ReadNumberOnLine(std::istream& stream) {
+    Number number;
+    stream >> number;
+    std::string dummy;
+    getline(stream, dummy);
+    return number;
+}

@@ -62,6 +62,9 @@ ResponsesContainer ProcessRequests(const vector<Request::Holder>& requests) {
         } else if (type == Request::Base::Type::READ_BUS_ROUTE) {
             const auto& request = dynamic_cast<const Request::ReadBusRouteInfo&>(*request_holder);
             responses.push_back(request.Process(manager));
+        } else if (type == Request::Base::Type::READ_BUS_STOP) {
+            const auto& request = dynamic_cast<const Request::ReadBusStopInfo&>(*request_holder);
+            responses.push_back(request.Process(manager));
         } else {
             throw runtime_error("unknown request type");
         }

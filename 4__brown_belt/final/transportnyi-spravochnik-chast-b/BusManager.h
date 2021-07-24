@@ -24,8 +24,10 @@ class BusManager {
     void AddBusRoute(BusRoute bus_route);
     void AddBusStop(BusStop bus_stop);
     Response::Holder ReadBusRouteInfo(std::string_view bus_name) const;
+    Response::Holder ReadBusStopInfo(std::string_view stop_name) const;
 
    private:
     std::unordered_map<std::string, BusRoute> bus_name_to_bus_route;
     std::unordered_map<std::string, Coordinate> bus_stop_name_to_coordinate;
+    std::unordered_map<std::string, std::set<std::string>> bus_stop_name_to_bus_names;
 };

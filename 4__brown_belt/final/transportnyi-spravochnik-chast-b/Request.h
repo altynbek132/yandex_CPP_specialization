@@ -18,6 +18,7 @@ struct Base {
         ADD_BUS_STOP,
         ADD_BUS_ROUTE,
         READ_BUS_ROUTE,
+        READ_BUS_STOP,
     };
 
     const Type type;
@@ -70,6 +71,14 @@ struct ReadBusRouteInfo : Read<Response::Holder> {
     void print(std::ostream& os) const override;
 };
 
+struct ReadBusStopInfo : Read<Response::Holder> {
+    std::string stop_name;
+    ReadBusStopInfo();
+    void ParseFrom(std::string_view input) override;
+    Response::Holder Process(const BusManager& manager) const override;
+    void print(std::ostream& os) const override;
+};
+
 using Map_Type = std::unordered_map<std::string_view, Base::Type>;
 inline const Map_Type STR_TO_MODIFY_REQUEST_TYPE = {
     {"Stop", Base::Type::ADD_BUS_STOP},
@@ -77,6 +86,7 @@ inline const Map_Type STR_TO_MODIFY_REQUEST_TYPE = {
 };
 inline const Map_Type STR_TO_READ_REQUEST_TYPE = {
     {"Bus", Base::Type::READ_BUS_ROUTE},
+    {"Stop", Base::Type::READ_BUS_STOP},
 };
 
 enum class OperationType {

@@ -26,4 +26,19 @@ struct BusRouteNotFound : Base {
     void print(std::ostream& os) const override;
 };
 
+//
+struct BusStopsFound : Base {
+    std::string stop_name;
+    const std::set<std::string>* bus_names;
+    void print(std::ostream& os) const override;
+};
+struct BusStopsNotFound : Base {
+    std::string stop_name;
+    void print(std::ostream& os) const override;
+};
+struct BusStopsEmpty : Base {
+    std::string stop_name;
+    void print(std::ostream& os) const override;
+};
+
 }  // namespace Response

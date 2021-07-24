@@ -22,4 +22,22 @@ void BusRouteNotFound::print(std::ostream& os) const {
     // Bus 751: not found
     os << "Bus " << bus_name << ": not found";
 }
+void BusStopsFound::print(std::ostream& os) const {
+    // example:
+    // Stop X: buses bus1 bus2 ... busN
+    os << "Stop " << stop_name << ": buses";
+    for (auto& bus_name : *bus_names) {
+        os << " " << bus_name;
+    }
+}
+void BusStopsNotFound::print(std::ostream& os) const {
+    // example:
+    // Stop X: not found
+    os << "Stop " << stop_name << ": not found";
+}
+void BusStopsEmpty::print(std::ostream& os) const {
+    // example:
+    // Stop X: no buses
+    os << "Stop " << stop_name << ": no buses";
+}
 }  // namespace Response

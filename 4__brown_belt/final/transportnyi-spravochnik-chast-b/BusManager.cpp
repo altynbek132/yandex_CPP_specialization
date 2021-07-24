@@ -4,9 +4,13 @@ using namespace std;
 
 void BusManager::AddBusRoute(BusRoute bus_route) {
     bus_name_to_bus_route[bus_route.bus_name] = bus_route;
+    for (auto& stop_name : bus_route.stop_names) {
+        bus_stop_name_to_bus_names[stop_name].insert(bus_route.bus_name);
+    }
 }
 void BusManager::AddBusStop(BusStop bus_stop) {
     bus_stop_name_to_coordinate[bus_stop.name] = bus_stop.coordinate;
+    bus_stop_name_to_bus_names[bus_stop.name];
 }
 Response::Holder BusManager::ReadBusRouteInfo(string_view bus_name) const {
     auto it = bus_name_to_bus_route.find(string(bus_name));
@@ -54,5 +58,26 @@ Response::Holder BusManager::ReadBusRouteInfo(string_view bus_name) const {
     response->stops_count = bus_route.getStopsCount();
     response->unique_stops_count = bus_route.unique_stops_count.value();
     response->route_length = bus_route.route_length.value();
+    return response;
+}
+Response::Holder BusManager::ReadBusStopInfo(std::string_view stop_name) const {
+    auto it = bus_stop_name_to_bus_names.find(string(stop_name));
+    if (it == bus_stop_name_to_bus_names.end()) {
+        auto response = make_shared<Response::BusStopsNotFound>();
+        response->stop_name = stop_name;
+        return response;
+    }
+
+    auto& bus_names = it->second;
+
+    if (bus_names.empty()) {
+        auto response = make_shared<Response::BusStopsEmpty>();
+        response->stop_name = stop_name;
+        return response;
+    }
+
+    auto response = make_shared<Response::BusStopsFound>();
+    response->stop_name = stop_name;
+    response->bus_names = &bus_names;
     return response;
 }

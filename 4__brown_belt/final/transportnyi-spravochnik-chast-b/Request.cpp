@@ -1,5 +1,6 @@
 #include "Request.h"
 #include <exception>
+#include "test_runner.h"
 #include "utils.h"
 
 using namespace std;
@@ -17,6 +18,9 @@ Holder Base::Create(Base::Type type) {
         }
         case Type::READ_BUS_ROUTE: {
             return make_unique<ReadBusRouteInfo>();
+        }
+        case Type::READ_BUS_STOP: {
+            return make_unique<ReadBusStopInfo>();
         }
         default:
             return nullptr;
@@ -130,6 +134,23 @@ void ReadBusRouteInfo::print(ostream& os) const {
 }
 
 //
+ReadBusStopInfo::ReadBusStopInfo() : Read(Base::Type::READ_BUS_STOP) {}
+void ReadBusStopInfo::ParseFrom(std::string_view input) {
+    auto initial_input = input;
+    // Stop X
+    Trim(input);
+    ReadToken(input);
+    TrimLeft(input);
+    stop_name = ReadToken(input, "\n");
+}
+Response::Holder ReadBusStopInfo::Process(const BusManager& manager) const {
+    return manager.ReadBusStopInfo(stop_name);
+}
+void ReadBusStopInfo::print(ostream& os) const {
+    os << "ReadBusStopInfo: " << stop_name;
+}
+
+//
 optional<Base::Type> ConvertRequestTypeFromString(string_view type_str, OperationType operation_type) {
     const auto map_it = OPERATION_TYPE_TO_MAP.find(operation_type);
     if (map_it == OPERATION_TYPE_TO_MAP.end()) {
@@ -154,6 +175,10 @@ std::ostream& operator<<(ostream& out, Base::Type type) {
         }
         case Base::Type::READ_BUS_ROUTE: {
             out << "READ_BUS_ROUTE";
+            break;
+        }
+        case Base::Type::READ_BUS_STOP: {
+            out << "READ_BUS_STOP";
             break;
         }
 

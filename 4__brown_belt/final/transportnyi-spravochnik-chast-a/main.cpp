@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include "Responses.h"
 #include "Request.h"
 #include "profile.h"
 #include "test_runner.h"
@@ -13,7 +14,7 @@ prerun maslo(true, false, false);
 
 using namespace std;
 
-Request::RequestHolder ParseRequest(string_view str) {
+Request::Holder ParseRequest(string_view str) {
     using namespace Request;
 
     const auto [lhs, rhs] = SplitTwoStrict(str, ":");
@@ -23,16 +24,16 @@ Request::RequestHolder ParseRequest(string_view str) {
     if (!request_type) {
         return nullptr;
     }
-    auto request = RequestBase::Create(*request_type);
+    auto request = Base::Create(*request_type);
     if (request) {
         request->ParseFrom(str);
     }
     return request;
 }
 
-vector<Request::RequestHolder> ReadRequests(istream& input = cin) {
+vector<Request::Holder> ReadRequests(istream& input = cin) {
     auto request_count = ReadNumberOnLine<size_t>(input);
-    vector<Request::RequestHolder> requests;
+    vector<Request::Holder> requests;
     requests.reserve(request_count);
     for (size_t i = 0; i < request_count; ++i) {
         string request_str;
@@ -44,20 +45,20 @@ vector<Request::RequestHolder> ReadRequests(istream& input = cin) {
     return requests;
 }
 
-using ResponsesContainer = vector<Request::ReadBusRouteInfoResultType>;
-ResponsesContainer ProcessRequests(const vector<Request::RequestHolder>& requests) {
+using ResponsesContainer = vector<Response::Holder>;
+ResponsesContainer ProcessRequests(const vector<Request::Holder>& requests) {
     ResponsesContainer responses;
     BusManager manager;
 
     for (auto& request_holder : requests) {
         auto type = request_holder->type;
-        if (type == Request::RequestBase::Type::ADD_BUS_STOP) {
+        if (type == Request::Base::Type::ADD_BUS_STOP) {
             const auto& request = dynamic_cast<const Request::AddBusStop&>(*request_holder);
             request.Process(manager);
-        } else if (type == Request::RequestBase::Type::ADD_BUS_ROUTE) {
+        } else if (type == Request::Base::Type::ADD_BUS_ROUTE) {
             const auto& request = dynamic_cast<const Request::AddBusRoute&>(*request_holder);
             request.Process(manager);
-        } else if (type == Request::RequestBase::Type::READ_BUS_ROUTE) {
+        } else if (type == Request::Base::Type::READ_BUS_ROUTE) {
             const auto& request = dynamic_cast<const Request::ReadBusRouteInfo&>(*request_holder);
             responses.push_back(request.Process(manager));
         } else {
@@ -69,7 +70,7 @@ ResponsesContainer ProcessRequests(const vector<Request::RequestHolder>& request
 
 void PrintResponses(const ResponsesContainer& responses, ostream& stream = cout) {
     for (const auto& response : responses) {
-        stream << response << endl;
+        stream << *response << endl;
     }
 }
 

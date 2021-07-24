@@ -1,19 +1,21 @@
 #pragma once
 #include <bits/stdc++.h>
+#include <ostream>
 #include "BusManager.h"
 #include "BusRoute.h"
 #include "BusStop.h"
 #include "Coordinate.h"
+#include "Responses.h"
 
 using namespace std;
 
 namespace Request {
 
-struct RequestBase;
+struct Base;
 
-using RequestHolder = unique_ptr<RequestBase>;
+using Holder = unique_ptr<Base>;
 
-struct RequestBase {
+struct Base {
     enum class Type {
         ADD_BUS_STOP,
         ADD_BUS_ROUTE,
@@ -22,56 +24,50 @@ struct RequestBase {
 
     const Type type;
 
-    explicit RequestBase(Type type);
-    static RequestHolder Create(Type type);
+    explicit Base(Type type);
+    static Holder Create(Type type);
     virtual void ParseFrom(string_view input) = 0;
-    virtual ~RequestBase() = default;
+    virtual ~Base() = default;
 };
 
 template <typename ResultType>
-struct ReadRequest : RequestBase {
-    using RequestBase::RequestBase;
+struct Read : Base {
+    using Base::Base;
     virtual ResultType Process(const BusManager& manager) const = 0;
 };
 
-struct ModifyRequest : RequestBase {
-    using RequestBase::RequestBase;
+struct Modify : Base {
+    using Base::Base;
     virtual void Process(BusManager& manager) const = 0;
 };
 
-struct AddBusStop : ModifyRequest {
+struct AddBusStop : Modify {
     BusStop stop;
     explicit AddBusStop();
     void ParseFrom(string_view input) override;
     void Process(BusManager& manager) const override;
 };
-struct AddBusRoute : ModifyRequest {
+struct AddBusRoute : Modify {
     BusRoute bus_route;
     explicit AddBusRoute();
     void ParseFrom(string_view input) override;
     void Process(BusManager& manager) const override;
 };
 
-struct ReadBusRouteInfoResultType {
-    size_t stops_count;
-    size_t unique_stops_count;
-    double route_length;
-};
-
-struct ReadBusRouteInfo : ReadRequest<ReadBusRouteInfoResultType> {
+struct ReadBusRouteInfo : Read<Response::Holder> {
     string bus_name;
     ReadBusRouteInfo();
     void ParseFrom(string_view input) override;
-    ReadBusRouteInfoResultType Process(const BusManager& manager) const override;
+    Response::Holder Process(const BusManager& manager) const override;
 };
 
-using Map_Type = unordered_map<string_view, RequestBase::Type>;
+using Map_Type = unordered_map<string_view, Base::Type>;
 const Map_Type STR_TO_MODIFY_REQUEST_TYPE = {
-    {"Stop", RequestBase::Type::ADD_BUS_STOP},
-    {"Bus", RequestBase::Type::ADD_BUS_ROUTE},
+    {"Stop", Base::Type::ADD_BUS_STOP},
+    {"Bus", Base::Type::ADD_BUS_ROUTE},
 };
 const Map_Type STR_TO_READ_REQUEST_TYPE = {
-    {"Bus", RequestBase::Type::READ_BUS_ROUTE},
+    {"Bus", Base::Type::READ_BUS_ROUTE},
 };
 
 enum class OperationType {
@@ -84,6 +80,6 @@ const unordered_map<OperationType, const Map_Type*> OPERATION_TYPE_TO_MAP = {
     {OperationType::READ, &STR_TO_READ_REQUEST_TYPE},
 };
 
-optional<RequestBase::Type> ConvertRequestTypeFromString(string_view type_str, OperationType operation_type);
+optional<Base::Type> ConvertRequestTypeFromString(string_view type_str, OperationType operation_type);
 
 }  // namespace Request

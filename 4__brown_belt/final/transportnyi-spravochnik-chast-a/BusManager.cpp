@@ -9,8 +9,15 @@ void BusManager::AddBusStop(BusStop bus_stop) {
     bus_stop_name_to_count[bus_stop.name]++;
     bus_stop_name_to_coordinate[bus_stop.name] = bus_stop.coordinate;
 }
-Request::ReadBusRouteInfoResultType BusManager::ReadBusRouteInfo(std::string bus_name) const {
-    auto& bus_route = bus_name_to_bus_route.at(bus_name);
+Response::Holder BusManager::ReadBusRouteInfo(string_view bus_name) const {
+    auto it = bus_name_to_bus_route.find(bus_name.data());
+    if (it == bus_name_to_bus_route.end()) {
+        auto response = make_shared<Response::BusRouteNotFound>();
+        response->bus_name = bus_name;
+        return response;
+    }
+
+    auto& bus_route = it->second;
 
     auto stops_count = bus_route.stop_names.size();
 
@@ -32,9 +39,10 @@ Request::ReadBusRouteInfoResultType BusManager::ReadBusRouteInfo(std::string bus
     }
     auto route_length = bus_route.route_length.value();
 
-    return {
-        .stops_count = stops_count,
-        .unique_stops_count = unique_stops_count,
-        .route_length = route_length,
-    };
+    auto response = make_shared<Response::BusRouteFound>();
+    response->bus_name = bus_name;
+    response->stops_count = stops_count;
+    response->unique_stops_count = unique_stops_count;
+    response->route_length = route_length;
+    return response;
 }

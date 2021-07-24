@@ -1,4 +1,5 @@
 #pragma once
+#include "Responses.h"
 #include <bits/stdc++.h>
 #include "BusRoute.h"
 #include "BusStop.h"
@@ -14,7 +15,7 @@ using namespace std;
  methods:
  AddBusRoute O(1)
  AddBusStop O(1)
- ReadBusRouteInfoResultType
+ ReadBusRouteInfo
     count of stops O(1)
     count of unique stops for route (can be cached but we have to use bus_name_to_bus_routes map) O(n)
     route length (cache) O(1?)
@@ -25,11 +26,12 @@ class BusManager {
     BusManager() = default;
     void AddBusRoute(BusRoute bus_route);
     void AddBusStop(BusStop bus_stop);
-    Request::ReadBusRouteInfoResultType ReadBusRouteInfo(string bus_name) const;
+    Response::Holder ReadBusRouteInfo(string_view bus_name) const;
 
    private:
     unordered_map<string, BusRoute> bus_name_to_bus_route;
 
+    // todo: use string_view
     unordered_map<string, Coordinate> bus_stop_name_to_coordinate;
     unordered_map<string, size_t> bus_stop_name_to_count;
 };

@@ -62,11 +62,11 @@ struct ReadBusRouteInfo : Read<Response::Holder> {
 };
 
 using Map_Type = unordered_map<string_view, Base::Type>;
-const Map_Type STR_TO_MODIFY_REQUEST_TYPE = {
+inline const Map_Type STR_TO_MODIFY_REQUEST_TYPE = {
     {"Stop", Base::Type::ADD_BUS_STOP},
     {"Bus", Base::Type::ADD_BUS_ROUTE},
 };
-const Map_Type STR_TO_READ_REQUEST_TYPE = {
+inline const Map_Type STR_TO_READ_REQUEST_TYPE = {
     {"Bus", Base::Type::READ_BUS_ROUTE},
 };
 
@@ -75,7 +75,7 @@ enum class OperationType {
     READ,
 };
 
-const unordered_map<OperationType, const Map_Type*> OPERATION_TYPE_TO_MAP = {
+inline const unordered_map<OperationType, const Map_Type*> OPERATION_TYPE_TO_MAP = {
     {OperationType::MODIFY, &STR_TO_MODIFY_REQUEST_TYPE},
     {OperationType::READ, &STR_TO_READ_REQUEST_TYPE},
 };

@@ -12,3 +12,7 @@ size_t hash<BusStop>::operator()(const BusStop& obj) const {
     size_t r2 = Coordinate_hash(obj.coordinate);
     return PolynomicCombine(x, {r1, r2});
 }
+ostream& operator<<(ostream& os, const BusStop& stop) {
+    os << "name: " << stop.name << " coordinate: " << stop.coordinate;
+    return os;
+}

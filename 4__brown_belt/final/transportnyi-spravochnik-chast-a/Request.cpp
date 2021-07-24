@@ -22,6 +22,10 @@ Holder Base::Create(Base::Type type) {
             return nullptr;
     }
 }
+std::ostream& operator<<(std::ostream& out, const Base& request) {
+    request.print(out);
+    return out;
+}
 
 //
 void AddBusStop::ParseFrom(string_view input) {
@@ -49,6 +53,9 @@ void AddBusStop::Process(BusManager& manager) const {
     manager.AddBusStop(stop);
 }
 AddBusStop::AddBusStop() : Modify(Base::Type::ADD_BUS_STOP) {}
+void AddBusStop::print(ostream& os) const {
+    os << "AddBusStop: " << stop;
+}
 
 //
 void AddBusRoute::ParseFrom(string_view input) {
@@ -90,6 +97,11 @@ void AddBusRoute::Process(BusManager& manager) const {
     manager.AddBusRoute(bus_route);
 }
 AddBusRoute::AddBusRoute() : Modify(Base::Type::ADD_BUS_ROUTE) {}
+void AddBusRoute::print(ostream& os) const {
+#ifdef MASLO
+    os << "AddBusRoute: " << bus_route;
+#endif  // MASLO
+}
 
 //
 void ReadBusRouteInfo::ParseFrom(string_view input) {
@@ -104,6 +116,9 @@ Response::Holder ReadBusRouteInfo::Process(const BusManager& manager) const {
     return manager.ReadBusRouteInfo(bus_name);
 }
 ReadBusRouteInfo::ReadBusRouteInfo() : Read(Base::Type::READ_BUS_ROUTE) {}
+void ReadBusRouteInfo::print(ostream& os) const {
+    os << "ReadBusRouteInfo: " << bus_name;
+}
 
 //
 optional<Base::Type> ConvertRequestTypeFromString(string_view type_str, OperationType operation_type) {
@@ -117,6 +132,26 @@ optional<Base::Type> ConvertRequestTypeFromString(string_view type_str, Operatio
         return nullopt;
     }
     return typing_it->second;
+}
+std::ostream& operator<<(ostream& out, Base::Type type) {
+    switch (type) {
+        case Base::Type::ADD_BUS_STOP: {
+            out << "ADD_BUS_STOP";
+            break;
+        }
+        case Base::Type::ADD_BUS_ROUTE: {
+            out << "ADD_BUS_ROUTE";
+            break;
+        }
+        case Base::Type::READ_BUS_ROUTE: {
+            out << "READ_BUS_ROUTE";
+            break;
+        }
+
+        default:
+            throw runtime_error("chotam?");
+    }
+    return out;
 }
 
 }  // namespace Request

@@ -1,10 +1,13 @@
 #pragma once
 #include <bits/stdc++.h>
+#include <ostream>
 #include "Coordinate.h"
 
 struct BusStop {
     std::string name;
     Coordinate coordinate;
+
+    friend std::ostream& operator<<(std::ostream& os, const BusStop& stop);
 };
 
 namespace std {

@@ -36,3 +36,7 @@ size_t hash<Coordinate>::operator()(const Coordinate& obj) const {
     size_t r2 = double_hash(obj.longitude);
     return PolynomicCombine(x, {r1, r2});
 }
+ostream& operator<<(ostream& os, const Coordinate& coordinate) {
+    os << "latitude: " << coordinate.latitude << " longitude: " << coordinate.longitude;
+    return os;
+}

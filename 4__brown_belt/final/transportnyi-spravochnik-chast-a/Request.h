@@ -26,8 +26,15 @@ struct Base {
     static Holder Create(Type type);
     virtual void ParseFrom(std::string_view input) = 0;
     virtual ~Base() = default;
-};
 
+    virtual void print(std::ostream& os) const = 0;
+};
+std::ostream& operator<<(std::ostream& out, const Base& request);
+std::ostream& operator<<(std::ostream& out, Base::Type type);
+
+/* ========================================================
+TWO MAIN TYPES OF REQUEST (READ/MODIFY DB)
+======================================================== */
 template <typename ResultType>
 struct Read : Base {
     using Base::Base;
@@ -38,18 +45,21 @@ struct Modify : Base {
     using Base::Base;
     virtual void Process(BusManager& manager) const = 0;
 };
+// ========================================================
 
 struct AddBusStop : Modify {
     BusStop stop;
     explicit AddBusStop();
     void ParseFrom(std::string_view input) override;
     void Process(BusManager& manager) const override;
+    void print(std::ostream& os) const override;
 };
 struct AddBusRoute : Modify {
     BusRoute bus_route;
     explicit AddBusRoute();
     void ParseFrom(std::string_view input) override;
     void Process(BusManager& manager) const override;
+    void print(std::ostream& os) const override;
 };
 
 struct ReadBusRouteInfo : Read<Response::Holder> {
@@ -57,6 +67,7 @@ struct ReadBusRouteInfo : Read<Response::Holder> {
     ReadBusRouteInfo();
     void ParseFrom(std::string_view input) override;
     Response::Holder Process(const BusManager& manager) const override;
+    void print(std::ostream& os) const override;
 };
 
 using Map_Type = std::unordered_map<std::string_view, Base::Type>;

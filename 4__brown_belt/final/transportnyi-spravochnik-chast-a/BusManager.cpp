@@ -4,9 +4,11 @@ using namespace std;
 
 void BusManager::AddBusRoute(BusRoute bus_route) {
     bus_name_to_bus_route[bus_route.bus_name] = bus_route;
+    for (auto& stop_name : bus_route.stop_names) {
+        bus_stop_name_to_count[stop_name]++;
+    }
 }
 void BusManager::AddBusStop(BusStop bus_stop) {
-    bus_stop_name_to_count[bus_stop.name]++;
     bus_stop_name_to_coordinate[bus_stop.name] = bus_stop.coordinate;
 }
 Response::Holder BusManager::ReadBusRouteInfo(string_view bus_name) const {

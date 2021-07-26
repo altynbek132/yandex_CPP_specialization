@@ -2,7 +2,7 @@
 #include "PresentationLayer.h"
 #include "profile.h"
 #include "test_runner.h"
-#include "utils.h"
+#include "tests.h"
 
 using namespace std;
 
@@ -18,6 +18,7 @@ int main(int argc, const char** argv) {
 #ifndef MASLO
     cout.precision(6);
 #endif  // MASLO
+    test();
 
     auto modify_requests = ReadRequests();
     auto read_requests = ReadRequests();

@@ -2,6 +2,7 @@
 #include <bits/stdc++.h>
 #include "BusRoute.h"
 #include "BusStop.h"
+#include "Neighbors.h"
 #include "Response.h"
 
 /*
@@ -30,4 +31,8 @@ class BusManager {
     std::unordered_map<std::string, BusRoute> bus_name_to_bus_route;
     std::unordered_map<std::string, Coordinate> bus_stop_name_to_coordinate;
     std::unordered_map<std::string, std::set<std::string>> bus_stop_name_to_bus_names;
+    std::unordered_map<Neighbors, double> neighbors_to_distance;
+
+    pair<double, double> GetGeographicAndRealDistanceBetweenNeighbors(std::string first,
+                                                                          std::string second) const;
 };

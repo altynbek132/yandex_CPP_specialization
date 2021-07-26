@@ -19,6 +19,7 @@ struct BusRouteFound : Base {
     size_t stops_count;
     size_t unique_stops_count;
     double route_length;
+    double curvature;
     void print(std::ostream& os) const override;
 };
 struct BusRouteNotFound : Base {

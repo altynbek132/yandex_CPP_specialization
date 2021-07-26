@@ -34,18 +34,24 @@ std::ostream& operator<<(std::ostream& out, const Base& request) {
 //
 void AddBusStop::ParseFrom(string_view input) {
     auto initial_input = input;
-    // Stop X: latitude, longitude
+    // Stop X: latitude, longitude, D1m to stop1, D2m to stop2, ...
 
     Trim(input);
     ReadToken(input);
     const string_view stop_name = ReadToken(input, ":");
     TrimLeft(input);
     const double latitude = ConvertToDouble(ReadToken(input, ", "));
-    const double longitude = ConvertToDouble(ReadToken(input));
-    if (!input.empty()) {
-        stringstream error;
-        error << "string " << initial_input << " contains " << input.size() << " trailing characters";
-        throw invalid_argument(error.str());
+    const double longitude = ConvertToDouble(ReadToken(input, ", "));
+    while (!input.empty()) {
+        auto neighbor_stop = ReadToken(input, ", ");
+        auto distance_with_unit = ReadToken(neighbor_stop, " to ");
+        auto distance = ConvertToDouble(ReadToken(distance_with_unit, "m"));
+        auto neighbor_stop_name = ReadToken(neighbor_stop, "\n");
+
+        stop.distances_to_neighbor_stops.push_back({
+            .distance = distance,
+            .stop_name = string(neighbor_stop_name),
+        });
     }
     stop.name = stop_name;
     stop.coordinate = {

@@ -9,7 +9,7 @@ using namespace std;
 
 #ifdef MASLO
 
-prerun maslo(true, false, false);
+prerun maslo(true, true, false);
 
 #endif  // MASLO
 

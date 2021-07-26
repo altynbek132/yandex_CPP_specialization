@@ -2,10 +2,12 @@
 #include <bits/stdc++.h>
 #include <ostream>
 #include "Coordinate.h"
+#include "DistanceToNeighborStop.h"
 
 struct BusStop {
     std::string name;
     Coordinate coordinate;
+    std::vector<DistanceToNeighborStop> distances_to_neighbor_stops;
 
     friend std::ostream& operator<<(std::ostream& os, const BusStop& stop);
 };

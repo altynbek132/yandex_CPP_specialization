@@ -13,6 +13,7 @@ struct BusRoute {
 
     mutable std::optional<double> route_length;
     mutable std::optional<size_t> unique_stops_count;
+    mutable std::optional<double> curvature;
 
     friend std::ostream& operator<<(std::ostream& os, const BusRoute& route);
     size_t getStopsCount() const;

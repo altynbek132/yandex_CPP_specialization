@@ -10,11 +10,12 @@ std::ostream& operator<<(std::ostream& out, const Base& response) {
 
 void BusRouteFound::print(std::ostream& os) const {
     // example:
-    // Bus 256: 6 stops on route, 5 unique stops, 4371.02 route length
+    // Bus X: R stops on route, U unique stops, L route length, C curvature
     os << "Bus " << bus_name                          //
        << ": " << stops_count << " stops on route, "  //
        << unique_stops_count << " unique stops, "     //
-       << route_length << " route length";
+       << route_length << " route length, "           //
+       << curvature << " curvature";
 }
 
 void BusRouteNotFound::print(std::ostream& os) const {

@@ -40,7 +40,7 @@ TWO MAIN TYPES OF REQUEST (READ/MODIFY DB)
 template <typename ResultType>
 struct Read : Base {
     using Base::Base;
-    int id = -1;
+    int request_id = -1;
     virtual ResultType Process(const BusManager& manager) const = 0;
 };
 

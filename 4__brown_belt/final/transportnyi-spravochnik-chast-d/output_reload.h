@@ -76,7 +76,8 @@ std::ostream& operator<<(std::ostream& os, const std::map<K, V>& m) {
             os << ", ";
         }
         first = false;
-        os << kv.first << ": " << kv.second;
+        os << "\"" << kv.first << "\""
+           << ": " << kv.second;
     }
     return os << "}";
 }

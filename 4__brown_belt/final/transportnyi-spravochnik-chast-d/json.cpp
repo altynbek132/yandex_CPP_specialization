@@ -137,10 +137,10 @@ Document Load(istream& input) {
 std::ostream& operator<<(ostream& os, const Node& node) {
     if (holds_alternative<vector<Node>>(node)) {
         auto& value = get<vector<Node>>(node);
-        os << value;
+        ::operator<<(os, value);
     } else if (holds_alternative<map<string, Node>>(node)) {
         auto& value = get<map<string, Node>>(node);
-        os << value;
+        ::operator<<(os, value);
     } else if (holds_alternative<int>(node)) {
         auto& value = get<int>(node);
         os << value;

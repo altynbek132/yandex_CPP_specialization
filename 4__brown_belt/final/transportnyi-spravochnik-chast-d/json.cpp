@@ -47,7 +47,8 @@ Node LoadInt(string_view& input) {
 
 string_view ReadDouble(string_view& input) {
     uint8_t dot_count = 0;
-    return ReadTokenWhile(input, [&dot_count](const auto ch) {
+    bool is_negative = input.front() == '-';
+    auto [lhs, rhs] = SplitTwo(is_negative ? input.substr(1) : input, [&dot_count](const auto ch) {
         if (isdigit(ch)) {
             return true;
         }
@@ -56,6 +57,10 @@ string_view ReadDouble(string_view& input) {
         }
         return false;
     });
+    size_t length = lhs.size() + is_negative;
+    auto result = input.substr(0, length);
+    input = input.substr(length);
+    return result;
 }
 
 Node LoadDouble(string_view& input) {
@@ -120,7 +125,8 @@ Node LoadNode(string_view& input) {
             return LoadBool(input);
         }
         default:
-            const auto [lhs, rhs] = SplitTwo(input, [](const auto ch) { return isdigit(ch); });
+            const auto [lhs, rhs] = SplitTwo(input.front() == '-' ? input.substr(1) : input,
+                                             [](const auto ch) { return isdigit(ch); });
             if (!rhs.empty() && rhs[0] == '.') {
                 return LoadDouble(input);
             }

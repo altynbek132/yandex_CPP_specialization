@@ -1,4 +1,5 @@
 #include "json.h"
+#include "output_reload.h"
 #include "utils.h"
 
 using namespace std;
@@ -9,6 +10,11 @@ Document::Document(Node root) : root(move(root)) {}
 
 const Node& Document::GetRoot() const {
     return root;
+}
+
+ostream& operator<<(ostream& os, const Document& document) {
+    os << document.root;
+    return os;
 }
 
 Node LoadNode(string_view& input);
@@ -112,4 +118,26 @@ Document Load(istream& input) {
     return Document{LoadNode(input_sv)};
 }
 
+std::ostream& operator<<(ostream& os, const Node& node) {
+    if (holds_alternative<vector<Node>>(node)) {
+        auto& value = get<vector<Node>>(node);
+        os << value;
+    } else if (holds_alternative<map<string, Node>>(node)) {
+        auto& value = get<map<string, Node>>(node);
+        os << value;
+    } else if (holds_alternative<int>(node)) {
+        auto& value = get<int>(node);
+        os << value;
+    } else if (holds_alternative<double>(node)) {
+        auto& value = get<double>(node);
+        os << value;
+    } else if (holds_alternative<string>(node)) {
+        auto& value = get<string>(node);
+        os << "\"" << value << "\"";
+    } else if (holds_alternative<bool>(node)) {
+        auto& value = get<bool>(node);
+        os << std::boolalpha << value;
+    }
+    return os;
+}
 }  // namespace Json

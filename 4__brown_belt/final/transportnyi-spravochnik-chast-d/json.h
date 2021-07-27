@@ -2,6 +2,7 @@
 
 #include <istream>
 #include <map>
+#include <ostream>
 #include <string>
 #include <variant>
 #include <vector>
@@ -18,6 +19,7 @@ class Node : std::variant<std::vector<Node>, std::map<std::string, Node>, int, d
     double AsDouble() const { return std::get<double>(*this); }
     const auto& AsString() const { return std::get<std::string>(*this); }
     const auto& AsBool() const { return std::get<bool>(*this); }
+    friend std::ostream& operator<<(std::ostream& os, const Node& node);
 };
 
 class Document {
@@ -25,6 +27,8 @@ class Document {
     explicit Document(Node root);
 
     const Node& GetRoot() const;
+
+    friend std::ostream& operator<<(std::ostream& os, const Document& document);
 
    private:
     Node root;

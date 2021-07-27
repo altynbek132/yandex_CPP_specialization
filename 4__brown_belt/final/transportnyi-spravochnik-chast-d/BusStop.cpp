@@ -1,8 +1,6 @@
 #include "BusStop.h"
 
-#ifdef MASLO
-#include "test_runner.h"
-#endif  // MASLO
+#include "output_reload.h"
 
 using namespace std;
 
@@ -18,10 +16,7 @@ size_t hash<BusStop>::operator()(const BusStop& obj) const {
 }
 ostream& operator<<(ostream& os, const BusStop& stop) {
     os << "name: " << stop.name << " coordinate: " << stop.coordinate;
-
-#ifdef MASLO
     os << " distances_to_neighbor_stops: " << stop.distances_to_neighbor_stops << std::endl;
-#endif  // MASLO
 
     return os;
 }

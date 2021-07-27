@@ -1,6 +1,6 @@
 #include "Request.h"
 #include <exception>
-#include "test_runner.h"
+#include "output_reload.h"
 #include "utils.h"
 
 using namespace std;
@@ -78,9 +78,7 @@ void AddBusRoute::Process(BusManager& manager) const {
 }
 AddBusRoute::AddBusRoute() : Modify(Base::Type::ADD_BUS_ROUTE) {}
 void AddBusRoute::print(ostream& os) const {
-#ifdef MASLO
     os << "AddBusRoute: " << bus_route;
-#endif  // MASLO
 }
 
 //

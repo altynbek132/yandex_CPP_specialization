@@ -1,19 +1,13 @@
 #include "BusRoute.h"
 #include <bits/stdc++.h>
 
-#ifdef MASLO
-#include "test_runner.h"
-#endif  // MASLO
+#include "output_reload.h"
 
 using namespace std;
 
 std::ostream& operator<<(std::ostream& os, const BusRoute& route) {
-#ifdef MASLO
-
     os << "bus_name: " << route.bus_name << " stop_names: " << route.stop_names << " type: " << route.type
        << " route_length: " << route.route_length.value_or(0);
-#endif  // MASLO
-
     return os;
 }
 size_t BusRoute::getStopsCount() const {

@@ -95,20 +95,26 @@ Node LoadNode(string_view& input) {
     const char c = input[0];
     auto first_char_removed_input = input.substr(1);
 
-    if (c == '[') {
-        return LoadArray(input = first_char_removed_input);
-    } else if (c == '{') {
-        return LoadDict(input = first_char_removed_input);
-    } else if (c == '"') {
-        return LoadString(input = first_char_removed_input);
-    } else if (c == 't' || c == 'f') {
-        return LoadBool(input);
-    } else {
-        const auto [lhs, rhs] = SplitTwo(input, [](const auto ch) { return isdigit(ch); });
-        if (!rhs.empty() && rhs[0] == '.') {
-            return LoadDouble(input);
+    switch (c) {
+        case '[': {
+            return LoadArray(input = first_char_removed_input);
         }
-        return LoadInt(input);
+        case '{': {
+            return LoadDict(input = first_char_removed_input);
+        }
+        case '"': {
+            return LoadString(input = first_char_removed_input);
+        }
+        case 't':
+        case 'f': {
+            return LoadBool(input);
+        }
+        default:
+            const auto [lhs, rhs] = SplitTwo(input, [](const auto ch) { return isdigit(ch); });
+            if (!rhs.empty() && rhs[0] == '.') {
+                return LoadDouble(input);
+            }
+            return LoadInt(input);
     }
 }
 

@@ -87,7 +87,7 @@ void ReadBusRouteInfo::ConvertFrom(const map<string, Json::Node>& input) {
     bus_name = input.at("name").AsString();
 }
 Response::Holder ReadBusRouteInfo::Process(const BusManager& manager) const {
-    return manager.ReadBusRouteInfo(bus_name);
+    return manager.ReadBusRouteInfo(bus_name, request_id);
 }
 ReadBusRouteInfo::ReadBusRouteInfo() : Read(Base::Type::READ_BUS_ROUTE) {}
 void ReadBusRouteInfo::print(ostream& os) const {
@@ -101,7 +101,7 @@ void ReadBusStopInfo::ConvertFrom(const map<string, Json::Node>& input) {
     stop_name = input.at("name").AsString();
 }
 Response::Holder ReadBusStopInfo::Process(const BusManager& manager) const {
-    return manager.ReadBusStopInfo(stop_name);
+    return manager.ReadBusStopInfo(stop_name, request_id);
 }
 void ReadBusStopInfo::print(ostream& os) const {
     os << "ReadBusStopInfo: " << stop_name;

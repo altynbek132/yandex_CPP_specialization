@@ -18,10 +18,11 @@ void BusManager::AddBusStop(BusStop bus_stop) {
         }] = neighbor_stop_with_distance.distance;
     }
 }
-Response::Holder BusManager::ReadBusRouteInfo(string_view bus_name) const {
+Response::Holder BusManager::ReadBusRouteInfo(std::string_view bus_name, int request_id) const {
     auto it = bus_name_to_bus_route.find(string(bus_name));
     if (it == bus_name_to_bus_route.end()) {
         auto response = make_shared<Response::BusRouteNotFound>();
+        response->request_id = request_id;
         response->bus_name = bus_name;
         return response;
     }
@@ -76,6 +77,7 @@ Response::Holder BusManager::ReadBusRouteInfo(string_view bus_name) const {
     }
 
     auto response = make_shared<Response::BusRouteFound>();
+    response->request_id = request_id;
     response->bus_name = bus_name;
     response->stops_count = bus_route.getStopsCount();
     response->unique_stops_count = bus_route.unique_stops_count.value();
@@ -83,10 +85,11 @@ Response::Holder BusManager::ReadBusRouteInfo(string_view bus_name) const {
     response->curvature = bus_route.curvature.value();
     return response;
 }
-Response::Holder BusManager::ReadBusStopInfo(std::string_view stop_name) const {
+Response::Holder BusManager::ReadBusStopInfo(std::string_view stop_name, int request_id) const {
     auto it = bus_stop_name_to_bus_names.find(string(stop_name));
     if (it == bus_stop_name_to_bus_names.end()) {
         auto response = make_shared<Response::BusStopNotFound>();
+        response->request_id = request_id;
         response->stop_name = stop_name;
         return response;
     }
@@ -95,11 +98,13 @@ Response::Holder BusManager::ReadBusStopInfo(std::string_view stop_name) const {
 
     if (bus_names.empty()) {
         auto response = make_shared<Response::BusStopEmpty>();
+        response->request_id = request_id;
         response->stop_name = stop_name;
         return response;
     }
 
     auto response = make_shared<Response::BusStopFound>();
+    response->request_id = request_id;
     response->stop_name = stop_name;
     response->bus_names = &bus_names;
     return response;

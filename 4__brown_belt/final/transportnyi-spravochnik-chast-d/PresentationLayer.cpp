@@ -54,6 +54,6 @@ ResponsesContainer ProcessRequests(const vector<Request::Holder>& requests, BusM
 }
 void PrintResponses(const ResponsesContainer& responses, ostream& stream) {
     for (const auto& response : responses) {
-        stream << *response << endl;
+        stream << response->ToJson() << endl;
     }
 }

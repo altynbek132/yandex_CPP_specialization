@@ -24,8 +24,8 @@ class BusManager {
     BusManager() = default;
     void AddBusRoute(BusRoute bus_route);
     void AddBusStop(BusStop bus_stop);
-    Response::Holder ReadBusRouteInfo(std::string_view bus_name) const;
-    Response::Holder ReadBusStopInfo(std::string_view stop_name) const;
+    Response::Holder ReadBusRouteInfo(std::string_view bus_name, int request_id = -1) const;
+    Response::Holder ReadBusStopInfo(std::string_view stop_name, int request_id = -1) const;
 
    private:
     std::unordered_map<std::string, BusRoute> bus_name_to_bus_route;
@@ -34,5 +34,5 @@ class BusManager {
     std::unordered_map<Neighbors, double> neighbors_to_distance;
 
     pair<double, double> GetGeographicAndRealDistanceBetweenNeighbors(std::string first,
-                                                                          std::string second) const;
+                                                                      std::string second) const;
 };

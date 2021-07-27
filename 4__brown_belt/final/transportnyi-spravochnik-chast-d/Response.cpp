@@ -57,7 +57,7 @@ Json::Node BusRouteNotFound::ToJson() const {
     using namespace Json;
     map<string, Node> result;
     result.emplace("request_id", request_id);
-    result.emplace("error_message", "not found");
+    result.emplace("error_message", "not found"s);
     return Node(move(result));
 }
 
@@ -107,7 +107,7 @@ Json::Node BusStopNotFound::ToJson() const {
     using namespace Json;
     map<string, Node> result;
     result.emplace("request_id", request_id);
-    result.emplace("error_message", "not found");
+    result.emplace("error_message", "not found"s);
     return Node(move(result));
 }
 

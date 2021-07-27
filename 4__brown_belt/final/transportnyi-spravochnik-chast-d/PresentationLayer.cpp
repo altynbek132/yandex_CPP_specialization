@@ -1,5 +1,6 @@
 #include "PresentationLayer.h"
 #include "json.h"
+#include "output_reload.h"
 
 using namespace std;
 
@@ -53,7 +54,5 @@ ResponsesContainer ProcessRequests(const vector<Request::Holder>& requests, BusM
     return responses;
 }
 void PrintResponses(const ResponsesContainer& responses, ostream& stream) {
-    for (const auto& response : responses) {
-        stream << response->ToJson() << endl;
-    }
+    stream << responses;
 }

@@ -33,18 +33,18 @@ struct BusRouteNotFound : Base {
 };
 
 //
-struct BusStopsFound : Base {
+struct BusStopFound : Base {
     std::string stop_name;
     const std::set<std::string>* bus_names;
     void print(std::ostream& os) const override;
     Json::Node ToJson() const override;
 };
-struct BusStopsNotFound : Base {
+struct BusStopNotFound : Base {
     std::string stop_name;
     void print(std::ostream& os) const override;
     Json::Node ToJson() const override;
 };
-struct BusStopsEmpty : Base {
+struct BusStopEmpty : Base {
     std::string stop_name;
     void print(std::ostream& os) const override;
     Json::Node ToJson() const override;

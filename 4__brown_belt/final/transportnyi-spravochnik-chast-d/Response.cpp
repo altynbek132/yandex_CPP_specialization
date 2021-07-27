@@ -57,7 +57,7 @@ Json::Node BusRouteNotFound::ToJson() const {
     return Node(move(result));
 }
 
-void BusStopsFound::print(std::ostream& os) const {
+void BusStopFound::print(std::ostream& os) const {
     // example:
     // Stop X: buses bus1 bus2 ... busN
     os << "Stop " << stop_name << ": buses";
@@ -65,7 +65,7 @@ void BusStopsFound::print(std::ostream& os) const {
         os << " " << bus_name;
     }
 }
-Json::Node BusStopsFound::ToJson() const {
+Json::Node BusStopFound::ToJson() const {
     /*
   {
     "buses": [
@@ -88,12 +88,12 @@ Json::Node BusStopsFound::ToJson() const {
     return Node(move(result));
 }
 
-void BusStopsNotFound::print(std::ostream& os) const {
+void BusStopNotFound::print(std::ostream& os) const {
     // example:
     // Stop X: not found
     os << "Stop " << stop_name << ": not found";
 }
-Json::Node BusStopsNotFound::ToJson() const {
+Json::Node BusStopNotFound::ToJson() const {
     /*
   {
     "request_id": 746888088,
@@ -107,12 +107,12 @@ Json::Node BusStopsNotFound::ToJson() const {
     return Node(move(result));
 }
 
-void BusStopsEmpty::print(std::ostream& os) const {
+void BusStopEmpty::print(std::ostream& os) const {
     // example:
     // Stop X: no buses
     os << "Stop " << stop_name << ": no buses";
 }
-Json::Node BusStopsEmpty::ToJson() const {
+Json::Node BusStopEmpty::ToJson() const {
     /*
   {
     "buses": [],

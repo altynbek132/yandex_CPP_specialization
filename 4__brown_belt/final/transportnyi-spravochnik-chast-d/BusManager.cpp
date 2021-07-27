@@ -86,7 +86,7 @@ Response::Holder BusManager::ReadBusRouteInfo(string_view bus_name) const {
 Response::Holder BusManager::ReadBusStopInfo(std::string_view stop_name) const {
     auto it = bus_stop_name_to_bus_names.find(string(stop_name));
     if (it == bus_stop_name_to_bus_names.end()) {
-        auto response = make_shared<Response::BusStopsNotFound>();
+        auto response = make_shared<Response::BusStopNotFound>();
         response->stop_name = stop_name;
         return response;
     }
@@ -94,12 +94,12 @@ Response::Holder BusManager::ReadBusStopInfo(std::string_view stop_name) const {
     auto& bus_names = it->second;
 
     if (bus_names.empty()) {
-        auto response = make_shared<Response::BusStopsEmpty>();
+        auto response = make_shared<Response::BusStopEmpty>();
         response->stop_name = stop_name;
         return response;
     }
 
-    auto response = make_shared<Response::BusStopsFound>();
+    auto response = make_shared<Response::BusStopFound>();
     response->stop_name = stop_name;
     response->bus_names = &bus_names;
     return response;

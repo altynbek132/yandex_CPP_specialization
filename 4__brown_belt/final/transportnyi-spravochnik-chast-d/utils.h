@@ -59,7 +59,7 @@ template <typename Pred>
 std::pair<std::string_view, std::optional<std::string_view>> SplitTwoStrict(std::string_view s,
                                                                             Pred predicate) {
     using namespace std;
-    auto it = find_if(s.begin(), s.end(), predicate);
+    auto it = find_if_not(s.begin(), s.end(), predicate);
     if (it == s.end()) {
         return {s, nullopt};
     }

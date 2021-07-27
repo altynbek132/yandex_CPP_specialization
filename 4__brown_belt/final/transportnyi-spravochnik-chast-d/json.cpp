@@ -37,7 +37,7 @@ Node LoadInt(string_view& input) {
 
 string_view ReadDouble(string_view input) {
     uint8_t dot_count = 0;
-    return ReadTokenIf(input, [&dot_count](const auto ch) {
+    return ReadTokenWhile(input, [&dot_count](const auto ch) {
         if (isdigit(ch)) {
             return true;
         }

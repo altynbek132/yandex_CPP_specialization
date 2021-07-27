@@ -23,7 +23,7 @@ template <typename Pred>
 std::pair<std::string_view, std::string_view> SplitTwo(std::string_view s, Pred predicate);
 std::string_view ReadToken(std::string_view& s, std::string_view delimiter = " ");
 template <typename Pred>
-std::string_view ReadTokenIf(std::string_view& s, Pred);
+std::string_view ReadTokenWhile(std::string_view& s, Pred);
 std::string_view ReadToken(std::string_view& s, size_t count);
 char ReadChar(std::string_view& s);
 void TrimLeft(std::string_view& s);
@@ -49,7 +49,7 @@ template definitions
 ======================================================== */
 
 template <typename Pred>
-std::string_view ReadTokenIf(std::string_view& s, Pred predicate) {
+std::string_view ReadTokenWhile(std::string_view& s, Pred predicate) {
     const auto [lhs, rhs] = SplitTwo(s, predicate);
     s = rhs;
     return lhs;

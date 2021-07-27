@@ -12,11 +12,10 @@ void BusManager::AddBusStop(BusStop bus_stop) {
     bus_stop_name_to_coordinate[bus_stop.name] = bus_stop.coordinate;
     bus_stop_name_to_bus_names[bus_stop.name];
     for (auto& neighbor_stop_with_distance : bus_stop.distances_to_neighbor_stops) {
-        auto asdf = Neighbors{
+        neighbors_to_distance[{
             .first = bus_stop.name,
             .second = neighbor_stop_with_distance.stop_name,
-        };
-        neighbors_to_distance[asdf] = neighbor_stop_with_distance.distance;
+        }] = neighbor_stop_with_distance.distance;
     }
 }
 Response::Holder BusManager::ReadBusRouteInfo(string_view bus_name) const {

@@ -4,7 +4,6 @@
 #include "Response.h"
 #include "json.h"
 #include "profile.h"
-#include "test_runner.h"
 #include "utils.h"
 
 Request::Holder ConvertJsonToRequest(const Json::Node&, Request::OperationType);

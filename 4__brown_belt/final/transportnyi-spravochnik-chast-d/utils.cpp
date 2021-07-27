@@ -29,6 +29,14 @@ string_view ReadToken(string_view& s, string_view delimiter) {
     s = rhs;
     return lhs;
 }
+std::string_view ReadToken(string_view& s, size_t count) {
+    auto result = s.substr(0, count);
+    s.remove_prefix(count);
+    return result;
+}
+char ReadChar(string_view& s) {
+    return ReadToken(s, 1)[0];
+}
 int ConvertToInt(string_view str) {
     // use std::from_chars when available to git rid of string copy
     size_t pos;

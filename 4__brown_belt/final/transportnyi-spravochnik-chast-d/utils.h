@@ -63,7 +63,7 @@ std::pair<std::string_view, std::optional<std::string_view>> SplitTwoStrict(std:
     if (it == s.end()) {
         return {s, nullopt};
     }
-    auto pos = s.begin() - it;
+    auto pos = it - s.begin();
     return {s.substr(0, pos), s.substr(pos + 1)};
 }
 

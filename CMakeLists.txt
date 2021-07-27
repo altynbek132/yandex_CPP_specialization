@@ -842,6 +842,13 @@ file(GLOB project_files CONFIGURE_DEPENDS
         )
 add_executable(brown-final-transportnyi-spravochnik-chast-c ${project_files} ${Masloriy_framework})
 # ======================================================
+set(folder_path 4__brown_belt/final/transportnyi-spravochnik-chast-d)
+file(GLOB project_files CONFIGURE_DEPENDS
+        "${folder_path}/*.h"
+        "${folder_path}/*.cpp"
+        )
+add_executable(brown-final-transportnyi-spravochnik-chast-d ${project_files} ${Masloriy_framework})
+# ======================================================
 set(folder_path ass)
 file(GLOB project_files CONFIGURE_DEPENDS
         "${folder_path}/*.h"

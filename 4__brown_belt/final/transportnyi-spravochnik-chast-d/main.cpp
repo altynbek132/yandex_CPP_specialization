@@ -10,7 +10,11 @@ using namespace std;
 
 #ifdef MASLO
 
-prerun maslo(true, true, false);
+int PRERUN = []() {
+    std::freopen("input.json", "r", stdin);
+    std::freopen("output.json", "w", stdout);
+    return 0;
+}();
 
 #endif  // MASLO
 

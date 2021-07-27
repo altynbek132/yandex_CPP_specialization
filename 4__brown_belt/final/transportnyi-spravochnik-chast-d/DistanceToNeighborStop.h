@@ -3,7 +3,7 @@
 #include <ostream>
 
 struct DistanceToNeighborStop {
-    double distance;
+    int distance;
     std::string stop_name;
 
     friend std::ostream& operator<<(std::ostream& os, const DistanceToNeighborStop& stop);

@@ -36,7 +36,7 @@ void AddBusStop::ConvertFrom(const map<string, Json::Node>& input) {
     auto& road_distances = input.at("road_distances").AsMap();
     for (auto& [neigbor_stop_name, distance_node] : road_distances) {
         stop.distances_to_neighbor_stops.push_back({
-            .distance = distance_node.AsDouble(),
+            .distance = distance_node.AsInt(),
             .stop_name = neigbor_stop_name,
         });
     }

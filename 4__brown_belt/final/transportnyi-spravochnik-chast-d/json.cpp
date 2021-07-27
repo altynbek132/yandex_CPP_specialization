@@ -20,13 +20,17 @@ ostream& operator<<(ostream& os, const Document& document) {
 Node LoadNode(string_view& input);
 
 Node LoadArray(string_view& input) {
+    TrimLeft(input);
     vector<Node> result;
 
-    for (char c; c = input[0], !input.empty() && c != ']';) {
+    for (char c; c = input[0], !input.empty() && c != ']'; TrimLeft(input)) {
         if (c == ',') {
             input.remove_prefix(1);
         }
         result.push_back(LoadNode(input));
+    }
+    if (!input.empty() && input.front() == ']') {
+        input.remove_prefix(1);
     }
 
     return Node(move(result));
@@ -41,7 +45,7 @@ Node LoadInt(string_view& input) {
     return Node(result);
 }
 
-string_view ReadDouble(string_view input) {
+string_view ReadDouble(string_view& input) {
     uint8_t dot_count = 0;
     return ReadTokenWhile(input, [&dot_count](const auto ch) {
         if (isdigit(ch)) {
@@ -76,14 +80,19 @@ Node LoadBool(string_view& input) {
 }
 
 Node LoadDict(string_view& input) {
+    TrimLeft(input);
     map<string, Node> result;
 
-    for (char c; c = ReadChar(input), !input.empty() && c != '}';) {
+    for (char c; c = ReadChar(input), !input.empty() && c != '}'; TrimLeft(input)) {
         if (c == ',') {
+            TrimLeft(input);
+            // '"' symbol
             c = ReadChar(input);
         }
 
         string key = LoadString(input).AsString();
+        TrimLeft(input);
+        // ':' symbol
         c = ReadChar(input);
         result.emplace(move(key), LoadNode(input));
     }
@@ -92,6 +101,7 @@ Node LoadDict(string_view& input) {
 }
 
 Node LoadNode(string_view& input) {
+    TrimLeft(input);
     const char c = input[0];
     auto first_char_removed_input = input.substr(1);
 
@@ -111,7 +121,7 @@ Node LoadNode(string_view& input) {
         }
         default:
             const auto [lhs, rhs] = SplitTwo(input, [](const auto ch) { return isdigit(ch); });
-            if (!rhs.empty() && rhs[0] == '.') {
+            if (!rhs.empty() && isdigit(rhs[0])) {
                 return LoadDouble(input);
             }
             return LoadInt(input);

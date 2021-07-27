@@ -1,31 +1,29 @@
 #include "PresentationLayer.h"
+#include "json.h"
 
 using namespace std;
 
-Request::Holder ParseRequest(string_view str) {
+Request::Holder ConvertJsonToRequest(const map<string, Json::Node>& json_request,
+                                     Request::OperationType operation_type) {
     using namespace Request;
 
-    auto [lhs, rhs] = SplitTwoStrict(str, ":");
-    const OperationType operation_type = rhs ? OperationType::MODIFY : OperationType::READ;
-
-    auto request_type = ConvertRequestTypeFromString(ReadToken(lhs), operation_type);
+    auto request_type = ConvertRequestTypeFromString(json_request.at("type").AsString(), operation_type);
     if (!request_type) {
         return nullptr;
     }
     auto request = Base::Create(*request_type);
     if (request) {
-        request->ParseFrom(str);
+        request->ConvertFrom(json_request);
     }
     return request;
 }
-vector<Request::Holder> ReadRequests(istream& input) {
-    auto request_count = ReadNumberOnLine<size_t>(input);
+vector<Request::Holder> ReadRequests(const vector<Json::Node>& request_nodes,
+                                     Request::OperationType operation_type) {
+    auto request_count = request_nodes.size();
     vector<Request::Holder> requests;
     requests.reserve(request_count);
-    for (size_t i = 0; i < request_count; ++i) {
-        string request_str;
-        getline(input, request_str);
-        if (auto request = ParseRequest(request_str)) {
+    for (auto& request_node : request_nodes) {
+        if (auto request = ConvertJsonToRequest(request_node.AsMap(), operation_type)) {
             requests.push_back(move(request));
         }
     }

@@ -1,4 +1,5 @@
 #pragma once
+#include "json.h"
 #include <bits/stdc++.h>
 #include <ostream>
 #include "BusManager.h"
@@ -25,7 +26,7 @@ struct Base {
 
     explicit Base(Type type);
     static Holder Create(Type type);
-    virtual void ParseFrom(std::string_view input) = 0;
+    virtual void ConvertFrom(const map<string, Json::Node>&) = 0;
     virtual ~Base() = default;
 
     virtual void print(std::ostream& os) const = 0;
@@ -39,6 +40,7 @@ TWO MAIN TYPES OF REQUEST (READ/MODIFY DB)
 template <typename ResultType>
 struct Read : Base {
     using Base::Base;
+    int id = -1;
     virtual ResultType Process(const BusManager& manager) const = 0;
 };
 
@@ -51,14 +53,14 @@ struct Modify : Base {
 struct AddBusStop : Modify {
     BusStop stop;
     explicit AddBusStop();
-    void ParseFrom(std::string_view input) override;
+    void ConvertFrom(const map<string, Json::Node>&) override;
     void Process(BusManager& manager) const override;
     void print(std::ostream& os) const override;
 };
 struct AddBusRoute : Modify {
     BusRoute bus_route;
     explicit AddBusRoute();
-    void ParseFrom(std::string_view input) override;
+    void ConvertFrom(const map<string, Json::Node>&) override;
     void Process(BusManager& manager) const override;
     void print(std::ostream& os) const override;
 };
@@ -66,7 +68,7 @@ struct AddBusRoute : Modify {
 struct ReadBusRouteInfo : Read<Response::Holder> {
     std::string bus_name;
     ReadBusRouteInfo();
-    void ParseFrom(std::string_view input) override;
+    void ConvertFrom(const map<string, Json::Node>&) override;
     Response::Holder Process(const BusManager& manager) const override;
     void print(std::ostream& os) const override;
 };
@@ -74,7 +76,7 @@ struct ReadBusRouteInfo : Read<Response::Holder> {
 struct ReadBusStopInfo : Read<Response::Holder> {
     std::string stop_name;
     ReadBusStopInfo();
-    void ParseFrom(std::string_view input) override;
+    void ConvertFrom(const map<string, Json::Node>&) override;
     Response::Holder Process(const BusManager& manager) const override;
     void print(std::ostream& os) const override;
 };

@@ -32,31 +32,18 @@ std::ostream& operator<<(std::ostream& out, const Base& request) {
 }
 
 //
-void AddBusStop::ParseFrom(string_view input) {
-    auto initial_input = input;
-    // Stop X: latitude, longitude, D1m to stop1, D2m to stop2, ...
-
-    Trim(input);
-    ReadToken(input);
-    const string_view stop_name = ReadToken(input, ":");
-    TrimLeft(input);
-    const double latitude = ConvertToDouble(ReadToken(input, ", "));
-    const double longitude = ConvertToDouble(ReadToken(input, ", "));
-    while (!input.empty()) {
-        auto neighbor_stop = ReadToken(input, ", ");
-        auto distance_with_unit = ReadToken(neighbor_stop, " to ");
-        auto distance = ConvertToDouble(ReadToken(distance_with_unit, "m"));
-        auto neighbor_stop_name = ReadToken(neighbor_stop, "\n");
-
+void AddBusStop::ConvertFrom(const map<string, Json::Node>& input) {
+    auto& road_distances = input.at("road_distances").AsMap();
+    for (auto& [neigbor_stop_name, distance_node] : road_distances) {
         stop.distances_to_neighbor_stops.push_back({
-            .distance = distance,
-            .stop_name = string(neighbor_stop_name),
+            .distance = distance_node.AsDouble(),
+            .stop_name = neigbor_stop_name,
         });
     }
-    stop.name = stop_name;
+    stop.name = input.at("name").AsString();
     stop.coordinate = {
-        .latitude = latitude,
-        .longitude = longitude,
+        .latitude = input.at("latitude").AsDouble(),
+        .longitude = input.at("longitude").AsDouble(),
     };
 }
 void AddBusStop::Process(BusManager& manager) const {
@@ -68,43 +55,17 @@ void AddBusStop::print(ostream& os) const {
 }
 
 //
-void AddBusRoute::ParseFrom(string_view input) {
-    auto initial_input = input;
-    // Bus X: описание маршрута
-    //
-    // 1. stop1 - stop2 - ... - stopN: автобус следует от stop1 до stopN и обратно с указанными промежуточными
-    // остановками.
-    //
-    // 2. stop1 > stop2 > ... > stopN > stop1: кольцевой маршрут с конечной stop1.
-    Trim(input);
-    ReadToken(input);
-    TrimLeft(input);
-
-    bus_route.bus_name = ReadToken(input, ":");
-
-    TrimLeft(input);
-    string delim;
-    if (input.find('-') != string_view::npos) {
-        bus_route.type = BusRoute::Type::STRAIGHT;
-        delim = " - ";
-    } else if (input.find('>') != string_view::npos) {
-        bus_route.type = BusRoute::Type::LOOPED;
-        delim = " > ";
-    } else {
-        std::stringstream error;
-        error << "unknown bus route type (uknown delimiter) or invalid bus route: " << initial_input;
-        throw std::invalid_argument(error.str());
-    }
-
-    while (!input.empty()) {
-        auto stop_name = ReadToken(input, delim);
-        Trim(stop_name);
-        bus_route.stop_names.emplace_back(string(stop_name));
+void AddBusRoute::ConvertFrom(const map<string, Json::Node>& input) {
+    bus_route.bus_name = input.at("name").AsString();
+    bus_route.type = input.at("is_roundtrip").AsBool() ? BusRoute::Type::LOOPED : BusRoute::Type::STRAIGHT;
+    for (auto& stop_name_node : input.at("stops").AsArray()) {
+        bus_route.stop_names.push_back(stop_name_node.AsString());
     }
     if (bus_route.type == BusRoute::Type::LOOPED) {
         if (bus_route.stop_names.front() != bus_route.stop_names.back()) {
             std::stringstream error;
-            error << "stop_first should be equal stop_last in looped route (delim = '>'): " << initial_input;
+            error << "stop_first should be equal stop_last in looped route: " << bus_route.stop_names.front()
+                  << " != " << bus_route.stop_names.back();
             throw std::invalid_argument(error.str());
         }
         bus_route.stop_names.pop_back();
@@ -123,13 +84,9 @@ void AddBusRoute::print(ostream& os) const {
 }
 
 //
-void ReadBusRouteInfo::ParseFrom(string_view input) {
-    auto initial_input = input;
-    // Bus X
-    Trim(input);
-    ReadToken(input);
-    TrimLeft(input);
-    bus_name = ReadToken(input, "\n");
+void ReadBusRouteInfo::ConvertFrom(const map<string, Json::Node>& input) {
+    id = input.at("id").AsInt();
+    bus_name = input.at("name").AsString();
 }
 Response::Holder ReadBusRouteInfo::Process(const BusManager& manager) const {
     return manager.ReadBusRouteInfo(bus_name);
@@ -141,13 +98,9 @@ void ReadBusRouteInfo::print(ostream& os) const {
 
 //
 ReadBusStopInfo::ReadBusStopInfo() : Read(Base::Type::READ_BUS_STOP) {}
-void ReadBusStopInfo::ParseFrom(std::string_view input) {
-    auto initial_input = input;
-    // Stop X
-    Trim(input);
-    ReadToken(input);
-    TrimLeft(input);
-    stop_name = ReadToken(input, "\n");
+void ReadBusStopInfo::ConvertFrom(const map<string, Json::Node>& input) {
+    id = input.at("id").AsInt();
+    stop_name = input.at("name").AsString();
 }
 Response::Holder ReadBusStopInfo::Process(const BusManager& manager) const {
     return manager.ReadBusStopInfo(stop_name);

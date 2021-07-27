@@ -2,13 +2,14 @@
 #include <bits/stdc++.h>
 #include "Request.h"
 #include "Response.h"
+#include "json.h"
 #include "profile.h"
 #include "test_runner.h"
 #include "utils.h"
 
-Request::Holder ParseRequest(std::string_view str);
+Request::Holder ConvertJsonToRequest(const Json::Node&, Request::OperationType);
 
-std::vector<Request::Holder> ReadRequests(std::istream& input = cin);
+std::vector<Request::Holder> ReadRequests(const std::vector<Json::Node>&, Request::OperationType);
 
 using ResponsesContainer = std::vector<Response::Holder>;
 ResponsesContainer ProcessRequests(const std::vector<Request::Holder>& requests, BusManager& manager);

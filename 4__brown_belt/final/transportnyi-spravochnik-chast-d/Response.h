@@ -8,6 +8,8 @@ struct Base;
 
 using Holder = std::shared_ptr<Base>;
 
+std::ostream& operator<<(std::ostream& os, const Holder& response_holder);
+
 struct Base {
     int request_id = -1;
     virtual void print(std::ostream& os) const = 0;

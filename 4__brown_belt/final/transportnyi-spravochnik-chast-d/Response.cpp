@@ -4,6 +4,10 @@ using namespace std;
 
 namespace Response {
 
+std::ostream& operator<<(ostream& os, const Holder& response_holder) {
+    return os << response_holder->ToJson();
+}
+
 std::ostream& operator<<(std::ostream& out, const Base& response) {
     response.print(out);
     return out;

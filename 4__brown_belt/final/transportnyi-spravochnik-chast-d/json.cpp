@@ -121,7 +121,7 @@ Node LoadNode(string_view& input) {
         }
         default:
             const auto [lhs, rhs] = SplitTwo(input, [](const auto ch) { return isdigit(ch); });
-            if (!rhs.empty() && isdigit(rhs[0])) {
+            if (!rhs.empty() && rhs[0] == '.') {
                 return LoadDouble(input);
             }
             return LoadInt(input);

@@ -48,6 +48,10 @@ Number ReadNumberOnLine(std::istream& stream) {
 template definitions
 ======================================================== */
 
+/**
+ * returns: part that predicate returns true for all chars
+ * s is assigned to other
+ * */
 template <typename Pred>
 std::string_view ReadTokenWhile(std::string_view& s, Pred predicate) {
     const auto [lhs, rhs] = SplitTwo(s, predicate);
@@ -55,6 +59,10 @@ std::string_view ReadTokenWhile(std::string_view& s, Pred predicate) {
     return lhs;
 }
 
+/**
+ * first part: predicate returns true for all chars
+ * second part: other
+ * */
 template <typename Pred>
 std::pair<std::string_view, std::optional<std::string_view>> SplitTwoStrict(std::string_view s,
                                                                             Pred predicate) {
@@ -64,9 +72,13 @@ std::pair<std::string_view, std::optional<std::string_view>> SplitTwoStrict(std:
         return {s, nullopt};
     }
     auto pos = it - s.begin();
-    return {s.substr(0, pos), s.substr(pos + 1)};
+    return {s.substr(0, pos), s.substr(pos)};
 }
 
+/**
+ * first part: predicate returns true for all chars
+ * second part: other
+ * */
 template <typename Pred>
 std::pair<std::string_view, std::string_view> SplitTwo(std::string_view s, Pred predicate) {
     const auto [lhs, rhs_opt] = SplitTwoStrict(s, predicate);

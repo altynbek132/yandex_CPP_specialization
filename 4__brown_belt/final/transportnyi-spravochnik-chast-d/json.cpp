@@ -57,6 +57,18 @@ Node LoadString(string_view& input) {
     return Node(move(line));
 }
 
+Node LoadBool(string_view& input) {
+    auto str = ReadTokenWhile(input, [](const auto ch) { return isalpha(ch); });
+    if (str == "true") {
+        return Node(true);
+    } else if (str == "false") {
+        return Node(false);
+    }
+    std::stringstream error;
+    error << "expected bool, got :" << str;
+    throw std::invalid_argument(error.str());
+}
+
 Node LoadDict(string_view& input) {
     map<string, Node> result;
 
@@ -83,6 +95,8 @@ Node LoadNode(string_view& input) {
         return LoadDict(input = first_char_removed_input);
     } else if (c == '"') {
         return LoadString(input = first_char_removed_input);
+    } else if (c == 't' || c == 'f') {
+        return LoadBool(input);
     } else {
         const auto [lhs, rhs] = SplitTwo(input, [](const auto ch) { return isdigit(ch); });
         if (!rhs.empty() && rhs[0] == '.') {

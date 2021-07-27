@@ -4,9 +4,6 @@
 
 using namespace std;
 
-/**
- * first and second are interchangable
- * */
 struct Neighbors {
     std::string first;
     std::string second;

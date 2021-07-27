@@ -41,7 +41,7 @@ Response::Holder BusManager::ReadBusRouteInfo(string_view bus_name) const {
             auto& cur = bus_route.stop_names[i];
             auto& prev = bus_route.stop_names[i - 1];
             const auto [geographic_length_cur, real_distance_cur] =
-                GetGeographicAndRealDistanceBetweenNeighbors(cur, prev);
+                GetGeographicAndRealDistanceBetweenNeighbors(prev, cur);
             route_length += real_distance_cur;
             geographic_length += geographic_length_cur;
         }
@@ -49,8 +49,15 @@ Response::Holder BusManager::ReadBusRouteInfo(string_view bus_name) const {
         // post-calculation depending on type of route
         switch (bus_route.type) {
             case BusRoute::Type::STRAIGHT: {
-                route_length *= 2;
-                geographic_length *= 2;
+                // starts EXCLUSIVELY, ends INCLUSIVELY
+                for (size_t i = bus_route.stop_names.size() - 1; i-- > 0;) {
+                    auto& cur = bus_route.stop_names[i];
+                    auto& prev = bus_route.stop_names[i + 1];
+                    const auto [geographic_length_cur, real_distance_cur] =
+                    GetGeographicAndRealDistanceBetweenNeighbors(prev, cur);
+                    route_length += real_distance_cur;
+                    geographic_length += geographic_length_cur;
+                }
                 break;
             }
             case BusRoute::Type::LOOPED: {
@@ -104,6 +111,10 @@ pair<double, double> BusManager::GetGeographicAndRealDistanceBetweenNeighbors(st
     const double geographic_distance = second_coord.DistanceTo(first_coord);
 
     if (auto real_distance_it = neighbors_to_distance.find({.first = first, .second = second});
+        real_distance_it != neighbors_to_distance.end()) {
+        return {geographic_distance, real_distance_it->second};
+    }
+    if (auto real_distance_it = neighbors_to_distance.find({.first = second, .second = first});
         real_distance_it != neighbors_to_distance.end()) {
         return {geographic_distance, real_distance_it->second};
     }

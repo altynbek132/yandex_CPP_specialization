@@ -37,12 +37,16 @@ Node LoadArray(string_view& input) {
 }
 
 Node LoadInt(string_view& input) {
+    bool is_negative = input.front() == '-';
+    if (is_negative) {
+        input.remove_prefix(1);
+    }
     int result = 0;
     while (isdigit(input[0])) {
         result *= 10;
         result += ReadChar(input) - '0';
     }
-    return Node(result);
+    return Node(result * (is_negative ? -1 : 1));
 }
 
 string_view ReadDouble(string_view& input) {

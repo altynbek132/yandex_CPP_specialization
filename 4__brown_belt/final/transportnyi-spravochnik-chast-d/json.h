@@ -20,6 +20,7 @@ class Node : std::variant<std::vector<Node>, std::map<std::string, Node>, int, d
     const auto& AsString() const { return std::get<std::string>(*this); }
     const auto& AsBool() const { return std::get<bool>(*this); }
     friend std::ostream& operator<<(std::ostream& os, const Node& node);
+    double GetDouble() const;
 };
 
 class Document {

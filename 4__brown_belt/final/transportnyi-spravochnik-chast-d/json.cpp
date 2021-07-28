@@ -162,4 +162,10 @@ std::ostream& operator<<(ostream& os, const Node& node) {
     }
     return os;
 }
+double Node::GetDouble() const {
+    if (holds_alternative<double>(*this)) {
+        return AsDouble();
+    }
+    return AsInt();
+}
 }  // namespace Json

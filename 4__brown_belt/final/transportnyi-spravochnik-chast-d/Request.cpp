@@ -42,8 +42,8 @@ void AddBusStop::ConvertFrom(const map<string, Json::Node>& input) {
     }
     stop.name = input.at("name").AsString();
     stop.coordinate = {
-        .latitude = input.at("latitude").AsDouble(),
-        .longitude = input.at("longitude").AsDouble(),
+        .latitude = input.at("latitude").GetDouble(),
+        .longitude = input.at("longitude").GetDouble(),
     };
 }
 void AddBusStop::Process(BusManager& manager) const {

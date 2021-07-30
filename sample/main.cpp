@@ -6,7 +6,13 @@ using namespace std;
 
 #ifdef MASLO
 
-prerun maslo(true, false, false);
+int PRERUN = []() {
+    std::freopen("input.txt", "r", stdin);
+    std::freopen("output.txt", "w", stdout);
+    // std::ios::sync_with_stdio(false);
+    // std::cin.tie(nullptr);
+    return 0;
+}();
 
 #endif  // MASLO
 
